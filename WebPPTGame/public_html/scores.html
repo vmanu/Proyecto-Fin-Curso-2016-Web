@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="multilanguage/Language.js" type="text/javascript"></script>
+        <script>
+            var userLang = navigator.language || navigator.userLanguage;
+            if (userLang != "es") {
+                userLang = "en";
+            }
+            var language = new Language().getLang();
+        </script>
+    </head>
+    <body>
+        <div id="scores">
+            <form role="form">
+                <div class="form-group col-md-4">
+                    <label for="selectScores"><script>document.write(language[userLang].orderBy);</script></label>
+                    <select id="selectScores" class="form-control">
+                        <option value="byRounds">
+
+                        </option>
+                        <option value="byVictories">
+
+                        </option>
+                        <option value="byAverage">
+
+                        </option>
+                    </select>
+                </div>
+                <script>
+                    $('#selectScores').children('option[value="byRounds"]').text(language[userLang].getByRounds);
+                    $('#selectScores').children('option[value="byVictories"]').text(language[userLang].getByVictories);
+                    $('#selectScores').children('option[value="byAverage"]').text(language[userLang].getByAverage);
+                </script>
+            </form>
+        </div>
+    </body>
+</html>

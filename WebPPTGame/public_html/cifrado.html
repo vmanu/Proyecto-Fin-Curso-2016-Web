@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <script src="model/GameType.js" type="text/javascript"></script>
+        <script src="model/RoundsNumber.js" type="text/javascript"></script>
+        <script src="model/Player.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function returnPlayer() {
+                var player = new Player().getPlayer();
+                player.namePlayer = "Ivan";
+                player.numPartidas = 3;
+                player.numberOfRounds = new RoundsNumber().getRoundsNumber().TRES;
+                player.playing = false;
+                player.tipoJuego = new GameType().getGameType().JUEGO3;
+                stringPlayer = JSON.stringify(player);
+                return stringPlayer;
+            }
+
+            function call() {
+                var player = returnPlayer();
+                $.post("http://localhost:8080/PruebaCifradoJS/ServletCifradoJS",{jugador:player},
+                    function(data){
+                        alert(data);
+                    });
+                //alert(player);
+                /*
+                var req = new XMLHttpRequest();
+                req.open("POST", "http://localhost:8080/PruebaCifradoJS/ServletCifradoJS", true);
+                req.send({'jugador': player});
+                req.onreadystatechange = function () {
+                    if (req.readyState === 4) {
+                        var serverResponse = req.responseText;
+                        alert(serverResponse);
+                    }
+                };
+                */
+            }
+        </script>
+    </head>
+    <body>
+        <button onclick="call();">Send</button>
+    </body>
+</html>
