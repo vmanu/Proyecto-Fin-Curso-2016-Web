@@ -472,27 +472,26 @@ function randomGame() {
     websocket.send(metamsg);
 }
 
-function getScores(selectedOption){
+function getScores(selectedOption) {
     alert(selectedOption);
-    var players=null;
-    if(selectedOption=="byRounds"){
+    var players = null;
+    if (selectedOption == "byRounds") {
         $.post("http://localhost:8080/ServerPPTGame/ServletDB?op=getByRounds",
-            function(data){
-                alert(data);
-                players=JSON.parse(data);
-            });
-    }else{
-        if(selectedOption=="byVictories"){
+                function (data) {
+                    alert(data);
+                    players = data;
+                });
+    } else {
+        if (selectedOption == "byVictories") {
             $.post("http://localhost:8080/ServerPPTGame/ServletDB?op=getByVictories",
-            function(data){
-                players=JSON.parse(data);
-            });
-        }else{
+                    function (data) {
+                        players = data;
+                    });
+        } else {
             $.post("http://localhost:8080/ServerPPTGame/ServletDB?op=getByAverage",
-            function(data){
-                players=JSON.parse(data);
-            });
+                    function (data) {
+                        players = data;
+                    });
         }
     }
 }
-

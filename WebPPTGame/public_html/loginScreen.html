@@ -6,14 +6,24 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <title>Login</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="styles.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <script src="model/EnumFichas3.js" type="text/javascript"></script>
+        <script src="model/EnumFichas5.js" type="text/javascript"></script>
+        <script src="model/EnumFichas9.js" type="text/javascript"></script>
+        <script src="model/DataContainer.js" type="text/javascript"></script>
         <script src="controller/ControllerGame.js" type="text/javascript"></script>
+        <script src="model/ModalidadJuego.js" type="text/javascript"></script>
         <script src="cifradoPrueba.js" type="text/javascript"></script>
         <script>
+            $(document).ready(function () {
+                $("#divConfirmPassword").attr("hidden", true);
+            });
             function removejscssfile(filename, filetype) {
                 var targetelement = (filetype == "js") ? "script" : (filetype == "css") ? "link" : "none"; //determine element type to create nodelist from
                 var targetattr = (filetype == "js") ? "src" : (filetype == "css") ? "href" : "none"; //determine corresponding attribute to test for
@@ -23,10 +33,16 @@ and open the template in the editor.
                         allsuspects[i].parentNode.removeChild(allsuspects[i]); //remove element by calling parentNode.removeChild()
                 }
             }
-            
-            function removeMaterializeImports(){
-                removejscssfile('https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js','js');
-                removejscssfile('https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css','css');
+
+            function removeMaterializeImports() {
+                removejscssfile('https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js', 'js');
+                removejscssfile('https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css', 'css');
+            }
+
+            function signUp() {
+                $("#signIn").text("Sign up");
+                $("#signUp").text("Sign in");
+                $("#divConfirmPassword").removeAttr("hidden");
             }
         </script>
     </head>
@@ -46,9 +62,15 @@ and open the template in the editor.
                         <div class="input-field col s12">
                             <input id="password" type="password" class="validate" style="font-size: 24px; text-align: center">
                             <label for="password">Password</label>
-                            <a href="" style="float:left">Sign up</a>
                         </div>
                     </div>
+                    <div class="row" id="divConfirmPassword">
+                        <div class="input-field col s12">
+                            <input id="confirmPass" type="password" class="validate" style="font-size: 24px; text-align: center">
+                            <label for="confirmPass">Confirm password</label>
+                        </div>
+                    </div>
+                    <a href="" id="signUp" style="float:left" onclick="signUp()">Sign up</a>
                     <div class="row">
                         <div class="col m12">
                             <p class="right-align">
@@ -56,7 +78,7 @@ and open the template in the editor.
                                         onclick="cambiaVista('initialButtons'); removeMaterializeImports();">
                                     Back
                                 </button>
-                                <button class="btn btn-large waves-effect waves-light" type="button" name="signIn" style="background-color: dodgerblue"
+                                <button id="signIn" class="btn btn-large waves-effect waves-light" type="button" name="signIn" style="background-color: dodgerblue"
                                         onclick="cambiaVista('playOnline'); removeMaterializeImports();">
                                     Sign in
                                 </button>
