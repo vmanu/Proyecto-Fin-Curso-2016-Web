@@ -69,7 +69,7 @@ and open the template in the editor.
             <button id="localModeBtn" type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('localGameMenu')">
                 <script>document.write(language[userLang].play)</script>
             </button><br>
-            <button id="onlineModeBtn" type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('playOnline')">
+            <button id="onlineModeBtn" type="button" class="btn btn-primary btn-sm btn-block" onclick="$('#loginScreen').load('loginScreen.html');cambiaVista('loginScreen')">
                 <script>document.write(language[userLang].onlineMode);</script>
             </button><br>
             <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('rules')">
@@ -244,7 +244,11 @@ and open the template in the editor.
             </div>
             <div>
                 <input type="button" class="btn btn-primary btn-lg" id="back" value="Back" onclick="backFromPlayScreen()"/>
-                <input type="button" class="btn btn-primary btn-lg" id="next" value="Continue" onclick="if(!online){cambiaVistaJuego();}else{cambiaVistaJuegoOnline();}"/>
+                <input type="button" class="btn btn-primary btn-lg" id="next" value="Continue" onclick="if (!online) {
+                            cambiaVistaJuego();
+                        } else {
+                            cambiaVistaJuegoOnline();
+                        }"/>
             </div>
         </div>
         <div class="atCenterTopOfScreen" id="scores" hidden>
@@ -257,14 +261,28 @@ and open the template in the editor.
                         <option value="byVictories"></option>
                         <option value="byAverage"></option>
                     </select>
+                    <div class="list-group" id="listPlayers">
+                        <a class="list-group-item">First item</a>
+                        <a class="list-group-item">Second item</a>
+                        <a class="list-group-item">Third item</a>
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('playOnline')">
+                        <script>document.write(language[userLang].back);</script>
+                    </button>
                 </div>
                 <div class="col-md-4"></div>
+
                 <script>
                     $('#selectScores').children('option[value="byRounds"]').text(language[userLang].getByRounds);
                     $('#selectScores').children('option[value="byVictories"]').text(language[userLang].getByVictories);
                     $('#selectScores').children('option[value="byAverage"]').text(language[userLang].getByAverage);
                 </script>
             </form>
+        </div>
+        <div id="loginScreen" hidden>
+
         </div>
     </body>
 </html>

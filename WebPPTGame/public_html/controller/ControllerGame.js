@@ -43,6 +43,7 @@ function cambiaVista(divId) {
     document.getElementById('gameOf9blue').style.display = 'none';
     document.getElementById('vistaResult').style.display = 'none';
     document.getElementById('scores').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'none';
     document.getElementById(divId).style.display = 'block';
     $("#nameOfPlayer1").attr("placeholder", language[userLang].player1);
     $("#nameOfPlayer2").attr("placeholder", language[userLang].player2);
@@ -493,6 +494,5 @@ function getScores(selectedOption){
             });
         }
     }
-    return players;
 }
 
