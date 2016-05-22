@@ -567,6 +567,7 @@ function doLogin() {
     console.debug("pass", $("#password").val());
     console.debug("click", click);
     console.debug("confirmPass", $("#confirmPass").val());
+    var logueadoCorrectamente;
     if ($("#login").val() != "" && $("#password").val() != "" && (click == false || (click == true && $("#password").val() == $("#confirmPass").val()))) {
         var user = new User().getUser();
         user.login = $("#login").val();
@@ -612,7 +613,7 @@ function doLogin() {
                                 } else {
                                     $.post("http://192.168.1.104:8080/ServerPPTGame/login",
                                             {
-                                                user: b64User,
+                                                user: user,
                                                 claveHasheada: keyHash,
                                                 complementoHasheado: complHash,
                                                 claveComplemento: JSON.stringify(keyCompl)
@@ -622,6 +623,14 @@ function doLogin() {
                                                 console.debug("keysComplements LOGIN", sessionStorage.getItem("keysComplements"));
                                                 console.debug("keySession LOGIN", sessionStorage.getItem("keySession"));
                                                 logueadoCorrectamente = data;
+                                                if (logueadoCorrectamente == "SI") {
+                                                    clave = "";
+                                                    complemento = "";
+                                                    cambiaVista("onlineGameMenu");
+                                                    removeMaterializeImports();
+                                                } else {
+                                                    alert("Login y/o password incorrectos!");
+                                                }
                                             });
                                 }
                             });
@@ -629,15 +638,9 @@ function doLogin() {
                 });
 
         console.debug("complHash", complHash);
-        var logueadoCorrectamente;
         console.debug("KEY HASH DESPUES", keyHash);
 
-        if (logueadoCorrectamente == "true") {
-            clave = "";
-            complemento = "";
-        } else {
-            alert("Login y/o password incorrectos!");
-        }
+
     } else {
         alert(language[userLang].fillTheFields);
     }
