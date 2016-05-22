@@ -6,6 +6,8 @@
 var datos, mapFichas, mapFichasMaquina, opc, modo, online, player, clave, complemento;
 
 $(document).ready(function () {
+    clave = "";
+    complemento = "";
     datos = new DataContainer();
     datos.setRoundsCounter(0);
     datos.setVictoriesP1(0);
@@ -476,19 +478,19 @@ function getScores(selectedOption) {
     alert(selectedOption);
     var players = null;
     if (selectedOption == "byRounds") {
-        $.post("http://localhost:8080/ServerPPTGame/ServletDB?op=getByRounds",
+        $.post("http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByRounds",
                 function (data) {
                     alert(data);
                     players = data;
                 });
     } else {
         if (selectedOption == "byVictories") {
-            $.post("http://localhost:8080/ServerPPTGame/ServletDB?op=getByVictories",
+            $.post("http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByVictories",
                     function (data) {
                         players = data;
                     });
         } else {
-            $.post("http://localhost:8080/ServerPPTGame/ServletDB?op=getByAverage",
+            $.post("http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByAverage",
                     function (data) {
                         players = data;
                     });
@@ -499,12 +501,19 @@ function getScores(selectedOption) {
 function getKeys() {
     if (clave == "") {
         var keyCompl = new ClaveComplemento().getClaveComplemento();
-        $.post("http://localhost:8080/ServerPPTGame/seguridad", {op: "security"},
+        $.post("http://192.168.1.104:8080/ServerPPTGame/seguridad",
                 function (data) {
-                    keyCompl = data;
+                    console.debug("DATA", data);
+                    keyCompl = JSON.parse(data);
+                    console.debug("keyCompl", keyCompl);
+                    clave = keyCompl.claves[Math.floor((Math.random() * ((keyCompl.claves.length))))];
+                    console.debug("claves", clave);
+                    complemento = keyCompl.complementos[Math.floor((Math.random() * ((keyCompl.complementos.length))))];
+                    console.debug("complementos", complemento);
+                    console.debug("keysComplements getKEYS",sessionStorage.getItem("keysComplements"));
                 });
-        clave = keyCompl.claves[Math.floor((Math.random() * keyCompl.claves.length))];
-        complemento = keyCompl.complementos[Math.floor((Math.random() * keyCompl.complementos.length))];
+                
+        //alert(clave+"-"+complemento);
     }
 }
 
@@ -534,43 +543,56 @@ function strhash(str) {
     return hash;
 }
 
-function login() {
+function doLogin() {
+    console.debug("compl", complemento);
+    console.debug("login", $("#login").val());
+    console.debug("pass", $("#password").val());
+    console.debug("click", click);
+    console.debug("confirmPass", $("#confirmPass").val());
     if ($("#login").val() != "" && $("#password").val() != "" && (click == false || (click == true && $("#password").val() == $("#confirmPass").val()))) {
         var user = new User().getUser();
         user.login = $("#login").val();
         user.pass = $("#password").val();
-        var b64User = btoa(AES_Encrypt(JSON.stringify(user), clave + complemento));
+        AES_Init();
+        var key = clave + "" + complemento;
+        console.debug("keyCompl", key);
+        var b64User = btoa(AES_Encrypt(JSON.stringify(user), key));
         var keyHash = strhash(clave);
+        console.debug("keyHash",keyHash);
         var complHash = strhash(complemento);
+        console.debug("complHash",complHash);
         var logueadoCorrectamente;
         if (click == true) {
-            $.post("http://localhost:8080/ServerPPTGame/ServletDB?op=put",
+            $.post("http://192.168.1.104/:8080/ServerPPTGame/ServletDB?op=put",
                     {
                         user: b64User,
-                        keyHasheada: keyHash,
+                        claveHasheada: keyHash,
                         complementoHasheado: complHash
                     },
                     function (data) {
                         logueadoCorrectamente = data;
+                        
                     });
         } else {
-            $.post("http://localhost:8080/ServerPPTGame/login",
+            $.post("http://192.168.1.104:8080/ServerPPTGame/login",
                     {
                         user: b64User,
-                        keyHasheada: keyHash,
+                        claveHasheada: keyHash,
                         complementoHasheado: complHash
                     },
                     function (data) {
+                        console.debug("keysComplements LOGIN",sessionStorage.getItem("keysComplements"));
+                        console.debug("keySession LOGIN",sessionStorage.getItem("keySession"));
                         logueadoCorrectamente = data;
                     });
         }
-        if(logueadoCorrectamente=="true"){
-            clave="";
-            complemento="";
-        }else{
+        if (logueadoCorrectamente == "true") {
+            clave = "";
+            complemento = "";
+        } else {
             alert("Login y/o password incorrectos!");
         }
-    }else{
+    } else {
         alert(language[userLang].fillTheFields);
     }
 }

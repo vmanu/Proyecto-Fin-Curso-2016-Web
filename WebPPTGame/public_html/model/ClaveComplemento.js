@@ -12,5 +12,13 @@ ClaveComplemento=function(){
     this.getClaveComplemento=function(){
         return claveComplemento;
     };
+    
+    this.getClaves=function(){
+        return this.getClaveComplemento().claves;
+    };
+    
+    this.getComplementos=function(){
+        return this.getClaveComplemento().complementos;
+    };
 };
 
