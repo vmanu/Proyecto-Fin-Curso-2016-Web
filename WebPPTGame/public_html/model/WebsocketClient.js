@@ -10,7 +10,7 @@ var datos = localStorage.getItem("datos");
 function connect() {
     //ws://servidorpptgame.jelastic.cloudhosted.es/ServerPPTGame/ppt?user=
     if (websocket==null||(websocket!=null&&websocket.readyState != 1)) {
-        var wsUri = "ws://localhost:8080/ServerPPTGame/ppt?user=" + datos.getNombreJ1();
+        var wsUri = "ws://192.168.1.104:8080/ServerPPTGame/ppt?user=" + datos.getNombreJ1();
         console.log("Connecting to " + wsUri);
         websocket = new WebSocket(wsUri);
         websocket.onopen = function (evt) {

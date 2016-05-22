@@ -384,61 +384,55 @@ function showToastBlue() {
  * en función de la configuración elegida.
  */
 function cambiaVistaJuegoOnline() {
-    if ($("#nameOfPlayerOnl").val() == "" || $("#nameOfPlayerOnl").val() == "undefined") {
-        alert(language[userLang].fillTheFields);
+
+    //if (id == "gameOnlineScreen") {
+    datos.setTurno(true);
+    online = true;
+    localStorage.setItem("online", online);
+    datos.setModalidadJuego(new ModalidadJuego().getModalidad().ONLINE);
+    cambiaVista('headerGame');
+    localStorage.setItem("namePlayerOnl", $("#nameOfPlayerOnl").val());
+    connect();
+    var metamsg = new MetaMessage().getMetaMessage();
+    metamsg.type = (new TypeMessage().getTypeMessage().CONEXION.name);
+    player = new Player().getPlayer();
+    player.namePlayer = (datos.getNombreJ1());
+    console.debug("nombre j1",datos.getNombreJ1());
+    player.playing = (false);
+    //alert("PLAYER JSON "+playerJson);
+    datos.setJugando(true);
+    if (document.getElementById('game3Onl').checked == true) {
+        localStorage.setItem("rbJuegoOnl", "game3Onl");
+        document.getElementById('gameOf3red').style.display = 'block';
+        datos.setFactorAlgoritmo(1);
+        player.tipoJuego = (new GameType().getGameType().JUEGO3.name);
+        modo = 3;
     } else {
-        //if (id == "gameOnlineScreen") {
-        datos.setTurno(true);
-        online = true;
-        localStorage.setItem("online", online);
-        datos.setModalidadJuego(new ModalidadJuego().getModalidad().ONLINE);
-        cambiaVista('headerGame');
-        datos.setNombreJ1($("#nameOfPlayerOnl").val());
-        localStorage.setItem("namePlayerOnl", $("#nameOfPlayerOnl").val());
-        connect();
-        var metamsg = new MetaMessage().getMetaMessage();
-        metamsg.type = (new TypeMessage().getTypeMessage().CONEXION.name);
-        player = new Player().getPlayer();
-        player.namePlayer = (datos.getNombreJ1());
-        player.playing = (false);
-        //alert("PLAYER JSON "+playerJson);
-        datos.setJugando(true);
-        if (document.getElementById('game3Onl').checked == true) {
-            localStorage.setItem("rbJuegoOnl", "game3Onl");
-            document.getElementById('gameOf3red').style.display = 'block';
-            datos.setFactorAlgoritmo(1);
-            player.tipoJuego = (new GameType().getGameType().JUEGO3.name);
-            modo = 3;
+        if (document.getElementById('game5Onl').checked == true) {
+            localStorage.setItem("rbJuegoOnl", "game5Onl");
+            document.getElementById('gameOf5red').style.display = 'block';
+            datos.setFactorAlgoritmo(2);
+            player.tipoJuego = (new GameType().getGameType().JUEGO5.name);
+            modo = 5;
         } else {
-            if (document.getElementById('game5Onl').checked == true) {
-                localStorage.setItem("rbJuegoOnl", "game5Onl");
-                document.getElementById('gameOf5red').style.display = 'block';
-                datos.setFactorAlgoritmo(2);
-                player.tipoJuego = (new GameType().getGameType().JUEGO5.name);
-                modo = 5;
-            } else {
-                localStorage.setItem("rbJuegoOnl", "game9Onl");
-                document.getElementById('gameOf9red').style.display = 'block';
-                datos.setFactorAlgoritmo(4);
-                player.tipoJuego = (new GameType().getGameType().JUEGO9.name);
-                modo = 9;
-            }
+            localStorage.setItem("rbJuegoOnl", "game9Onl");
+            document.getElementById('gameOf9red').style.display = 'block';
+            datos.setFactorAlgoritmo(4);
+            player.tipoJuego = (new GameType().getGameType().JUEGO9.name);
+            modo = 9;
         }
-        localStorage.setItem("modo", modo);
-        setLimiteRondasOnline();
-        metamsg.content = (player);
-        console.log(metamsg);
-        var msgToSend = JSON.stringify(metamsg);
-        //alert(msgToSend);
-        waitForSocketConnection(websocket, function () {
-            websocket.send(msgToSend);
-        });
-
     }
-
-
-    //}
+    localStorage.setItem("modo", modo);
+    setLimiteRondasOnline();
+    metamsg.content = (player);
+    console.log(metamsg);
+    var msgToSend = JSON.stringify(metamsg);
+    //alert(msgToSend);
+    waitForSocketConnection(websocket, function () {
+        websocket.send(msgToSend);
+    });
 }
+
 /**
  * Método encargado de cambiar al DataContainer datos el número de rondas elegido en el formulario del modo online.
  */
@@ -499,176 +493,92 @@ function getScores(selectedOption) {
     }
 }
 
-function getKeys() {
-    if (clave == "") {
-        $.post("http://192.168.1.104:8080/ServerPPTGame/seguridad",
-                function (data) {
-                    console.debug("DATA", data);
-                    keyCompl = JSON.parse(data);
-                    console.debug("keyCompl", keyCompl);
-                    clave = keyCompl.claves[Math.floor((Math.random() * ((keyCompl.claves.length))))];
-                    console.debug("claves", clave);
-                    complemento = keyCompl.complementos[Math.floor((Math.random() * ((keyCompl.complementos.length))))];
-                    console.debug("complementos", complemento);
-                    console.debug("keysComplements getKEYS", sessionStorage.getItem("keysComplements"));
-                    console.debug("id session getKEYS", readCookie("sessionId"));
-                });
-        //alert(clave+"-"+complemento);
-    }
-}
-
 function getKeysFromServlet() {
-    $.ajax({
-        type: "POST",
-        url: "http://192.168.1.104:8080/ServerPPTGame/seguridad"
-    }).done(function (data) {
-        //alert(data);
-        console.debug("DATA", data);
-        keyCompl = JSON.parse(data);
-        console.debug("keyCompl", keyCompl);
-        clave = keyCompl.claves[Math.floor((Math.random() * ((keyCompl.claves.length))))];
-        console.debug("claves", clave);
-        complemento = keyCompl.complementos[Math.floor((Math.random() * ((keyCompl.complementos.length))))];
-        console.debug("complementos", complemento);
-        console.debug("id session getKEYS", readCookie("sessionId"));
-    });
-}
-
-
-function strhash(str) {
-    if (str.length % 32 > 0)
-        str += Array(33 - str.length % 32).join("z");
-    var hash = '', bytes = [], i = j = k = a = 0, dict = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    for (i = 0; i < str.length; i++) {
-        ch = str.charCodeAt(i);
-        bytes[j++] = (ch < 127) ? ch & 0xFF : 127;
+    if (clave == "") {
+        $.ajax({
+            type: "POST",
+            url: "http://192.168.1.104:8080/ServerPPTGame/seguridad"
+        }).done(function (data) {
+            //alert(data);
+            console.debug("DATA", data);
+            keyCompl = JSON.parse(data);
+            console.debug("keyCompl", keyCompl);
+            clave = keyCompl.claves[Math.floor((Math.random() * ((keyCompl.claves.length))))];
+            console.debug("claves", clave);
+            complemento = keyCompl.complementos[Math.floor((Math.random() * ((keyCompl.complementos.length))))];
+            console.debug("complementos", complemento);
+        });
     }
-    var chunk_len = Math.ceil(bytes.length / 32);
-    for (i = 0; i < bytes.length; i++) {
-        j += bytes[i];
-        k++;
-        if ((k == chunk_len) || (i == bytes.length - 1)) {
-            a = Math.floor(j / k);
-            if (a < 32)
-                hash += '0';
-            else if (a > 126)
-                hash += 'z';
-            else
-                hash += dict[  Math.floor((a - 32) / 2.76) ];
-            j = k = 0;
-        }
-    }
-    return hash;
 }
 
 function doLogin() {
-    console.debug("compl", complemento);
-    console.debug("login", $("#login").val());
-    console.debug("pass", $("#password").val());
-    console.debug("click", click);
-    console.debug("confirmPass", $("#confirmPass").val());
     var logueadoCorrectamente;
     if ($("#login").val() != "" && $("#password").val() != "" && (click == false || (click == true && $("#password").val() == $("#confirmPass").val()))) {
         var user = new User().getUser();
         user.login = $("#login").val();
         user.pass = $("#password").val();
+        datos.setNombreJ1(user.login);
         var key = clave + "" + complemento;
-        console.debug("keyCompl", key);
-        AES_Init();
-        //var b64User = btoa(AES_Encrypt(JSON.stringify(user), key));
-        var keyHash;
-        var complHash;
+        var keyHash, complHash;
         $.post("http://192.168.1.104:8080/ServerPPTGame/ServletHashingJS",
-                {
-                    op: "claves",
-                    clave: clave,
-                    complemento: complemento
-                },
+                {op: "claves", clave: clave, complemento: complemento},
                 function (data) {
-                    console.debug("data hashing", data);
                     keyHash = JSON.parse(data)[0];
-                    console.debug("keyHash", keyHash);
                     complHash = JSON.parse(data)[1];
-                    console.debug("complHash", complHash);
                     $.post("http://192.168.1.104:8080/ServerPPTGame/ServletHashingJS",
-                            {
-                                op: "user",
-                                user: JSON.stringify(user),
-                                fraseHash: key
-                            },
+                            {op: "user", user: JSON.stringify(user), fraseHash: key},
                             function (data) {
                                 user = JSON.parse(data);
                                 if (click == true) {
                                     $.post("http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=put",
-                                            {
-                                                user: user,
-                                                claveHasheada: keyHash,
-                                                complementoHasheado: complHash,
-                                                claveComplemento: JSON.stringify(keyCompl)
-                                            },
+                                            {user: user, claveHasheada: keyHash, complementoHasheado: complHash, claveComplemento: JSON.stringify(keyCompl)},
                                             function (data) {
                                                 logueadoCorrectamente = data;
-
+                                                compruebaSiLogueadoBien(logueadoCorrectamente, false);
                                             });
                                 } else {
                                     $.post("http://192.168.1.104:8080/ServerPPTGame/login",
-                                            {
-                                                user: user,
-                                                claveHasheada: keyHash,
-                                                complementoHasheado: complHash,
-                                                claveComplemento: JSON.stringify(keyCompl)
-                                            },
+                                            {user: user, claveHasheada: keyHash, complementoHasheado: complHash, claveComplemento: JSON.stringify(keyCompl)},
                                             function (data) {
-                                                console.debug("id session CASE LOGIN", readCookie("sessionId"));
-                                                console.debug("keysComplements LOGIN", sessionStorage.getItem("keysComplements"));
-                                                console.debug("keySession LOGIN", sessionStorage.getItem("keySession"));
                                                 logueadoCorrectamente = data;
-                                                if (logueadoCorrectamente == "SI") {
-                                                    clave = "";
-                                                    complemento = "";
-                                                    cambiaVista("onlineGameMenu");
-                                                    removeMaterializeImports();
-                                                } else {
-                                                    alert("Login y/o password incorrectos!");
-                                                }
+                                                compruebaSiLogueadoBien(logueadoCorrectamente, true);
                                             });
                                 }
                             });
-
                 });
-
-        console.debug("complHash", complHash);
-        console.debug("KEY HASH DESPUES", keyHash);
-
-
     } else {
         alert(language[userLang].fillTheFields);
     }
 }
 
-function writeCookie(name, value, days) {
-    var date, expires;
-    if (days) {
-        date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toGMTString();
+function compruebaSiLogueadoBien(logueadoCorrectamente, click) {
+    if (logueadoCorrectamente == "SI") {
+        localStorage.setItem("logueado", JSON.stringify({nombre: datos.getNombreJ1(), yaLogueado: true}));
+        clave = "";
+        complemento = "";
+        cambiaVista("onlineGameMenu");
+        removeMaterializeImports();
     } else {
-        expires = "";
+        if (click == true) {
+            alert("Login y/o password incorrectos!");
+        } else {
+            alert("No coinciden las contraseñas!");
+        }
     }
-    document.cookie = name + "=" + value + expires + "; path=/";
 }
 
-function readCookie(name) {
-    var i, c, ca, nameEQ = name + "=";
-    ca = document.cookie.split(';');
-    for (i = 0; i < ca.length; i++) {
-        c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1, c.length);
+function muestraPantallaLoginSiNoLogueado() {
+    var logueado = JSON.parse(localStorage.getItem("logueado"));
+    console.debug("logueado", logueado);
+    if (logueado != null) {
+        if (logueado.yaLogueado == true) {
+            datos.setNombreJ1(logueado.nombre);
+            cambiaVista('onlineGameMenu');
         }
-        if (c.indexOf(nameEQ) == 0) {
-            return c.substring(nameEQ.length, c.length);
-        }
+    } else {
+        $('#loginScreen').load('loginScreen.html');
+        cambiaVista('loginScreen');
     }
-    return '';
+
+
 }

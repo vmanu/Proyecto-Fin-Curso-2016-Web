@@ -12,7 +12,6 @@ and open the template in the editor.
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script src="encryption/jsaes.js" type="text/javascript"></script>
         <script src="model/ModalidadJuego.js" type="text/javascript"></script>
         <script src="model/GameType.js" type="text/javascript"></script>
         <script src="model/RoundsNumber.js" type="text/javascript"></script>
@@ -35,9 +34,7 @@ and open the template in the editor.
         <script src="resources/infoOfDevelopers.js" type="text/javascript"></script>
         <script>
             $(document).ready(function () {
-                writeCookie("sessionId","ivanPR",4);
-                console.debug("id session INDEX",readCookie("sessionId"));
-                sessionStorage.setItem("keySession","ivan");
+                //localStorage.clear();
                 if (localStorage.getItem("rbPlayers") != null && localStorage.getItem("rbJuego") != null && localStorage.getItem("rbRondas") != null) {
                     $("#" + localStorage.getItem("rbPlayers")).click();
                     $("#nameOfPlayer1").val(localStorage.getItem("namePlayer1"));
@@ -55,7 +52,6 @@ and open the template in the editor.
                     }
                 }
                 if (localStorage.getItem("rbJuegoOnl") != null && localStorage.getItem("rbRondasOnl") != null) {
-                    $("#nameOfPlayerOnl").val(localStorage.getItem("namePlayerOnl"));
                     $("#" + localStorage.getItem("rbJuegoOnl")).click();
                     $("#" + localStorage.getItem("rbRondasOnl")).click();
                 }
@@ -74,7 +70,7 @@ and open the template in the editor.
             <button id="localModeBtn" type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('localGameMenu')">
                 <script>document.write(language[userLang].play)</script>
             </button><br>
-            <button id="onlineModeBtn" type="button" class="btn btn-primary btn-sm btn-block" onclick="$('#loginScreen').load('loginScreen.html');cambiaVista('loginScreen')">
+            <button id="onlineModeBtn" type="button" class="btn btn-primary btn-sm btn-block" onclick="muestraPantallaLoginSiNoLogueado()">
                 <script>document.write(language[userLang].onlineMode);</script>
             </button><br>
             <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('rules')">
@@ -162,8 +158,6 @@ and open the template in the editor.
             <input type="radio" id="game3Onl" value="game3Onl" name="gameOnl" checked/><script>document.write(language[userLang].game3);</script><br>
             <input type="radio" id="game5Onl" value="game5Onl" name="gameOnl"/><script>document.write(language[userLang].game5);</script><br>
             <input type="radio" id="game9Onl" value="game9Onl" name="gameOnl"/><script>document.write(language[userLang].game9);</script><br>
-            <h4>Put your name:</h4>
-            <input type="text" class="containsPlaceholder" id="nameOfPlayerOnl" name="nameOfPlayerOnl" placeholder="Your name HERE"/>
             <h4><script>document.write(language[userLang].chooseRounds);</script></h4>
             <input type="radio" id="oneRoundOnl" name="roundsOnl" onclick="invisibleElement('customedRounds')" checked/><script>document.write(language[userLang].oneRound);</script><br>
             <input type="radio" id="threeRoundsOnl" name="roundsOnl" onclick="invisibleElement('customedRounds')"/><script>document.write(language[userLang].threeRounds);</script><br>

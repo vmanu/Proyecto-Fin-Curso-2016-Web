@@ -23,7 +23,6 @@ and open the template in the editor.
         <script>
             var click;
             $(document).ready(function () {
-                console.debug("id session LOGIN SCREEN",readCookie("sessionId"));
                 console.debug("keySession",sessionStorage.getItem("keySession"));
                 console.debug("keysComplements LOGINSCREEN",sessionStorage.getItem("keysComplements"));
                 $("#divConfirmPassword").attr("hidden", true);
@@ -46,19 +45,21 @@ and open the template in the editor.
             }
 
             function signUp() {
-                if (click == true) {
+                
+                if (click == false) {
                     //SIGN UP
                     $("#signIn").text("Sign up");
                     $("#signUp").text("Sign in");
                     $("#divConfirmPassword").removeAttr("hidden");
-                    click=false;
+                    click=true;
                 }else{
                     //SIGN IN
                     $("#signIn").text("Sign in");
                     $("#signUp").text("Sign up");
                     $("#divConfirmPassword").attr("hidden",true);
-                    click=true;
+                    click=false;
                 }
+                console.debug("click en signup",click);
 
             }
         </script>
@@ -81,7 +82,7 @@ and open the template in the editor.
                             <label for="password">Password</label>
                         </div>
                     </div>
-                    <div class="row" id="divConfirmPassword">
+                    <div class="row" id="divConfirmPassword" hidden>
                         <div class="input-field col s12">
                             <input id="confirmPass" type="password" class="validate" style="font-size: 24px; text-align: center">
                             <label for="confirmPass">Confirm password</label>
