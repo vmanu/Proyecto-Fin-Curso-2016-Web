@@ -21,8 +21,10 @@ and open the template in the editor.
         <script src="model/ModalidadJuego.js" type="text/javascript"></script>
         <script src="cifradoPrueba.js" type="text/javascript"></script>
         <script>
+            var click;
             $(document).ready(function () {
                 $("#divConfirmPassword").attr("hidden", true);
+                click=true;
             });
             function removejscssfile(filename, filetype) {
                 var targetelement = (filetype == "js") ? "script" : (filetype == "css") ? "link" : "none"; //determine element type to create nodelist from
@@ -40,9 +42,20 @@ and open the template in the editor.
             }
 
             function signUp() {
-                $("#signIn").text("Sign up");
-                $("#signUp").text("Sign in");
-                $("#divConfirmPassword").removeAttr("hidden");
+                if (click == true) {
+                    //SIGN UP
+                    $("#signIn").text("Sign up");
+                    $("#signUp").text("Sign in");
+                    $("#divConfirmPassword").removeAttr("hidden");
+                    click=false;
+                }else{
+                    //SIGN IN
+                    $("#signIn").text("Sign in");
+                    $("#signUp").text("Sign up");
+                    $("#divConfirmPassword").attr("hidden",true);
+                    click=true;
+                }
+
             }
         </script>
     </head>
@@ -70,8 +83,7 @@ and open the template in the editor.
                             <label for="confirmPass">Confirm password</label>
                         </div>
                     </div>
-                    <div id="signUp" style="float:left; color: blue" onclick="signUp()" onmouseover="$('#signUp').css('cursor','pointer')">Sign up</div>
-                    <div>MIRA A VER SI PUEDES PONER PARA QUE AL DARLE OTRA VEZ AL SIGN UP SE VUELVA AL LOGEO NORMAL</div>
+                    <div id="signUp" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="signUp()" onmouseover="$('#signUp').css('cursor', 'pointer')">Sign up</div>
                     <div class="row">
                         <div class="col m12">
                             <p class="right-align">
