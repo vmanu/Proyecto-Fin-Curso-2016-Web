@@ -397,7 +397,7 @@ function cambiaVistaJuegoOnline() {
     metamsg.type = (new TypeMessage().getTypeMessage().CONEXION.name);
     player = new Player().getPlayer();
     player.namePlayer = (datos.getNombreJ1());
-    console.debug("nombre j1",datos.getNombreJ1());
+    console.debug("nombre j1", datos.getNombreJ1());
     player.playing = (false);
     //alert("PLAYER JSON "+playerJson);
     datos.setJugando(true);
@@ -475,19 +475,27 @@ function getScores(selectedOption) {
     if (selectedOption == "byRounds") {
         $.post("http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByRounds",
                 function (data) {
-                    alert(data);
                     players = data;
+                    for (var i = 0; i < players.length; i++) {
+                        $("#listPlayers").html("<a class='list-group-item'>" + players[i].namePlayer + " " + players[i].numPartidas + " " + players[i].numVictorias + "</a>");
+                    }
                 });
     } else {
         if (selectedOption == "byVictories") {
             $.post("http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByVictories",
                     function (data) {
                         players = data;
+                        for (var i = 0; i < players.length; i++) {
+                            $("#listPlayers").html("<a class='list-group-item'>" + players[i].namePlayer + " " + players[i].numPartidas + " " + players[i].numVictorias + "</a>");
+                        }
                     });
         } else {
             $.post("http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByAverage",
                     function (data) {
                         players = data;
+                        for (var i = 0; i < players.length; i++) {
+                            $("#listPlayers").html("<a class='list-group-item'>" + players[i].namePlayer + " " + players[i].numPartidas + " " + players[i].numVictorias + "</a>");
+                        }
                     });
         }
     }
