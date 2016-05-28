@@ -83,12 +83,12 @@ function cambiaVistaJuego() {
         if (document.getElementById('onePlayer').checked) {
             datos.setModalidadJuego(new ModalidadJuego().getModalidad().UNO);
             localStorage.setItem("rbPlayers", "onePlayer");
-            localStorage.setItem("namePlayer1", $("#nameOfPlayer1").val());
+            localStorage.setItem("nameOfPlayer1", $("#nameOfPlayer1").val());
         } else {
             localStorage.setItem("rbPlayers", "twoPlayers");
             datos.setModalidadJuego(new ModalidadJuego().getModalidad().DOS);
             dosJugadores = true;
-            localStorage.setItem("namePlayer2", $("#nameOfPlayer2").val());
+            localStorage.setItem("nameOfPlayer2", $("#nameOfPlayer2").val());
         }
         cambiaVista('headerGame');
         datos.setNombreJ1($("#nameOfPlayer1").val());
