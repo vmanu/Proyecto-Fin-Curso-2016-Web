@@ -39,17 +39,17 @@ and open the template in the editor.
                 //localStorage.clear();
                 if (localStorage.getItem(RB_PLAYERS) != null && localStorage.getItem(RB_JUEGO) != null && localStorage.getItem(RB_RONDAS) != null) {
                     $("#" + localStorage.getItem(RB_PLAYERS)).click();
-                    $("#"+NAME_PLAYER1).val(localStorage.getItem(NAME_PLAYER1));
+                    $("#" + NAME_PLAYER1).val(localStorage.getItem(NAME_PLAYER1));
                     if (localStorage.getItem(RB_PLAYERS) == TWO_PLAYERS) {
                         if (localStorage.getItem(NAME_PLAYER2) != null) {
-                            $("#"+NAME_PLAYER2).val(localStorage.getItem(NAME_PLAYER2));
+                            $("#" + NAME_PLAYER2).val(localStorage.getItem(NAME_PLAYER2));
                         }
                     }
                     $("#" + localStorage.getItem(RB_JUEGO)).click();
                     $("#" + localStorage.getItem(RB_RONDAS)).click();
                     if (localStorage.getItem(RB_RONDAS) == MORE_ROUNDS) {
                         if (localStorage.getItem(VALUE_RONDAS) != null) {
-                            $("#"+CUSTOMED_ROUNDS).val(localStorage.getItem(VALUE_RONDAS));
+                            $("#" + CUSTOMED_ROUNDS).val(localStorage.getItem(VALUE_RONDAS));
                         }
                     }
                 }
@@ -69,62 +69,66 @@ and open the template in the editor.
 
         <div class="atCenterTopOfScreen" id="initialButtons">
             <h2 class="title" style="margin-top: 40px"><script>document.write(language[userLang].titleGame)</script></h2><br>
-            <button id="localModeBtn" type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('localGameMenu')">
+            <button id="localModeBtn" type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_LOCAL_MENU)">
                 <script>document.write(language[userLang].play)</script>
             </button><br>
             <button id="onlineModeBtn" type="button" class="btn btn-primary btn-sm btn-block" onclick="muestraPantallaLoginSiNoLogueado()">
                 <script>document.write(language[userLang].onlineMode);</script>
             </button><br>
-            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('rules')">
+            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_RULES)">
                 <script>document.write(language[userLang].rulesOption);</script>
             </button><br>
-            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('graphicRules')">
+            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_RULES_GRAPHIC)">
                 <script>document.write(language[userLang].rulesGraph);</script>
             </button><br>
-            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('infoDev')">
+            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_INFO_DEVELOPERS)">
                 <script>document.write(language[userLang].infoDev);</script>
             </button>
         </div>
         <div class="atCenterTopOfScreen" id="playOnline" hidden="">
             <div id="divLogOut">
                 <div id="nameLoggedPlayer" class="col-md-10" style="text-align: right">
-                    <script>document.write("(" + JSON.parse(localStorage.getItem("logueado")).nombre + ")")</script>
+                    <script>
+                        if (localStorage.getItem(LOGUEADO) != null) {
+                            document.write(JSON.parse(localStorage.getItem(LOGUEADO)).nombre);
+                        }
+                    </script>
                 </div>
-                <div id="logOut" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="logOut()" onmouseover="$('#logOut').css('cursor', 'pointer')">
+                <div id="logOut" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="logOut()" onmouseover="$('#'+LOG_OUT).css('cursor', 'pointer')">
                     Log out
                 </div>
             </div>
             <h2 class="title" style="margin-top: 40px"><script>document.write(language[userLang].onlineMode);</script></h2><br>
-            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('onlineGameMenu')">
+            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_ONLINE_MENU)">
                 <script>document.write(language[userLang].play);</script>
             </button><br>
-            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('scores')">
+            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(SCORES)">
                 <script>document.write(language[userLang].scores);</script>
             </button><br><br>
-            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('initialButtons')">
+            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_MENU_PPAL)">
                 <script>document.write(language[userLang].back);</script>
             </button>
         </div>
         <div class="atCenterTopOfScreen" id="rules" hidden="">
             <h3><script>document.write(language[userLang].rulesOption);</script></h3>
             <pre class="bgBlue">
-                <script>document.write(userLang == "es" ? textRules : textRulesEng);</script>
+                <script>document.write(userLang == SPANISH ? textRules : textRulesEng);</script>
             </pre>
-            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('initialButtons')">Back</button>
+            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_MENU_PPAL)">Back</button>
         </div>
         <div class="atCenterTopOfScreen" id="graphicRules" hidden="">
             <h3><script>document.write(language[userLang].rulesGraph);</script></h3>
             <img src="imagesPPTGame/threegame.png" alt=""/><br>
             <img src="imagesPPTGame/fivegame.png" alt=""/><br><br>
             <img src="imagesPPTGame/ninegame.png" alt=""/><br><br>
-            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('initialButtons')">
+            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_MENU_PPAL)">
                 <script>document.write(language[userLang].back);</script>
             </button>
         </div>
         <div class="atCenterTopOfScreen" id="infoDev" hidden="">
             <h3><script>document.write(language[userLang].infoDev);</script></h3>
-            <script>document.write(userLang == "es" ? textInfoDev : textInfoDevEng);</script>
-            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('initialButtons')">
+            <script>document.write(userLang == SPANISH ? textInfoDev : textInfoDevEng);</script>
+            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_MENU_PPAL)">
                 <script>document.write(language[userLang].back);</script>
             </button>
         </div>
@@ -135,18 +139,18 @@ and open the template in the editor.
             <input type="radio" id="game5" value="game5" name="game"/><script>document.write(language[userLang].game5);</script><br>
             <input type="radio" id="game9" value="game9" name="game"/><script>document.write(language[userLang].game9);</script><br>
             <h4><script>document.write(language[userLang].chooseNumPlayers);</script></h4>
-            <input checked="" type="radio" id="onePlayer" name="players" onclick="invisibleElement('nameOfPlayer2')" /><script>document.write(language[userLang].onePlayer);</script><br>
-            <input type="radio" id="twoPlayers" name="players" onclick="visibleElement('nameOfPlayer2')"/><script>document.write(language[userLang].twoPlayers);</script><br>
+            <input checked="" type="radio" id="onePlayer" name="players" onclick="invisibleElement(NAME_PLAYER2)" /><script>document.write(language[userLang].onePlayer);</script><br>
+            <input type="radio" id="twoPlayers" name="players" onclick="visibleElement(NAME_PLAYER2)"/><script>document.write(language[userLang].twoPlayers);</script><br>
             <input type="text" class="containsPlaceholder" id="nameOfPlayer1" name="nameOfPlayer1" placeholder="Player 1" required=""/>
             <input type="text" class="containsPlaceholder" id="nameOfPlayer2" name="nameOfPlayer2" placeholder="Player 2" hidden/>
             <h4><script>document.write(language[userLang].chooseRounds);</script></h4>
-            <input checked="" id="oneRound" type="radio" name="rounds" onclick="invisibleElement('customedRounds')"/><script>document.write(language[userLang].oneRound);</script><br>
-            <input type="radio" id="threeRounds" name="rounds" onclick="invisibleElement('customedRounds')"/><script>document.write(language[userLang].threeRounds);</script><br>
-            <input type="radio" id="fiveRounds" name="rounds" onclick="invisibleElement('customedRounds')"/><script>document.write(language[userLang].fiveRounds);</script><br>
-            <input type="radio" id="moreRounds" name="rounds" onclick="visibleElement('customedRounds')"/><script>document.write(language[userLang].customedRounds);</script><br>
+            <input checked="" id="oneRound" type="radio" name="rounds" onclick="invisibleElement(CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].oneRound);</script><br>
+            <input type="radio" id="threeRounds" name="rounds" onclick="invisibleElement(CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].threeRounds);</script><br>
+            <input type="radio" id="fiveRounds" name="rounds" onclick="invisibleElement(CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].fiveRounds);</script><br>
+            <input type="radio" id="moreRounds" name="rounds" onclick="visibleElement(CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].customedRounds);</script><br>
             <input type="text" class="containsPlaceholder" id="customedRounds" name="customedRounds" placeholder="Number of Rounds" hidden/><br><br>
             <div>
-                <button type="button" class="btn btn-primary btn-lg " onclick="cambiaVista('initialButtons')">
+                <button type="button" class="btn btn-primary btn-lg " onclick="cambiaVista(DIV_MENU_PPAL)">
                     <script>document.write(language[userLang].back);</script>
                 </button>
                 <button type="button" class="btn btn-primary btn-lg " onclick="cambiaVistaJuego()">
@@ -158,16 +162,20 @@ and open the template in the editor.
         <div class="atCenterTopOfScreen" id="onlineGameMenu" hidden="">
             <div>
                 <div id="loggedPlayer" class="col-md-10" style="text-align: right">
-                    <script>document.write("(" + JSON.parse(localStorage.getItem("logueado")).nombre + ")")</script>
+                    <script>
+                        if(localStorage.getItem(LOGUEADO)){
+                            document.write(JSON.parse(localStorage.getItem(LOGUEADO)).nombre);
+                        }
+                    </script>
                 </div>
                 <div id="logOut2" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="logOut()" onmouseover="$('#logOut2').css('cursor', 'pointer')">
                     Log out
                 </div>
             </div>
             <h2 class="title" style="margin-top: 40px"><script>document.write(language[userLang].onlineMode);</script></h2><br>
-            <button id="playCust" type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('customedOnline')">Play customed</button><br>
+            <button id="playCust" type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_ONLINE_MENU_JUEGO)">Play customed</button><br>
             <button id="randomly" type="button" class="btn btn-primary btn-sm btn-block" onclick="randomGame()">Randomly</button><br><br>
-            <button id="backOnl" type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('playOnline')">
+            <button id="backOnl" type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_PLAY_ONLINE)">
                 <script>document.write(language[userLang].back);</script>
             </button>
         </div>
@@ -177,11 +185,11 @@ and open the template in the editor.
             <input type="radio" id="game5Onl" value="game5Onl" name="gameOnl"/><script>document.write(language[userLang].game5);</script><br>
             <input type="radio" id="game9Onl" value="game9Onl" name="gameOnl"/><script>document.write(language[userLang].game9);</script><br>
             <h4><script>document.write(language[userLang].chooseRounds);</script></h4>
-            <input type="radio" id="oneRoundOnl" name="roundsOnl" onclick="invisibleElement('customedRounds')" checked/><script>document.write(language[userLang].oneRound);</script><br>
-            <input type="radio" id="threeRoundsOnl" name="roundsOnl" onclick="invisibleElement('customedRounds')"/><script>document.write(language[userLang].threeRounds);</script><br>
-            <input type="radio" id="fiveRoundsOnl" name="roundsOnl" onclick="invisibleElement('customedRounds')"/><script>document.write(language[userLang].fiveRounds);</script><br>
+            <input type="radio" id="oneRoundOnl" name="roundsOnl" onclick="invisibleElement(CUSTOMED_ROUNDS)" checked/><script>document.write(language[userLang].oneRound);</script><br>
+            <input type="radio" id="threeRoundsOnl" name="roundsOnl" onclick="invisibleElement(CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].threeRounds);</script><br>
+            <input type="radio" id="fiveRoundsOnl" name="roundsOnl" onclick="invisibleElement(CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].fiveRounds);</script><br>
             <div>
-                <button type="button" class="btn btn-primary btn-lg " onclick="cambiaVista('onlineGameMenu')">
+                <button type="button" class="btn btn-primary btn-lg " onclick="cambiaVista(DIV_ONLINE_MENU)">
                     <script>document.write(language[userLang].back);</script>
                 </button>
                 <button id="gameOnlineScreen" type="button" class="btn btn-primary btn-lg " onclick="cambiaVistaJuegoOnline()">
@@ -195,50 +203,50 @@ and open the template in the editor.
             <img id="p2" class="sizeAdjust" src="imagesPPTGame/helpsymbolazul.png" alt=""/>
         </div>
         <div class="atCenterOfScreen" id="gameOf3red" hidden>
-            <img id="piedraroja3" name="juego3" class="sizeAdjust" src="imagesPPTGame/piedraroja.png" alt="" onclick="gestionaJuego('gameOf3red', 'PIEDRA3', this.id)"/>
-            <img id="papelrojo3" name="juego3" class="sizeAdjust" src="imagesPPTGame/papelrojo.png" alt="" onclick="gestionaJuego('gameOf3red', 'PAPEL3', this.id)">
-            <img id="tijerasrojo3" name="juego3" class="sizeAdjust" src="imagesPPTGame/tijerasrojo.png" alt="" onclick="gestionaJuego('gameOf3red', 'TIJERA3', this.id)"/>
+            <img id="piedraroja3" name="juego3" class="sizeAdjust" src="imagesPPTGame/piedraroja.png" alt="" onclick="gestionaJuego(GAME3_RED, PIEDRA3, this.id)"/>
+            <img id="papelrojo3" name="juego3" class="sizeAdjust" src="imagesPPTGame/papelrojo.png" alt="" onclick="gestionaJuego(GAME3_RED, PAPEL3, this.id)">
+            <img id="tijerasrojo3" name="juego3" class="sizeAdjust" src="imagesPPTGame/tijerasrojo.png" alt="" onclick="gestionaJuego(GAME3_RED, TIJERA3, this.id)"/>
         </div>
         <div  class="atCenterOfScreen" id="gameOf3blue" hidden>
-            <img id="piedraazul3" name="juego3" class="sizeAdjust" src="imagesPPTGame/piedraazul.png" alt="" onclick="gestionaJuego('gameOf3blue', 'PIEDRA3', this.id)"/>
-            <img id="papelazul3" name="juego3" class="sizeAdjust" src="imagesPPTGame/papelazul.png" alt="" onclick="gestionaJuego('gameOf3blue', 'PAPEL3', this.id)"/>
-            <img id="tijerasazul3" name="juego3" class="sizeAdjust" src="imagesPPTGame/tijerasazul.png" alt="" onclick="gestionaJuego('gameOf3blue', 'TIJERA3', this.id)"/>
+            <img id="piedraazul3" name="juego3" class="sizeAdjust" src="imagesPPTGame/piedraazul.png" alt="" onclick="gestionaJuego(GAME3_BLUE, PIEDRA3, this.id)"/>
+            <img id="papelazul3" name="juego3" class="sizeAdjust" src="imagesPPTGame/papelazul.png" alt="" onclick="gestionaJuego(GAME3_BLUE, PAPEL3, this.id)"/>
+            <img id="tijerasazul3" name="juego3" class="sizeAdjust" src="imagesPPTGame/tijerasazul.png" alt="" onclick="gestionaJuego(GAME3_BLUE, TIJERA3, this.id)"/>
         </div>
         <div class="atCenterOfScreen" id="gameOf5red" hidden>
-            <img class="sizeAdjust imageOfGame5" id="lizardrojo" name="juego5" src="imagesPPTGame/lizardrojo.png" alt="" onclick="gestionaJuego('gameOf5red', 'LAGARTO5', this.id)"/><br>
-            <img class="sizeAdjust" id="piedraroja5" name="juego5" src="imagesPPTGame/piedraroja.png" alt="" onclick="gestionaJuego('gameOf5red', 'PIEDRA5', this.id)"/>
-            <img class="sizeAdjust" id="papelrojo5" name="juego5" src="imagesPPTGame/papelrojo.png" alt="" onclick="gestionaJuego('gameOf5red', 'PAPEL5', this.id)"/>
-            <img class="sizeAdjust" id="tijerasrojo5" name="juego5" src="imagesPPTGame/tijerasrojo.png" alt="" onclick="gestionaJuego('gameOf5red', 'TIJERA5', this.id)"/><br>
-            <img class="sizeAdjust imageOfGame5" id="spockrojo" name="juego5" src="imagesPPTGame/spockrojo.png" alt="" onclick="gestionaJuego('gameOf5red', 'SPOCK5', this.id)"/>
+            <img class="sizeAdjust imageOfGame5" id="lizardrojo" name="juego5" src="imagesPPTGame/lizardrojo.png" alt="" onclick="gestionaJuego(GAME5_RED, LAGARTO5, this.id)"/><br>
+            <img class="sizeAdjust" id="piedraroja5" name="juego5" src="imagesPPTGame/piedraroja.png" alt="" onclick="gestionaJuego(GAME5_RED, PIEDRA5, this.id)"/>
+            <img class="sizeAdjust" id="papelrojo5" name="juego5" src="imagesPPTGame/papelrojo.png" alt="" onclick="gestionaJuego(GAME5_RED, PAPEL5, this.id)"/>
+            <img class="sizeAdjust" id="tijerasrojo5" name="juego5" src="imagesPPTGame/tijerasrojo.png" alt="" onclick="gestionaJuego(GAME5_RED, TIJERA5, this.id)"/><br>
+            <img class="sizeAdjust imageOfGame5" id="spockrojo" name="juego5" src="imagesPPTGame/spockrojo.png" alt="" onclick="gestionaJuego(GAME5_RED, SPOCK5, this.id)"/>
         </div>
         <div  class="atCenterOfScreen" id="gameOf5blue" hidden>
-            <img class="sizeAdjust imageOfGame5" id="lizardazul5" name="juego5" src="imagesPPTGame/lizardazul.png" alt="" onclick="gestionaJuego('gameOf5blue', 'LAGARTO5', this.id)"/><br>
-            <img class="sizeAdjust" id="piedraazul5" name="juego5" src="imagesPPTGame/piedraazul.png" alt="" onclick="gestionaJuego('gameOf5blue', 'PIEDRA5', this.id)"/>
-            <img class="sizeAdjust" id="papelazul5" name="juego5" src="imagesPPTGame/papelazul.png" alt="" onclick="gestionaJuego('gameOf5blue', 'PAPEL5', this.id)"/>
-            <img class="sizeAdjust" id="tijerasazul5" name="juego5" src="imagesPPTGame/tijerasazul.png" alt="" onclick="gestionaJuego('gameOf5blue', 'TIJERA5', this.id)"/><br>
-            <img class="sizeAdjust imageOfGame5" id="spockazul5" name="juego5" src="imagesPPTGame/spockazul.png" alt="" onclick="gestionaJuego('gameOf5blue', 'SPOCK5', this.id)"/>
+            <img class="sizeAdjust imageOfGame5" id="lizardazul5" name="juego5" src="imagesPPTGame/lizardazul.png" alt="" onclick="gestionaJuego(GAME5_BLUE, LAGARTO5, this.id)"/><br>
+            <img class="sizeAdjust" id="piedraazul5" name="juego5" src="imagesPPTGame/piedraazul.png" alt="" onclick="gestionaJuego(GAME5_BLUE, PIEDRA5, this.id)"/>
+            <img class="sizeAdjust" id="papelazul5" name="juego5" src="imagesPPTGame/papelazul.png" alt="" onclick="gestionaJuego(GAME5_BLUE, PAPEL5, this.id)"/>
+            <img class="sizeAdjust" id="tijerasazul5" name="juego5" src="imagesPPTGame/tijerasazul.png" alt="" onclick="gestionaJuego(GAME5_BLUE, TIJERA5, this.id)"/><br>
+            <img class="sizeAdjust imageOfGame5" id="spockazul5" name="juego5" src="imagesPPTGame/spockazul.png" alt="" onclick="gestionaJuego(GAME5_BLUE, SPOCK5, this.id)"/>
         </div>
         <div class="atCenterOfScreen" id="gameOf9red" hidden>
-            <img class="sizeAdjust" id="waterrojo9" name="juego9" src="imagesPPTGame/waterrojo.png" alt="" onclick="gestionaJuego('gameOf9red', 'AGUA9', this.id)"/>
-            <img class="sizeAdjust" id="windrojo9" name="juego9" src="imagesPPTGame/windrojo.png" alt="" onclick="gestionaJuego('gameOf9red', 'AIRE9', this.id)"/>
-            <img class="sizeAdjust" id="gunrojo9" name="juego9" src="imagesPPTGame/gunrojo.png" alt="" onclick="gestionaJuego('gameOf9red', 'PISTOLA9', this.id)"/><br>
-            <img class="sizeAdjust" id="piedraroja9" name="juego9" src="imagesPPTGame/piedraroja.png" alt="" onclick="gestionaJuego('gameOf9red', 'PIEDRA9', this.id)"/>
-            <img class="sizeAdjust" id="papelrojo9" name="juego9" src="imagesPPTGame/papelrojo.png" alt="" onclick="gestionaJuego('gameOf9red', 'PAPEL9', this.id)"/>
-            <img class="sizeAdjust" id="tijerasrojo9" name="juego9" src="imagesPPTGame/tijerasrojo.png" alt="" onclick="gestionaJuego('gameOf9red', 'TIJERA9', this.id)"/><br>
-            <img class="sizeAdjust" id="humanrojo9" name="juego9" src="imagesPPTGame/humanrojo.png" alt="" onclick="gestionaJuego('gameOf9red', 'HUMANO9', this.id)"/>
-            <img class="sizeAdjust" id="spongerojo9" name="juego9" src="imagesPPTGame/spongerojo.png" alt="" onclick="gestionaJuego('gameOf9red', 'ESPONJA9', this.id)"/>
-            <img class="sizeAdjust" id="firerojo9" name="juego9" src="imagesPPTGame/firerojo.png" alt="" onclick="gestionaJuego('gameOf9red', 'FUEGO9', this.id)"/>
+            <img class="sizeAdjust" id="waterrojo9" name="juego9" src="imagesPPTGame/waterrojo.png" alt="" onclick="gestionaJuego(GAME9_RED, AGUA9, this.id)"/>
+            <img class="sizeAdjust" id="windrojo9" name="juego9" src="imagesPPTGame/windrojo.png" alt="" onclick="gestionaJuego(GAME9_RED, AIRE9, this.id)"/>
+            <img class="sizeAdjust" id="gunrojo9" name="juego9" src="imagesPPTGame/gunrojo.png" alt="" onclick="gestionaJuego(GAME9_RED, PISTOLA9, this.id)"/><br>
+            <img class="sizeAdjust" id="piedraroja9" name="juego9" src="imagesPPTGame/piedraroja.png" alt="" onclick="gestionaJuego(GAME9_RED, PIEDRA9, this.id)"/>
+            <img class="sizeAdjust" id="papelrojo9" name="juego9" src="imagesPPTGame/papelrojo.png" alt="" onclick="gestionaJuego(GAME9_RED, PAPEL9, this.id)"/>
+            <img class="sizeAdjust" id="tijerasrojo9" name="juego9" src="imagesPPTGame/tijerasrojo.png" alt="" onclick="gestionaJuego(GAME9_RED, TIJERA9, this.id)"/><br>
+            <img class="sizeAdjust" id="humanrojo9" name="juego9" src="imagesPPTGame/humanrojo.png" alt="" onclick="gestionaJuego(GAME9_RED, HUMANO9, this.id)"/>
+            <img class="sizeAdjust" id="spongerojo9" name="juego9" src="imagesPPTGame/spongerojo.png" alt="" onclick="gestionaJuego(GAME9_RED, ESPONJA9, this.id)"/>
+            <img class="sizeAdjust" id="firerojo9" name="juego9" src="imagesPPTGame/firerojo.png" alt="" onclick="gestionaJuego(GAME9_RED, FUEGO9, this.id)"/>
         </div>
         <div  class="atCenterOfScreen" id="gameOf9blue" hidden>
-            <img class="sizeAdjust" id="waterazul9" name="juego9" src="imagesPPTGame/waterazul.png" alt="" onclick="gestionaJuego('gameOf9blue', 'AGUA9', this.id)"/>
-            <img class="sizeAdjust" id="windazul9" name="juego9" src="imagesPPTGame/windazul.png" alt="" onclick="gestionaJuego('gameOf9blue', 'AIRE9', this.id)"/>
-            <img class="sizeAdjust" id="gunazul9" name="juego9" src="imagesPPTGame/gunazul.png" alt="" onclick="gestionaJuego('gameOf9blue', 'PISTOLA9', this.id)"/><br>
-            <img class="sizeAdjust" id="piedraazul9" name="juego9" src="imagesPPTGame/piedraazul.png" alt="" onclick="gestionaJuego('gameOf9blue', 'PIEDRA9', this.id)"/>
-            <img class="sizeAdjust" id="papelazul9" name="juego9" src="imagesPPTGame/papelazul.png" alt="" onclick="gestionaJuego('gameOf9blue', 'PAPEL9', this.id)"/>
-            <img class="sizeAdjust" id="tijerasazul9" name="juego9" src="imagesPPTGame/tijerasazul.png" alt="" onclick="gestionaJuego('gameOf9blue', 'TIJERA9', this.id)"/><br>
-            <img class="sizeAdjust" id="humanazul9" name="juego9" src="imagesPPTGame/humanazul.png" alt="" onclick="gestionaJuego('gameOf9blue', 'HUMANO9', this.id)"/>
-            <img class="sizeAdjust" id="spongeazul9" name="juego9" src="imagesPPTGame/spongeazul.png" alt="" onclick="gestionaJuego('gameOf9blue', 'ESPONJA9', this.id)"/>
-            <img class="sizeAdjust" id="fireazul9" name="juego9" src="imagesPPTGame/fireazul.png" alt="" onclick="gestionaJuego('gameOf9blue', 'FUEGO9', this.id)"/>
+            <img class="sizeAdjust" id="waterazul9" name="juego9" src="imagesPPTGame/waterazul.png" alt="" onclick="gestionaJuego(GAME9_BLUE, AGUA9, this.id)"/>
+            <img class="sizeAdjust" id="windazul9" name="juego9" src="imagesPPTGame/windazul.png" alt="" onclick="gestionaJuego(GAME9_BLUE, AIRE9, this.id)"/>
+            <img class="sizeAdjust" id="gunazul9" name="juego9" src="imagesPPTGame/gunazul.png" alt="" onclick="gestionaJuego(GAME9_BLUE, PISTOLA9, this.id)"/><br>
+            <img class="sizeAdjust" id="piedraazul9" name="juego9" src="imagesPPTGame/piedraazul.png" alt="" onclick="gestionaJuego(GAME9_BLUE, PIEDRA9, this.id)"/>
+            <img class="sizeAdjust" id="papelazul9" name="juego9" src="imagesPPTGame/papelazul.png" alt="" onclick="gestionaJuego(GAME9_BLUE, PAPEL9, this.id)"/>
+            <img class="sizeAdjust" id="tijerasazul9" name="juego9" src="imagesPPTGame/tijerasazul.png" alt="" onclick="gestionaJuego(GAME9_BLUE, TIJERA9, this.id)"/><br>
+            <img class="sizeAdjust" id="humanazul9" name="juego9" src="imagesPPTGame/humanazul.png" alt="" onclick="gestionaJuego(GAME9_BLUE, HUMANO9, this.id)"/>
+            <img class="sizeAdjust" id="spongeazul9" name="juego9" src="imagesPPTGame/spongeazul.png" alt="" onclick="gestionaJuego(GAME9_BLUE, ESPONJA9, this.id)"/>
+            <img class="sizeAdjust" id="fireazul9" name="juego9" src="imagesPPTGame/fireazul.png" alt="" onclick="gestionaJuego(GAME9_BLUE, FUEGO9, this.id)"/>
         </div>
         <div id="toastJS" class="toast" style="display: none">
         </div>
@@ -279,20 +287,20 @@ and open the template in the editor.
                         <option value="byAverage"></option>
                     </select>
                     <div class="list-group" id="listPlayers">
-                        
+
                     </div>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('playOnline')">
+                    <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_PLAY_ONLINE)">
                         <script>document.write(language[userLang].back);</script>
                     </button>
                 </div>
                 <div class="col-md-4"></div>
 
                 <script>
-                    $('#selectScores').children('option[value="byRounds"]').text(language[userLang].getByRounds);
-                    $('#selectScores').children('option[value="byVictories"]').text(language[userLang].getByVictories);
-                    $('#selectScores').children('option[value="byAverage"]').text(language[userLang].getByAverage);
+                    $('#'+COMBO_SELECT_SCORES).children(OP_GET_BY_ROUNDS).text(language[userLang].getByRounds);
+                    $('#'+COMBO_SELECT_SCORES).children(OP_GET_BY_VICTORIES).text(language[userLang].getByVictories);
+                    $('#'+COMBO_SELECT_SCORES).children(OP_GET_BY_AVERAGE).text(language[userLang].getByAverage);
                 </script>
             </form>
         </div>
