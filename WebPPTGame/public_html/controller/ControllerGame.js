@@ -27,6 +27,9 @@ function cambiaVista(divId) {
         online = false;
     } else {
         online = true;
+        if(divId=="scores"){
+            getScores('byRounds');
+        }
     }
     document.getElementById('initialButtons').style.display = 'none';
     //document.getElementById('playLocal').style.display = 'none';
@@ -470,31 +473,38 @@ function randomGame() {
 }
 
 function getScores(selectedOption) {
-    alert(selectedOption);
     var players = null;
     if (selectedOption == "byRounds") {
         $.post("http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByRounds",
                 function (data) {
-                    players = data;
+                    players = JSON.parse(data);
+                    console.debug("players: ",players);
+                    $("#listPlayers").text("");
                     for (var i = 0; i < players.length; i++) {
-                        $("#listPlayers").html("<a class='list-group-item'>" + players[i].namePlayer + " " + players[i].numPartidas + " " + players[i].numVictorias + "</a>");
+                        $("#listPlayers").append("<a class='list-group-item'>Nombre:" + players[i].namePlayer + " | Rondas:" + players[i].numPartidas + " | Victorias:" + players[i].numVictorias + "</a>");
                     }
                 });
     } else {
         if (selectedOption == "byVictories") {
             $.post("http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByVictories",
                     function (data) {
-                        players = data;
+                        players=JSON.parse(data);
+                        console.debug("players: ",players);
+                        console.debug("players: ",JSON.parse(JSON.stringify(players)));
+                        $("#listPlayers").text("");
                         for (var i = 0; i < players.length; i++) {
-                            $("#listPlayers").html("<a class='list-group-item'>" + players[i].namePlayer + " " + players[i].numPartidas + " " + players[i].numVictorias + "</a>");
+                            $("#listPlayers").append("<a class='list-group-item'>Nombre:" + players[i].namePlayer + " | Rondas:" + players[i].numPartidas + " | Victorias:" + players[i].numVictorias + "</a>");
                         }
+                        
                     });
         } else {
             $.post("http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByAverage",
                     function (data) {
-                        players = data;
+                        players = JSON.parse(data);
+                        console.debug("players: ",players);
+                        $("#listPlayers").text("");
                         for (var i = 0; i < players.length; i++) {
-                            $("#listPlayers").html("<a class='list-group-item'>" + players[i].namePlayer + " " + players[i].numPartidas + " " + players[i].numVictorias + "</a>");
+                            $("#listPlayers").append("<a class='list-group-item'>Nombre:" + players[i].namePlayer + " | Rondas:" + players[i].numPartidas + " | Victorias:" + players[i].numVictorias + "</a>");
                         }
                     });
         }
@@ -582,6 +592,8 @@ function muestraPantallaLoginSiNoLogueado() {
         if (logueado.yaLogueado == true) {
             datos.setNombreJ1(logueado.nombre);
             cambiaVista('playOnline');
+            $("#nameLoggedPlayer").text(logueado.nombre);
+            $("#loggedPlayer").text(logueado.nombre);
         }
     } else {
         $('#loginScreen').load('loginScreen.html');

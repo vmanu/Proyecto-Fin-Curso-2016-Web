@@ -272,15 +272,13 @@ and open the template in the editor.
                 <div class="col-md-4"></div>
                 <div class="form-group col-md-4">
                     <label for="selectScores"><script>document.write(language[userLang].orderBy);</script></label>
-                    <select id="selectScores" class="form-control" onchange="getScores(this.value);">
+                    <select id="selectScores" class="form-control" onchange="getScores(this.value);" onload="">
                         <option value="byRounds"></option>
                         <option value="byVictories"></option>
                         <option value="byAverage"></option>
                     </select>
                     <div class="list-group" id="listPlayers">
-                        <a class="list-group-item">First item</a>
-                        <a class="list-group-item">Second item</a>
-                        <a class="list-group-item">Third item</a>
+                        
                     </div>
                 </div>
                 <div>
