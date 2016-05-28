@@ -85,6 +85,14 @@ and open the template in the editor.
             </button>
         </div>
         <div class="atCenterTopOfScreen" id="playOnline" hidden="">
+            <div id="divLogOut">
+                <div id="nameLoggedPlayer" class="col-md-10" style="text-align: right">
+                    <script>document.write("(" + JSON.parse(localStorage.getItem("logueado")).nombre + ")")</script>
+                </div>
+                <div id="logOut" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="logOut()" onmouseover="$('#logOut').css('cursor', 'pointer')">
+                    Log out
+                </div>
+            </div>
             <h2 class="title" style="margin-top: 40px"><script>document.write(language[userLang].onlineMode);</script></h2><br>
             <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('onlineGameMenu')">
                 <script>document.write(language[userLang].play);</script>
@@ -147,6 +155,14 @@ and open the template in the editor.
             </div>
         </div>
         <div class="atCenterTopOfScreen" id="onlineGameMenu" hidden="">
+            <div>
+                <div id="loggedPlayer" class="col-md-10" style="text-align: right">
+                    <script>document.write("(" + JSON.parse(localStorage.getItem("logueado")).nombre + ")")</script>
+                </div>
+                <div id="logOut2" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="logOut()" onmouseover="$('#logOut2').css('cursor', 'pointer')">
+                    Log out
+                </div>
+            </div>
             <h2 class="title" style="margin-top: 40px"><script>document.write(language[userLang].onlineMode);</script></h2><br>
             <button id="playCust" type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista('customedOnline')">Play customed</button><br>
             <button id="randomly" type="button" class="btn btn-primary btn-sm btn-block" onclick="randomGame()">Randomly</button><br><br>

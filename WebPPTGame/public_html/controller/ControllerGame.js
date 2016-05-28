@@ -581,12 +581,15 @@ function muestraPantallaLoginSiNoLogueado() {
     if (logueado != null) {
         if (logueado.yaLogueado == true) {
             datos.setNombreJ1(logueado.nombre);
-            cambiaVista('onlineGameMenu');
+            cambiaVista('playOnline');
         }
     } else {
         $('#loginScreen').load('loginScreen.html');
         cambiaVista('loginScreen');
     }
+}
 
-
+function logOut(){
+    localStorage.removeItem("logueado");
+    cambiaVista("initialButtons");
 }
