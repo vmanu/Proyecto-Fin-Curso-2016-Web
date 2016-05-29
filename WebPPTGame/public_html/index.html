@@ -36,7 +36,6 @@ and open the template in the editor.
         <script src="resources/infoOfDevelopers.js" type="text/javascript"></script>
         <script>
             $(document).ready(function () {
-                //localStorage.clear();
                 if (localStorage.getItem(RB_PLAYERS) != null && localStorage.getItem(RB_JUEGO) != null && localStorage.getItem(RB_RONDAS) != null) {
                     $("#" + localStorage.getItem(RB_PLAYERS)).click();
                     $("#" + NAME_PLAYER1).val(localStorage.getItem(NAME_PLAYER1));
@@ -218,7 +217,7 @@ and open the template in the editor.
             <img class="sizeAdjust" id="tijerasrojo5" name="juego5" src="imagesPPTGame/tijerasrojo.png" alt="" onclick="gestionaJuego(GAME5_RED, TIJERA5, this.id)"/><br>
             <img class="sizeAdjust imageOfGame5" id="spockrojo" name="juego5" src="imagesPPTGame/spockrojo.png" alt="" onclick="gestionaJuego(GAME5_RED, SPOCK5, this.id)"/>
         </div>
-        <div  class="atCenterOfScreen" id="gameOf5blue" hidden>
+        <div class="atCenterOfScreen" id="gameOf5blue" hidden>
             <img class="sizeAdjust imageOfGame5" id="lizardazul5" name="juego5" src="imagesPPTGame/lizardazul.png" alt="" onclick="gestionaJuego(GAME5_BLUE, LAGARTO5, this.id)"/><br>
             <img class="sizeAdjust" id="piedraazul5" name="juego5" src="imagesPPTGame/piedraazul.png" alt="" onclick="gestionaJuego(GAME5_BLUE, PIEDRA5, this.id)"/>
             <img class="sizeAdjust" id="papelazul5" name="juego5" src="imagesPPTGame/papelazul.png" alt="" onclick="gestionaJuego(GAME5_BLUE, PAPEL5, this.id)"/>

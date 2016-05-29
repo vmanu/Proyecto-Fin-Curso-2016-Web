@@ -574,7 +574,7 @@ function compruebaSiLogueadoBien(logueadoCorrectamente, click) {
         localStorage.setItem("logueado", JSON.stringify({nombre: datos.getNombreJ1(), yaLogueado: true}));
         clave = "";
         complemento = "";
-        cambiaVista("onlineGameMenu");
+        cambiaVista("playOnline");
         removeMaterializeImports();
     } else {
         if (click == true) {
