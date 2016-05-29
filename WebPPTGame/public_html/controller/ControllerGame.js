@@ -28,7 +28,7 @@ function cambiaVista(divId) {
     } else {
         online = true;
         if(divId=="scores"){
-            getScores('byRounds');
+            getScores('byVictories');
         }
     }
     document.getElementById('initialButtons').style.display = 'none';
