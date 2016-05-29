@@ -23,15 +23,15 @@ and open the template in the editor.
         <script>
             var click;
             $(document).ready(function () {
-                console.debug("keySession",sessionStorage.getItem("keySession"));
-                console.debug("keysComplements LOGINSCREEN",sessionStorage.getItem("keysComplements"));
-                $("#divConfirmPassword").attr(HIDDEN, true);
+                //console.debug("keySession",sessionStorage.getItem("keySession"));
+                //console.debug("keysComplements LOGINSCREEN",sessionStorage.getItem("keysComplements"));
+                $("#"+DIV_CONFIRMAR_PASS).attr(HIDDEN, true);
                 click=false;
                 getKeysFromServlet();
             });
             function removejscssfile(filename, filetype) {
-                var targetelement = (filetype == "js") ? "script" : (filetype == "css") ? "link" : "none"; //determine element type to create nodelist from
-                var targetattr = (filetype == "js") ? "src" : (filetype == "css") ? "href" : "none"; //determine corresponding attribute to test for
+                var targetelement = (filetype == JS) ? SCRIPT : (filetype == CSS) ? LINK : NONE; //determine element type to create nodelist from
+                var targetattr = (filetype == JS) ? SRC : (filetype == CSS) ? HREF : NONE; //determine corresponding attribute to test for
                 var allsuspects = document.getElementsByTagName(targetelement);
                 for (var i = allsuspects.length; i >= 0; i--) { //search backwards within nodelist for matching elements to remove
                     if (allsuspects[i] && allsuspects[i].getAttribute(targetattr) != null && allsuspects[i].getAttribute(targetattr).indexOf(filename) != -1)
@@ -40,26 +40,26 @@ and open the template in the editor.
             }
 
             function removeMaterializeImports() {
-                removejscssfile('https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js', 'js');
-                removejscssfile('https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css', 'css');
+                removejscssfile(SCRIPT_MATERIALIZE_JS, JS);
+                removejscssfile(SCRIPT_MATERIALIZE_CSS, CSS);
             }
 
             function signUp() {
                 
                 if (click == false) {
                     //SIGN UP
-                    $("#signIn").text("Sign up");
-                    $("#signUp").text("Sign in");
-                    $("#divConfirmPassword").removeAttr("hidden");
+                    $("#"+SIGN_IN_BTN).text(language[userLang].signUp);
+                    $("#"+SIGN_UP_BTN).text(language[userLang].signIn);
+                    $("#"+DIV_CONFIRMAR_PASS).removeAttr(HIDDEN);
                     click=true;
                 }else{
                     //SIGN IN
-                    $("#signIn").text("Sign in");
-                    $("#signUp").text("Sign up");
-                    $("#divConfirmPassword").attr("hidden",true);
+                    $("#"+SIGN_IN_BTN).text(language[userLang].signIn);
+                    $("#"+SIGN_UP_BTN).text(language[userLang].signUp);
+                    $("#"+DIV_CONFIRMAR_PASS).attr(HIDDEN,true);
                     click=false;
                 }
-                console.debug("click en signup",click);
+                //console.debug("click en signup",click);
 
             }
         </script>
@@ -69,36 +69,46 @@ and open the template in the editor.
             <div class="col s4">&nbsp</div>
             <div class="col s4" style="text-align: center; border: 20px solid deepskyblue; border-radius: 20px">
                 <form>
-                    <h2 class="center-align">Login</h2>
+                    <h2 class="center-align">
+                        <script>document.write(language[userLang].login);</script>
+                    </h2>
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="login" type="text" class="validate" style="font-size: 24px; text-align: center">
-                            <label for="login">Login</label>
+                            <label for="login">
+                                <script>document.write(language[userLang].userId);</script>
+                            </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="password" type="password" class="validate" style="font-size: 24px; text-align: center">
-                            <label for="password">Password</label>
+                            <label for="password">
+                                <script>document.write(language[userLang].pass);</script>
+                            </label>
                         </div>
                     </div>
                     <div class="row" id="divConfirmPassword" hidden>
                         <div class="input-field col s12">
                             <input id="confirmPass" type="password" class="validate" style="font-size: 24px; text-align: center">
-                            <label for="confirmPass">Confirm password</label>
+                            <label for="confirmPass">
+                                <script>document.write(language[userLang].confirmPass);</script>
+                            </label>
                         </div>
                     </div>
-                    <div id="signUp" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="signUp()" onmouseover="$('#signUp').css('cursor', 'pointer')">Sign up</div>
+                    <div id="signUp" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="signUp()" onmouseover="$('#'+SIGN_UP_BTN).css(CURSOR, POINTER)">
+                        <script>document.write(language[userLang].signUp);</script>
+                    </div>
                     <div class="row">
                         <div class="col m12">
                             <p class="right-align">
                                 <button class="btn btn-large waves-effect waves-light" type="button" name="signIn" style="background-color: dodgerblue" 
-                                        onclick="cambiaVista('initialButtons'); removeMaterializeImports();">
-                                    Back
+                                        onclick="cambiaVista(DIV_MENU_PPAL); removeMaterializeImports();">
+                                    <script>document.write(language[userLang].back);</script>
                                 </button>
                                 <button id="signIn" class="btn btn-large waves-effect waves-light" type="button" name="signIn" style="background-color: dodgerblue"
                                         onclick="doLogin();">
-                                    Sign in
+                                    <script>document.write(language[userLang].signIn);</script>
                                 </button>
                             </p>
                         </div>

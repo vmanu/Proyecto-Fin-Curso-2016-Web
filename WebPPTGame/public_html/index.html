@@ -13,7 +13,8 @@ and open the template in the editor.
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script src="constantes/constantes.js" type="text/javascript"></script>
+        <script src="constantes/constantesJSyCSS.js" type="text/javascript"></script>
+        <script src="constantes/constantesJuego.js" type="text/javascript"></script>
         <script src="model/ModalidadJuego.js" type="text/javascript"></script>
         <script src="model/GameType.js" type="text/javascript"></script>
         <script src="model/RoundsNumber.js" type="text/javascript"></script>
@@ -68,7 +69,7 @@ and open the template in the editor.
 
         <div class="atCenterTopOfScreen" id="initialButtons">
             <h2 class="title" style="margin-top: 40px"><script>document.write(language[userLang].titleGame)</script></h2><br>
-            <button id="localModeBtn" type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_LOCAL_MENU)">
+            <button id="localModeBtn" type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_LOCAL_MENU_JUEGO)">
                 <script>document.write(language[userLang].play)</script>
             </button><br>
             <button id="onlineModeBtn" type="button" class="btn btn-primary btn-sm btn-block" onclick="muestraPantallaLoginSiNoLogueado()">
@@ -93,8 +94,8 @@ and open the template in the editor.
                         }
                     </script>
                 </div>
-                <div id="logOut" class="col-md-2" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="logOut()" onmouseover="$('#'+LOG_OUT).css('cursor', 'pointer')">
-                    Log out
+                <div id="logOut" class="col-md-2" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="logOut()" onmouseover="$('#'+LOG_OUT_BTN).css(CURSOR, POINTER)">
+                    <script>document.write(language[userLang].logOut);</script>
                 </div>
             </div>
             <h2 class="title" style="margin-top: 40px"><script>document.write(language[userLang].onlineMode);</script></h2><br>
@@ -113,7 +114,9 @@ and open the template in the editor.
             <pre class="bgBlue">
                 <script>document.write(userLang == SPANISH ? textRules : textRulesEng);</script>
             </pre>
-            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_MENU_PPAL)">Back</button>
+            <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_MENU_PPAL)">
+                <script>document.write(language[userLang].back);</script>
+            </button>
         </div>
         <div class="atCenterTopOfScreen" id="graphicRules" hidden="">
             <h3><script>document.write(language[userLang].rulesGraph);</script></h3>
@@ -166,8 +169,8 @@ and open the template in the editor.
                         }
                     </script>
                 </div>
-                <div id="logOut2" class="col-md-2" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="logOut()" onmouseover="$('#logOut2').css('cursor', 'pointer')">
-                    Log out
+                <div id="logOut2" class="col-md-2" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="logOut()" onmouseover="$('#'+LOG_OUT_BTN).css(CURSOR, POINTER)">
+                    <script>document.write(language[userLang].logOut);</script>
                 </div>
             </div>
             <h2 class="title" style="margin-top: 40px"><script>document.write(language[userLang].onlineMode);</script></h2><br>

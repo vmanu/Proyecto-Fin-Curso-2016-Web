@@ -46,7 +46,14 @@ Language = function () {
             getByRounds: "Número de rondas",
             getByVictories: "Número de victorias",
             getByAverage: "Promedio", 
-            orderBy: "Ordenar por:"
+            orderBy: "Ordenar por:",
+            signIn: "Accede",
+            signUp: "Regístrate",
+            login: "Inicio de sesión",
+            pass: "Contraseña",
+            confirmPass: "Confirmar contraseña",
+            userId: "Nombre de usuario",
+            logOut: "Cerrar sesión"
         },
         en: {
             titleGame: "Rock, scissors, paper",
@@ -85,7 +92,14 @@ Language = function () {
             getByRounds: "Number of rounds",
             getByVictories: "Number of victories",
             getByAverage: "Average",
-            orderBy: "Order by:"
+            orderBy: "Order by:",
+            signIn: "Sign in",
+            signUp: "Sign up",
+            login: "Login",
+            pass: "Password",
+            confirmPass: "Confirm password", 
+            userId: "Login",
+            logOut: "Log out"
         }
     };
 
