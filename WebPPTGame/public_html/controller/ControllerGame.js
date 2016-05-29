@@ -440,19 +440,19 @@ function cambiaVistaJuegoOnline() {
  * Método encargado de cambiar al DataContainer datos el número de rondas elegido en el formulario del modo online.
  */
 function setLimiteRondasOnline() {
-    if (document.getElementById('oneRoundOnl').checked) {
+    if (document.getElementById(ONE_ROUND_ONL).checked) {
         datos.setRoundsLimit(1);
         player.numberOfRounds = (new RoundsNumber().getRoundsNumber().UNA.name);
-        localStorage.setItem("rbRondasOnl", "oneRoundOnl");
+        localStorage.setItem(RB_RONDAS_ONL, ONE_ROUND_ONL);
     } else {
-        if (document.getElementById('threeRoundsOnl').checked) {
+        if (document.getElementById(THREE_ROUNDS_ONL).checked) {
             datos.setRoundsLimit(3);
             player.numberOfRounds = (new RoundsNumber().getRoundsNumber().TRES.name);
-            localStorage.setItem("rbRondasOnl", "threeRoundsOnl");
+            localStorage.setItem(RB_RONDAS_ONL, THREE_ROUNDS_ONL);
         } else {
             datos.setRoundsLimit(5);
             player.numberOfRounds = (new RoundsNumber().getRoundsNumber().CINCO.name);
-            localStorage.setItem("rbRondasOnl", "fiveRoundsOnl");
+            localStorage.setItem(RB_RONDAS_ONL, FIVE_ROUNDS_ONL);
         }
     }
     //alert(player.numberOfRounds.name);
@@ -474,37 +474,37 @@ function randomGame() {
 
 function getScores(selectedOption) {
     var players = null;
-    if (selectedOption == "byRounds") {
-        $.post("http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByRounds",
+    if (selectedOption == BY_ROUNDS) {
+        $.post(URL_GET_BY_ROUNDS,
                 function (data) {
                     players = JSON.parse(data);
                     console.debug("players: ",players);
-                    $("#listPlayers").text("");
+                    $("#"+LIST_SCORES).text("");
                     for (var i = 0; i < players.length; i++) {
-                        $("#listPlayers").append("<a class='list-group-item'>Nombre:" + players[i].namePlayer + " | Rondas:" + players[i].numPartidas + " | Victorias:" + players[i].numVictorias + "</a>");
+                        $("#"+LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + LIST_ITEM_CLOSE);
                     }
                 });
     } else {
-        if (selectedOption == "byVictories") {
-            $.post("http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByVictories",
+        if (selectedOption == BY_VICTORIES) {
+            $.post(URL_GET_BY_VICTORIES,
                     function (data) {
                         players=JSON.parse(data);
                         console.debug("players: ",players);
                         console.debug("players: ",JSON.parse(JSON.stringify(players)));
-                        $("#listPlayers").text("");
+                        $("#"+LIST_SCORES).text("");
                         for (var i = 0; i < players.length; i++) {
-                            $("#listPlayers").append("<a class='list-group-item'>Nombre:" + players[i].namePlayer + " | Rondas:" + players[i].numPartidas + " | Victorias:" + players[i].numVictorias + "</a>");
+                            $("#"+LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + LIST_ITEM_CLOSE);
                         }
                         
                     });
         } else {
-            $.post("http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByAverage",
+            $.post(URL_GET_BY_AVERAGE,
                     function (data) {
                         players = JSON.parse(data);
                         console.debug("players: ",players);
-                        $("#listPlayers").text("");
+                        $("#"+LIST_SCORES).text("");
                         for (var i = 0; i < players.length; i++) {
-                            $("#listPlayers").append("<a class='list-group-item'>Nombre:" + players[i].namePlayer + " | Rondas:" + players[i].numPartidas + " | Victorias:" + players[i].numVictorias + "</a>");
+                            $("#"+LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + LIST_ITEM_CLOSE);
                         }
                     });
         }
@@ -514,8 +514,8 @@ function getScores(selectedOption) {
 function getKeysFromServlet() {
     if (clave == "") {
         $.ajax({
-            type: "POST",
-            url: "http://192.168.1.104:8080/ServerPPTGame/seguridad"
+            type: POST,
+            url: URL_GET_KEYS
         }).done(function (data) {
             //alert(data);
             console.debug("DATA", data);
@@ -531,31 +531,31 @@ function getKeysFromServlet() {
 
 function doLogin() {
     var logueadoCorrectamente;
-    if ($("#login").val() != "" && $("#password").val() != "" && (click == false || (click == true && $("#password").val() == $("#confirmPass").val()))) {
+    if ($("#"+LOGIN_INPUT_TEXT).val() != "" && $("#"+PASS_INPUT_TEXT).val() != "" && (click == false || (click == true && $("#"+PASS_INPUT_TEXT).val() == $("#"+CONFIRM_PASS_INPUT_TEXT).val()))) {
         var user = new User().getUser();
-        user.login = $("#login").val();
-        user.pass = $("#password").val();
+        user.login = $("#"+LOGIN_INPUT_TEXT).val();
+        user.pass = $("#"+PASS_INPUT_TEXT).val();
         datos.setNombreJ1(user.login);
         var key = clave + "" + complemento;
         var keyHash, complHash;
-        $.post("http://192.168.1.104:8080/ServerPPTGame/ServletHashingJS",
-                {op: "claves", clave: clave, complemento: complemento},
+        $.post(URL_SERVLET_HASHING_JS,
+                {op: OP_CLAVES, clave: clave, complemento: complemento},
                 function (data) {
                     keyHash = JSON.parse(data)[0];
                     complHash = JSON.parse(data)[1];
-                    $.post("http://192.168.1.104:8080/ServerPPTGame/ServletHashingJS",
-                            {op: "user", user: JSON.stringify(user), fraseHash: key},
+                    $.post(URL_SERVLET_HASHING_JS,
+                            {op: OP_USER, user: JSON.stringify(user), fraseHash: key},
                             function (data) {
                                 user = JSON.parse(data);
                                 if (click == true) {
-                                    $.post("http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=put",
+                                    $.post(URL_SERVLET_SIGN_UP,
                                             {user: user, claveHasheada: keyHash, complementoHasheado: complHash, claveComplemento: JSON.stringify(keyCompl)},
                                             function (data) {
                                                 logueadoCorrectamente = data;
                                                 compruebaSiLogueadoBien(logueadoCorrectamente, false);
                                             });
                                 } else {
-                                    $.post("http://192.168.1.104:8080/ServerPPTGame/login",
+                                    $.post(URL_SERVLET_SIGN_IN,
                                             {user: user, claveHasheada: keyHash, complementoHasheado: complHash, claveComplemento: JSON.stringify(keyCompl)},
                                             function (data) {
                                                 logueadoCorrectamente = data;
@@ -570,38 +570,38 @@ function doLogin() {
 }
 
 function compruebaSiLogueadoBien(logueadoCorrectamente, click) {
-    if (logueadoCorrectamente == "SI") {
-        localStorage.setItem("logueado", JSON.stringify({nombre: datos.getNombreJ1(), yaLogueado: true}));
+    if (logueadoCorrectamente == SI) {
+        localStorage.setItem(LOGUEADO, JSON.stringify({nombre: datos.getNombreJ1(), yaLogueado: true}));
         clave = "";
         complemento = "";
-        cambiaVista("playOnline");
+        cambiaVista(DIV_PLAY_ONLINE);
         removeMaterializeImports();
     } else {
         if (click == true) {
-            alert("Login y/o password incorrectos!");
+            alert(language[userLang].wrongLoginOrPass);
         } else {
-            alert("No coinciden las contraseñas!");
+            alert(language[userLang].passNotEqual);
         }
     }
 }
 
 function muestraPantallaLoginSiNoLogueado() {
-    var logueado = JSON.parse(localStorage.getItem("logueado"));
+    var logueado = JSON.parse(localStorage.getItem(LOGUEADO));
     console.debug("logueado", logueado);
     if (logueado != null) {
         if (logueado.yaLogueado == true) {
             datos.setNombreJ1(logueado.nombre);
-            cambiaVista('playOnline');
-            $("#nameLoggedPlayer").text(logueado.nombre);
-            $("#loggedPlayer").text(logueado.nombre);
+            cambiaVista(DIV_PLAY_ONLINE);
+            $("#"+NAME_LOGGED_PLAYER).text(logueado.nombre);
+            $("#"+LOGGED_PLAYER).text(logueado.nombre);
         }
     } else {
-        $('#loginScreen').load('loginScreen.html');
-        cambiaVista('loginScreen');
+        $('#'+LOGIN_SCREEN).load(HTML_LOGIN_SCREEN);
+        cambiaVista(LOGIN_SCREEN);
     }
 }
 
 function logOut(){
-    localStorage.removeItem("logueado");
-    cambiaVista("initialButtons");
+    localStorage.removeItem(LOGUEADO);
+    cambiaVista(DIV_MENU_PPAL);
 }

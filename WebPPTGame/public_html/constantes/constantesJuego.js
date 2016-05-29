@@ -7,7 +7,6 @@ var RB_JUEGO="rbJuego";
 var RB_RONDAS="rbRondas";
 var RB_JUEGO_ONL="rbJuegoOnl";
 var RB_RONDAS_ONL="rbRondasOnl";
-var COMBO_SELECT_SCORES="selectScores";
 var NAME_PLAYER1="nameOfPlayer1";
 var NAME_PLAYER2="nameOfPlayer2";
 var NAME_PLAYER_ONLINE="nameOfPlayerOnline";
@@ -17,8 +16,15 @@ var ONE_ROUND="oneRound";
 var THREE_ROUNDS="threeRounds";
 var FIVE_ROUNDS="fiveRounds";
 var MORE_ROUNDS="moreRounds";
+var ONE_ROUND_ONL="oneRoundOnl";
+var THREE_ROUNDS_ONL="threeRoundsOnl";
+var FIVE_ROUNDS_ONL="fiveRoundsOnl";
 var CUSTOMED_ROUNDS="customedRounds";
 var LOGIN_INPUT_TEXT="login";
+var PASS_INPUT_TEXT="password";
+var CONFIRM_PASS_INPUT_TEXT="confirmPass";
+var COMBO_SELECT_SCORES="selectScores";
+var LIST_SCORES="listPlayers";
 //DIVS
 var DIV_MENU_PPAL="initialButtons";
 var DIV_LOCAL_MENU_JUEGO="localGameMenu";
@@ -40,6 +46,8 @@ var IMG_RESULT_P2="imgResultP2";
 var DIV_RESULT_GAME="imgResultP2";
 var WON_COUNT_P1="wonCountP1";
 var WON_COUNT_P2="wonCountP2";
+var NAME_LOGGED_PLAYER="nameLoggedPlayer";
+var LOGGED_PLAYER="loggedPlayer";
 //GAMES
 var GAME3_RED="gameOf3red";
 var GAME3_BLUE="gameOf3blue";
@@ -93,9 +101,25 @@ var MODO="modo";
 var IMAGE_BLANK="imagesPPTGame/blank.png";
 var IMAGE_HELP_ROJO="imagesPPTGame/helpsymbolrojo.png";
 var IMAGE_HELP_AZUL="imagesPPTGame/helpsymbolazul.png";
-//OTHERS
-var CPU="CPU";
 //STYLES
 var CLASE_TOAST=".toast";
 var COLOR_ROJO="red";
 var COLOR_AZUL="blue";
+//URL SERVLETS
+var URL_GET_KEYS="http://192.168.1.104:8080/ServerPPTGame/seguridad";
+var URL_GET_BY_ROUNDS="http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByRounds";
+var URL_GET_BY_VICTORIES="http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByVictories";
+var URL_GET_BY_AVERAGE="http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByAverage";
+var URL_SERVLET_HASHING_JS="http://192.168.1.104:8080/ServerPPTGame/ServletHashingJS";
+var URL_SERVLET_SIGN_UP="http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=put";
+var URL_SERVLET_SIGN_IN="http://192.168.1.104:8080/ServerPPTGame/login";
+//SCORES
+var LIST_ITEM_OPEN="<a class='list-group-item'>";
+var LIST_ITEM_CLOSE="</a>";
+//OTHERS
+var CPU="CPU";
+var OP_CLAVES="claves";
+var OP_USER="user";
+var SI="SI";
+//VIEWS
+var HTML_LOGIN_SCREEN="loginScreen.html";

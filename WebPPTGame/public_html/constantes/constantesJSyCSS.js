@@ -16,4 +16,5 @@ var POINTER="pointer";
 var SCRIPT_MATERIALIZE_JS="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js";
 var SCRIPT_MATERIALIZE_CSS="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css";
 var BACKGROUND_COLOR="background-color";
+var POST="POST";
 

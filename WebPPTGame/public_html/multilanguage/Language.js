@@ -53,7 +53,12 @@ Language = function () {
             pass: "Contraseña",
             confirmPass: "Confirmar contraseña",
             userId: "Nombre de usuario",
-            logOut: "Cerrar sesión"
+            logOut: "Cerrar sesión",
+            nameScores: "Nombre:",
+            victoriesScores: "<br>Victorias:",
+            roundsScores: " | Rondas:",
+            wrongLoginOrPass: "¡Usuario y/o contraseña incorrectos!",
+            passNotEquals: "¡No coinciden las contraseñas!" 
         },
         en: {
             titleGame: "Rock, scissors, paper",
@@ -99,7 +104,12 @@ Language = function () {
             pass: "Password",
             confirmPass: "Confirm password", 
             userId: "Login",
-            logOut: "Log out"
+            logOut: "Log out",
+            nameScores: "Name:",
+            victoriesScores: "<br>Victories:",
+            roundsScores: " | Rounds:",
+            wrongLoginOrPass: "Login and/or password are wrong!",
+            passNotEquals: "Both passwords doesn't match!"            
         }
     };
 
