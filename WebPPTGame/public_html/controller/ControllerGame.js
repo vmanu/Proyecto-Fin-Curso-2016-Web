@@ -16,7 +16,7 @@ $(document).ready(function () {
     mapFichas = datos.inicializaMapFichas();
     mapFichasMaquina = datos.inicializaMapFichasMaquina();
     localStorage.setItem(DATOS, datos);
-    $("#"+IMAGE_PLAYER2).attr(SRC, IMAGE_BLANK);
+    $("#" + IMAGE_PLAYER2).attr(SRC, IMAGE_BLANK);
 });
 /**
  * Método que quita la visibilidad de ciertos elementos del juego, poniendo visible el pasado por parámetro para su visualización en el navegador.
@@ -27,7 +27,7 @@ function cambiaVista(divId) {
         online = false;
     } else {
         online = true;
-        if(divId==DIV_SCORES){
+        if (divId == DIV_SCORES) {
             getScores(BY_VICTORIES);
         }
     }
@@ -51,10 +51,10 @@ function cambiaVista(divId) {
     document.getElementById(DIV_SCORES).style.display = NONE;
     document.getElementById(LOGIN_SCREEN).style.display = NONE;
     document.getElementById(divId).style.display = BLOCK;
-    $("#"+NAME_PLAYER1).attr(PLACEHOLDER, language[userLang].player1);
-    $("#"+NAME_PLAYER2).attr(PLACEHOLDER, language[userLang].player2);
-    $("#"+CUSTOMED_ROUNDS).attr(PLACEHOLDER, language[userLang].numberOfRounds);
-    $("#"+NAME_PLAYER_ONLINE).attr(PLACEHOLDER, language[userLang].yourNameHere);
+    $("#" + NAME_PLAYER1).attr(PLACEHOLDER, language[userLang].player1);
+    $("#" + NAME_PLAYER2).attr(PLACEHOLDER, language[userLang].player2);
+    $("#" + CUSTOMED_ROUNDS).attr(PLACEHOLDER, language[userLang].numberOfRounds);
+    $("#" + NAME_PLAYER_ONLINE).attr(PLACEHOLDER, language[userLang].yourNameHere);
 }
 /**
  * Método que hace aparecer un elemento, concretamente un <input> de tipo 'text', sobre una pantalla ya cargada y visible.
@@ -76,22 +76,22 @@ function invisibleElement(element) {
  * en función de la configuración elegida.
  */
 function cambiaVistaJuego() {
-    if (($("#"+NAME_PLAYER1).val() == "" || $("#"+NAME_PLAYER1).val() == UNDEFINED) || (dosJugadores == true && (($("#"+NAME_PLAYER1).val() == "" || $("#"+NAME_PLAYER1).val() == UNDEFINED) || ($("#"+NAME_PLAYER2).val() == "" || $("#"+NAME_PLAYER2).val() == UNDEFINED)))) {
+    if (($("#" + NAME_PLAYER1).val() == "" || $("#" + NAME_PLAYER1).val() == UNDEFINED) || (dosJugadores == true && (($("#" + NAME_PLAYER1).val() == "" || $("#" + NAME_PLAYER1).val() == UNDEFINED) || ($("#" + NAME_PLAYER2).val() == "" || $("#" + NAME_PLAYER2).val() == UNDEFINED)))) {
         alert(language[userLang].fillTheFields);
     } else {
         var dosJugadores = false;
         if (document.getElementById(ONE_PLAYER).checked) {
             datos.setModalidadJuego(new ModalidadJuego().getModalidad().UNO);
             localStorage.setItem(RB_PLAYERS, ONE_PLAYER);
-            localStorage.setItem(NAME_PLAYER1, $("#"+NAME_PLAYER1).val());
+            localStorage.setItem(NAME_PLAYER1, $("#" + NAME_PLAYER1).val());
         } else {
             localStorage.setItem(RB_PLAYERS, TWO_PLAYERS);
             datos.setModalidadJuego(new ModalidadJuego().getModalidad().DOS);
             dosJugadores = true;
-            localStorage.setItem(NAME_PLAYER2, $("#"+NAME_PLAYER2).val());
+            localStorage.setItem(NAME_PLAYER2, $("#" + NAME_PLAYER2).val());
         }
         cambiaVista(HEADER_GAME);
-        datos.setNombreJ1($("#"+NAME_PLAYER1).val());
+        datos.setNombreJ1($("#" + NAME_PLAYER1).val());
         if (document.getElementById(GAME3).checked == true) {
             localStorage.setItem(RB_JUEGO, GAME3);
             document.getElementById(GAME3_RED).style.display = BLOCK;
@@ -112,7 +112,7 @@ function cambiaVistaJuego() {
         }
         setLimiteRondas();
         datos.setTurno(true);
-        $("#"+IMAGE_PLAYER1).attr(SRC, IMAGE_HELP_ROJO);
+        $("#" + IMAGE_PLAYER1).attr(SRC, IMAGE_HELP_ROJO);
         showToastRed();
     }
 }
@@ -132,9 +132,9 @@ function setLimiteRondas() {
                 datos.setRoundsLimit(5);
                 localStorage.setItem(RB_RONDAS, FIVE_ROUNDS);
             } else {
-                datos.setRoundsLimit($("#"+CUSTOMED_ROUNDS).val());
+                datos.setRoundsLimit($("#" + CUSTOMED_ROUNDS).val());
                 localStorage.setItem(RB_RONDAS, MORE_ROUNDS);
-                localStorage.setItem(VALUE_RONDAS, $("#"+CUSTOMED_ROUNDS).val());
+                localStorage.setItem(VALUE_RONDAS, $("#" + CUSTOMED_ROUNDS).val());
             }
         }
     }
@@ -162,7 +162,7 @@ function gestionaJuego(window, opClicked, imgId) {
             if (datos.getModalidadJuego().ordinal == modalidad.DOS.ordinal) {
                 //DOS JUGADORES
                 //alert("DOS JUGADORES");
-                datos.setNombreJ2($("#"+NAME_PLAYER2).val());
+                datos.setNombreJ2($("#" + NAME_PLAYER2).val());
                 turnoAzul();
                 datos.setTurno(false);
                 showToastBlue();
@@ -186,7 +186,7 @@ function gestionaJuego(window, opClicked, imgId) {
                     //alert(datos.getEnumChosen2());
                     if (datos.getEnumChosen2() != null) {
                         //$("#imgResultP2").attr(SRC, document.getElementById(datos.getIdImgPulsada2()).src);
-                        $("#"+IMG_RESULT_P2).attr(SRC, $("#" + datos.getIdImgPulsada2()).attr(SRC));
+                        $("#" + IMG_RESULT_P2).attr(SRC, $("#" + datos.getIdImgPulsada2()).attr(SRC));
                         comunEvaluacionGanador();
                     }
                     mmsg.content = (opcionJuego);
@@ -215,28 +215,28 @@ function comunEvaluacionGanador() {
 //    $("#imgResultP2").attr(SRC, document.getElementById(datos.getIdImgPulsada2()).src);
     //alert("id 1: " + datos.getIdImgPulsada1() + " --- id 2: " + datos.getIdImgPulsada2());
     //alert("ruta 1: "+$("#"+datos.getIdImgPulsada1()).attr(SRC)+" --- ruta 2: "+$("#"+datos.getIdImgPulsada2()).attr(SRC));
-    $("#"+IMG_RESULT_P1).attr(SRC, $("#" + datos.getIdImgPulsada1()).attr(SRC));
+    $("#" + IMG_RESULT_P1).attr(SRC, $("#" + datos.getIdImgPulsada1()).attr(SRC));
     if (datos.getModalidadJuego().ordinal == modalidad.DOS.ordinal) {
-        $("#"+IMG_RESULT_P2).attr(SRC, $("#" + datos.getIdImgPulsada2()).attr(SRC));
+        $("#" + IMG_RESULT_P2).attr(SRC, $("#" + datos.getIdImgPulsada2()).attr(SRC));
     } else {
-        $("#"+IMG_RESULT_P2).attr(SRC, $("#" + datos.getIdImgPulsada2() + modo).attr(SRC));
+        $("#" + IMG_RESULT_P2).attr(SRC, $("#" + datos.getIdImgPulsada2() + modo).attr(SRC));
     }
     switch (logicaJuego()) {
         case 0:
             //empata
             console.log("case empate");
-            $("#"+DIV_RESULT_GAME).text(language[userLang].draw);
+            $("#" + DIV_RESULT_GAME).text(language[userLang].draw);
             break;
         case 1:
             //gana jugador 1
             console.log("case gana");
-            $("#"+DIV_RESULT_GAME).text(datos.getNombreJ1() + language[userLang].wins);
+            $("#" + DIV_RESULT_GAME).text(datos.getNombreJ1() + language[userLang].wins);
             datos.sumaVictoriesP1();
             break;
         case 2:
             //gana jugador 2
             console.log("case pierde");
-            $("#"+DIV_RESULT_GAME).text(datos.getNombreJ2() + language[userLang].wins);
+            $("#" + DIV_RESULT_GAME).text(datos.getNombreJ2() + language[userLang].wins);
             datos.sumaVictoriesP2();
             break;
     }
@@ -255,7 +255,7 @@ function logicaJuego() {
         datos.avanzaRonda();
         //alert(datos.getRoundsCounter());
         if (datos.rondasFinalizadas() == true) {
-            $("#"+NEXT_BTN).prop(DISABLED, true);
+            $("#" + NEXT_BTN).prop(DISABLED, true);
         }
         for (var j = ((datos.getEnumChosen2().ordinal + 1) % ((datos.getFactorAlgoritmo() * 2) + 1)), i = 0; i < (datos.getFactorAlgoritmo()) && !ganaChosen; i++, j = ((j + 1) % ((datos.getFactorAlgoritmo() * 2) + 1))) {
             if (datos.getEnumChosen1().ordinal == j) {
@@ -312,8 +312,8 @@ function getEnumFromOrdinal(ordinal) {
  */
 function cambiarVistaAResult() {
     cambiaVista(VISTA_RESULT);
-    $("#"+WON_COUNT_P1).html(datos.getNombreJ1() + language[userLang].wonCount + datos.getVictoriesP1());
-    $("#"+WON_COUNT_P2).html(datos.getNombreJ2() + language[userLang].wonCount + datos.getVictoriesP2());
+    $("#" + WON_COUNT_P1).html(datos.getNombreJ1() + language[userLang].wonCount + datos.getVictoriesP1());
+    $("#" + WON_COUNT_P2).html(datos.getNombreJ2() + language[userLang].wonCount + datos.getVictoriesP2());
     datos.setEnumChosen1(null);
     datos.setEnumChosen2(null);
     datos.setJugando(false);
@@ -334,8 +334,8 @@ function gestionaPulsadoMaquina() {
  * en color azul cuando el turno sea del jugador 2.
  */
 function turnoAzul() {
-    $("#"+IMAGE_PLAYER1).attr(SRC, IMAGE_BLANK);
-    $("#"+IMAGE_PLAYER2).attr(SRC, IMAGE_HELP_AZUL);
+    $("#" + IMAGE_PLAYER1).attr(SRC, IMAGE_BLANK);
+    $("#" + IMAGE_PLAYER2).attr(SRC, IMAGE_HELP_AZUL);
     if (document.getElementById(GAME3).checked == true) {
         document.getElementById(GAME3_BLUE).style.display = BLOCK;
     } else {
@@ -353,7 +353,7 @@ function backFromPlayScreen() {
     //alert();
     datos.setVictoriesP1(0);
     datos.setVictoriesP2(0);
-    $("#"+NEXT_BTN).prop(DISABLED, false);
+    $("#" + NEXT_BTN).prop(DISABLED, false);
     datos.setRoundsCounter(0);
     if (datos.getModalidadJuego().ordinal == new ModalidadJuego().getModalidad().ONLINE.ordinal && websocket != null) {
         websocket.close();
@@ -394,7 +394,7 @@ function cambiaVistaJuegoOnline() {
     localStorage.setItem(ONLINE, online);
     datos.setModalidadJuego(new ModalidadJuego().getModalidad().ONLINE);
     cambiaVista(HEADER_GAME);
-    localStorage.setItem(NAME_PLAYER_ONLINE, $("#"+LOGIN_INPUT_TEXT).val());
+    localStorage.setItem(NAME_PLAYER_ONLINE, $("#" + LOGIN_INPUT_TEXT).val());
     connect();
     var metamsg = new MetaMessage().getMetaMessage();
     metamsg.type = (new TypeMessage().getTypeMessage().CONEXION.name);
@@ -478,33 +478,33 @@ function getScores(selectedOption) {
         $.post(URL_GET_BY_ROUNDS,
                 function (data) {
                     players = JSON.parse(data);
-                    console.debug("players: ",players);
-                    $("#"+LIST_SCORES).text("");
+                    console.debug("players: ", players);
+                    $("#" + LIST_SCORES).text("");
                     for (var i = 0; i < players.length; i++) {
-                        $("#"+LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + LIST_ITEM_CLOSE);
+                        $("#" + LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + LIST_ITEM_CLOSE);
                     }
                 });
     } else {
         if (selectedOption == BY_VICTORIES) {
             $.post(URL_GET_BY_VICTORIES,
                     function (data) {
-                        players=JSON.parse(data);
-                        console.debug("players: ",players);
-                        console.debug("players: ",JSON.parse(JSON.stringify(players)));
-                        $("#"+LIST_SCORES).text("");
+                        players = JSON.parse(data);
+                        console.debug("players: ", players);
+                        console.debug("players: ", JSON.parse(JSON.stringify(players)));
+                        $("#" + LIST_SCORES).text("");
                         for (var i = 0; i < players.length; i++) {
-                            $("#"+LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + LIST_ITEM_CLOSE);
+                            $("#" + LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + LIST_ITEM_CLOSE);
                         }
-                        
+
                     });
         } else {
             $.post(URL_GET_BY_AVERAGE,
                     function (data) {
                         players = JSON.parse(data);
-                        console.debug("players: ",players);
-                        $("#"+LIST_SCORES).text("");
+                        console.debug("players: ", players);
+                        $("#" + LIST_SCORES).text("");
                         for (var i = 0; i < players.length; i++) {
-                            $("#"+LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + LIST_ITEM_CLOSE);
+                            $("#" + LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + LIST_ITEM_CLOSE);
                         }
                     });
         }
@@ -531,10 +531,10 @@ function getKeysFromServlet() {
 
 function doLogin() {
     var logueadoCorrectamente;
-    if ($("#"+LOGIN_INPUT_TEXT).val() != "" && $("#"+PASS_INPUT_TEXT).val() != "" && (click == false || (click == true && $("#"+PASS_INPUT_TEXT).val() == $("#"+CONFIRM_PASS_INPUT_TEXT).val()))) {
+    if ($("#" + LOGIN_INPUT_TEXT).val() != "" && $("#" + PASS_INPUT_TEXT).val() != "" && (click == false || (click == true && $("#" + PASS_INPUT_TEXT).val() == $("#" + CONFIRM_PASS_INPUT_TEXT).val()))) {
         var user = new User().getUser();
-        user.login = $("#"+LOGIN_INPUT_TEXT).val();
-        user.pass = $("#"+PASS_INPUT_TEXT).val();
+        user.login = $("#" + LOGIN_INPUT_TEXT).val();
+        user.pass = $("#" + PASS_INPUT_TEXT).val();
         datos.setNombreJ1(user.login);
         var key = clave + "" + complemento;
         var keyHash, complHash;
@@ -592,16 +592,25 @@ function muestraPantallaLoginSiNoLogueado() {
         if (logueado.yaLogueado == true) {
             datos.setNombreJ1(logueado.nombre);
             cambiaVista(DIV_PLAY_ONLINE);
-            $("#"+NAME_LOGGED_PLAYER).text(logueado.nombre);
-            $("#"+LOGGED_PLAYER).text(logueado.nombre);
+            $("#" + NAME_LOGGED_PLAYER).text(logueado.nombre);
+            $("#" + LOGGED_PLAYER).text(logueado.nombre);
         }
     } else {
-        $('#'+LOGIN_SCREEN).load(HTML_LOGIN_SCREEN);
+        $('#' + LOGIN_SCREEN).load(HTML_LOGIN_SCREEN);
         cambiaVista(LOGIN_SCREEN);
     }
 }
 
-function logOut(){
+function logOut() {
     localStorage.removeItem(LOGUEADO);
     cambiaVista(DIV_MENU_PPAL);
+}
+
+function addVictories(victories) {
+    $.post(URL_SERVLET_SIGN_IN,
+            {user: user, claveHasheada: keyHash, complementoHasheado: complHash, claveComplemento: JSON.stringify(keyCompl)},
+            function (data) {
+                logueadoCorrectamente = data;
+                compruebaSiLogueadoBien(logueadoCorrectamente, true);
+            });
 }
