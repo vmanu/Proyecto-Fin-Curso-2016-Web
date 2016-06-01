@@ -113,7 +113,8 @@ var URL_GET_BY_AVERAGE="http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=get
 var URL_SERVLET_HASHING_JS="http://192.168.1.104:8080/ServerPPTGame/ServletHashingJS";
 var URL_SERVLET_SIGN_UP="http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=put";
 var URL_SERVLET_SIGN_IN="http://192.168.1.104:8080/ServerPPTGame/login";
-var URL_SERVLET_ADD_VICTORIES="http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=update";
+var URL_SERVLET_ADD_VICTORIES="http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=addVictories";
+var URL_SERVLET_ADD_ROUNDS="http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=addRounds";
 //SCORES
 var LIST_ITEM_OPEN="<a class='list-group-item'>";
 var LIST_ITEM_CLOSE="</a>";
