@@ -37,7 +37,7 @@ function cambiaVista(divId) {
     document.getElementById(DIV_RULES).style.display = NONE;
     document.getElementById(DIV_RULES_GRAPHIC).style.display = NONE;
     document.getElementById(DIV_INFO_DEVELOPERS).style.display = NONE;
-    document.getElementById(DIV_LOCAL_MENU).style.display = NONE;
+    document.getElementById(DIV_LOCAL_MENU_JUEGO).style.display = NONE;
     document.getElementById(DIV_ONLINE_MENU).style.display = NONE;
     document.getElementById(DIV_ONLINE_MENU_JUEGO).style.display = NONE;
     document.getElementById(HEADER_GAME).style.display = NONE;
