@@ -13,6 +13,12 @@ and open the template in the editor.
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="constantes/ConstantesDIVS.js" type="text/javascript"></script>
+        <script src="constantes/ConstantesInputs.js" type="text/javascript"></script>
+        <script src="constantes/ConstantesJSyCSS.js" type="text/javascript"></script>
+        <script src="constantes/ConstantesOpcionesJuego.js" type="text/javascript"></script>
+        <script src="constantes/ConstantesOtras.js" type="text/javascript"></script>
+        <script src="constantes/ConstantesServletURLs.js" type="text/javascript"></script>
         <script src="model/ModalidadJuego.js" type="text/javascript"></script>
         <script src="model/GameType.js" type="text/javascript"></script>
         <script src="model/RoundsNumber.js" type="text/javascript"></script>
@@ -34,31 +40,37 @@ and open the template in the editor.
         <script src="resources/rulesOfTheGame.js" type="text/javascript"></script>
         <script src="resources/infoOfDevelopers.js" type="text/javascript"></script>
         <script>
+            var constantsJSCSS="", constantsInputs="",constantsDIVS="", constantsOpsJuego="", otherConstants="", constantsURLs="";
             $(document).ready(function () {
-                if (localStorage.getItem(RB_PLAYERS) != null && localStorage.getItem(RB_JUEGO) != null && localStorage.getItem(RB_RONDAS) != null) {
-                    $("#" + localStorage.getItem(RB_PLAYERS)).click();
-                    $("#" + NAME_PLAYER1).val(localStorage.getItem(NAME_PLAYER1));
-                    if (localStorage.getItem(RB_PLAYERS) == TWO_PLAYERS) {
-                        if (localStorage.getItem(NAME_PLAYER2) != null) {
-                            $("#" + NAME_PLAYER2).val(localStorage.getItem(NAME_PLAYER2));
+                constantsJSCSS = new ConstantesJSyCSS().getConstantsJSCSS(); 
+                constantsInputs = new ConstantesInputs().getConstantsInputs();
+                constantsDIVS = new ConstantesDIVS().getConstantsDivs();
+                constantsOpsJuego = new ConstantesOpcionesJuego().getConstantesOpcionesJuego();
+                constantsURLs = new ConstantesServletURLs().getConstantsURLs();
+                if (localStorage.getItem(constantsInputs.RB_PLAYERS) != null && localStorage.getItem(constantsInputs.RB_JUEGO) != null && localStorage.getItem(constantsInputs.RB_RONDAS) != null) {
+                    $("#" + localStorage.getItem(constantsInputs.RB_PLAYERS)).click();
+                    $("#" + constantsInputs.NAME_PLAYER1).val(localStorage.getItem(constantsInputs.NAME_PLAYER1));
+                    if (localStorage.getItem(constantsInputs.RB_PLAYERS) == constantsInputs.TWO_PLAYERS) {
+                        if (localStorage.getItem(constantsInputs.NAME_PLAYER2) != null) {
+                            $("#" + constantsInputs.NAME_PLAYER2).val(localStorage.getItem(constantsInputs.NAME_PLAYER2));
                         }
                     }
-                    $("#" + localStorage.getItem(RB_JUEGO)).click();
-                    $("#" + localStorage.getItem(RB_RONDAS)).click();
-                    if (localStorage.getItem(RB_RONDAS) == MORE_ROUNDS) {
-                        if (localStorage.getItem(VALUE_RONDAS) != null) {
-                            $("#" + CUSTOMED_ROUNDS).val(localStorage.getItem(VALUE_RONDAS));
+                    $("#" + localStorage.getItem(constantsInputs.RB_JUEGO)).click();
+                    $("#" + localStorage.getItem(constantsInputs.RB_RONDAS)).click();
+                    if (localStorage.getItem(constantsInputs.RB_RONDAS) == MORE_ROUNDS) {
+                        if (localStorage.getItem(otherConstants.VALUE_RONDAS) != null) {
+                            $("#" + constantsInputs.CUSTOMED_ROUNDS).val(localStorage.getItem(otherConstants.VALUE_RONDAS));
                         }
                     }
                 }
-                if (localStorage.getItem(RB_JUEGO_ONL) != null && localStorage.getItem(RB_RONDAS_ONL) != null) {
-                    $("#" + localStorage.getItem(RB_JUEGO_ONL)).click();
-                    $("#" + localStorage.getItem(RB_RONDAS_ONL)).click();
+                if (localStorage.getItem(constantsInputs.RB_JUEGO_ONL) != null && localStorage.getItem(constantsInputs.RB_RONDAS_ONL) != null) {
+                    $("#" + localStorage.getItem(constantsInputs.RB_JUEGO_ONL)).click();
+                    $("#" + localStorage.getItem(constantsInputs.RB_RONDAS_ONL)).click();
                 }
             });
             var userLang = navigator.language || navigator.userLanguage;
-            if (userLang != constants.SPANISH) {
-                userLang = constants.ENGLISH;
+            if (userLang != constantsJSCSS.SPANISH) {
+                userLang = constantsJSCSS.ENGLISH;
             }
             var language = new Language().getLang();
             
@@ -111,7 +123,7 @@ and open the template in the editor.
         <div class="atCenterTopOfScreen" id="rules" hidden="">
             <h3><script>document.write(language[userLang].rulesOption);</script></h3>
             <pre class="bgBlue">
-                <script>document.write(userLang == constants.SPANISH ? textRules : textRulesEng);</script>
+                <script>document.write(userLang == constantsJSCSS.SPANISH ? textRules : textRulesEng);</script>
             </pre>
             <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_MENU_PPAL)">
                 <script>document.write(language[userLang].back);</script>
@@ -128,7 +140,7 @@ and open the template in the editor.
         </div>
         <div class="atCenterTopOfScreen" id="infoDev" hidden="">
             <h3><script>document.write(language[userLang].infoDev);</script></h3>
-            <script>document.write(userLang == constants.SPANISH ? textInfoDev : textInfoDevEng);</script>
+            <script>document.write(userLang == constantsJSCSS.SPANISH ? textInfoDev : textInfoDevEng);</script>
             <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_MENU_PPAL)">
                 <script>document.write(language[userLang].back);</script>
             </button>
@@ -140,15 +152,15 @@ and open the template in the editor.
             <input type="radio" id="game5" value="game5" name="game"/><script>document.write(language[userLang].game5);</script><br>
             <input type="radio" id="game9" value="game9" name="game"/><script>document.write(language[userLang].game9);</script><br>
             <h4><script>document.write(language[userLang].chooseNumPlayers);</script></h4>
-            <input checked="" type="radio" id="onePlayer" name="players" onclick="invisibleElement(NAME_PLAYER2)" /><script>document.write(language[userLang].onePlayer);</script><br>
-            <input type="radio" id="twoPlayers" name="players" onclick="visibleElement(NAME_PLAYER2)"/><script>document.write(language[userLang].twoPlayers);</script><br>
+            <input checked="" type="radio" id="onePlayer" name="players" onclick="invisibleElement(constantsInputs.NAME_PLAYER2)" /><script>document.write(language[userLang].onePlayer);</script><br>
+            <input type="radio" id="twoPlayers" name="players" onclick="visibleElement(constantsInputs.NAME_PLAYER2)"/><script>document.write(language[userLang].twoPlayers);</script><br>
             <input type="text" class="containsPlaceholder" id="nameOfPlayer1" name="nameOfPlayer1" placeholder="Player 1" required=""/>
             <input type="text" class="containsPlaceholder" id="nameOfPlayer2" name="nameOfPlayer2" placeholder="Player 2" hidden/>
             <h4><script>document.write(language[userLang].chooseRounds);</script></h4>
-            <input checked="" id="oneRound" type="radio" name="rounds" onclick="invisibleElement(CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].oneRound);</script><br>
-            <input type="radio" id="threeRounds" name="rounds" onclick="invisibleElement(CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].threeRounds);</script><br>
-            <input type="radio" id="fiveRounds" name="rounds" onclick="invisibleElement(CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].fiveRounds);</script><br>
-            <input type="radio" id="moreRounds" name="rounds" onclick="visibleElement(CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].customedRounds);</script><br>
+            <input checked="" id="oneRound" type="radio" name="rounds" onclick="invisibleElement(constantsInputs.CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].oneRound);</script><br>
+            <input type="radio" id="threeRounds" name="rounds" onclick="invisibleElement(constantsInputs.CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].threeRounds);</script><br>
+            <input type="radio" id="fiveRounds" name="rounds" onclick="invisibleElement(constantsInputs.CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].fiveRounds);</script><br>
+            <input type="radio" id="moreRounds" name="rounds" onclick="visibleElement(constantsInputs.CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].customedRounds);</script><br>
             <input type="text" class="containsPlaceholder" id="customedRounds" name="customedRounds" placeholder="Number of Rounds" hidden/><br><br>
             <div>
                 <button type="button" class="btn btn-primary btn-lg " onclick="cambiaVista(DIV_MENU_PPAL)">
@@ -185,9 +197,9 @@ and open the template in the editor.
             <input type="radio" id="game5Onl" value="game5Onl" name="gameOnl"/><script>document.write(language[userLang].game5);</script><br>
             <input type="radio" id="game9Onl" value="game9Onl" name="gameOnl"/><script>document.write(language[userLang].game9);</script><br>
             <h4><script>document.write(language[userLang].chooseRounds);</script></h4>
-            <input type="radio" id="oneRoundOnl" name="roundsOnl" onclick="invisibleElement(CUSTOMED_ROUNDS)" checked/><script>document.write(language[userLang].oneRound);</script><br>
-            <input type="radio" id="threeRoundsOnl" name="roundsOnl" onclick="invisibleElement(CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].threeRounds);</script><br>
-            <input type="radio" id="fiveRoundsOnl" name="roundsOnl" onclick="invisibleElement(CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].fiveRounds);</script><br>
+            <input type="radio" id="oneRoundOnl" name="roundsOnl" onclick="invisibleElement(constantsInputs.CUSTOMED_ROUNDS)" checked/><script>document.write(language[userLang].oneRound);</script><br>
+            <input type="radio" id="threeRoundsOnl" name="roundsOnl" onclick="invisibleElement(constantsInputs.CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].threeRounds);</script><br>
+            <input type="radio" id="fiveRoundsOnl" name="roundsOnl" onclick="invisibleElement(constantsInputs.CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].fiveRounds);</script><br>
             <div>
                 <button type="button" class="btn btn-primary btn-lg " onclick="cambiaVista(DIV_ONLINE_MENU)">
                     <script>document.write(language[userLang].back);</script>

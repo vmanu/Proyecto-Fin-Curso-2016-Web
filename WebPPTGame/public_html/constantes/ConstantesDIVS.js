@@ -16,21 +16,21 @@ ConstantesDIVS=function(){
         IMAGE_PLAYER1:"p1",
         IMAGE_PLAYER2:"p2",
         IMG_RESULT_P1:"imgResultP1",
-        IMG_RESULT_P2:"imgResultP2"
-    }
+        IMG_RESULT_P2:"imgResultP2",
+        DIV_RESULT_GAME:"resultGame",
+        WON_COUNT_P1:"wonCountP1",
+        WON_COUNT_P2:"wonCountP2",
+        NAME_LOGGED_PLAYER:"nameLoggedPlayer",
+        LOGGED_PLAYER:"loggedPlayer",
+        GAME3_RED:"gameOf3red",
+        GAME3_BLUE:"gameOf3blue",
+        GAME5_RED:"gameOf5red",
+        GAME5_BLUE:"gameOf5blue",
+        GAME9_RED:"gameOf9red",
+        GAME9_BLUE:"gameOf9blue"
+    };
+    
+    this.getConstantsDivs=function(){
+        return constantsDIVS;
+    };
 };
-//DIVS
-var IMG_RESULT_P1="imgResultP1";
-var IMG_RESULT_P2="imgResultP2";
-var DIV_RESULT_GAME="imgResultP2";
-var WON_COUNT_P1="wonCountP1";
-var WON_COUNT_P2="wonCountP2";
-var NAME_LOGGED_PLAYER="nameLoggedPlayer";
-var LOGGED_PLAYER="loggedPlayer";
-//GAMES
-var GAME3_RED="gameOf3red";
-var GAME3_BLUE="gameOf3blue";
-var GAME5_RED="gameOf5red";
-var GAME5_BLUE="gameOf5blue";
-var GAME9_RED="gameOf9red";
-var GAME9_BLUE="gameOf9blue";

@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var datos, mapFichas, mapFichasMaquina, opc, modo, online, player, clave, complemento, keyCompl, constants;
+var datos, mapFichas, mapFichasMaquina, opc, modo, online, player, clave, complemento, keyCompl;
+//        constantsJSCSS, constantsInputs,constantsDIVS, constantsOpsJuego, otherConstants, constantsURLs;
 
 $(document).ready(function () {
     clave = "";
@@ -16,64 +17,68 @@ $(document).ready(function () {
     mapFichas = datos.inicializaMapFichas();
     mapFichasMaquina = datos.inicializaMapFichasMaquina();
     localStorage.setItem(DATOS, datos);
-    $("#" + IMAGE_PLAYER2).attr(constants.SRC, IMAGE_BLANK);
-    constants = new ConstantesJSyCSS().getConstants();
+    $("#" + IMAGE_PLAYER2).attr(constantsJSCSS.SRC, IMAGE_BLANK);
+//    constantsJSCSS = new ConstantesJSyCSS().getConstantsJSCSS();
+//    constantsInputs = new ConstantesInputs().getConstantsInputs();
+//    constantsDIVS = new ConstantesDIVS().getConstantsDivs();
+//    constantsOpsJuego = new ConstantesOpcionesJuego().getConstantesOpcionesJuego();
+//    constantsURLs = new ConstantesServletURLs().getConstantsURLs();
 });
 /**
  * Método que quita la visibilidad de ciertos elementos del juego, poniendo visible el pasado por parámetro para su visualización en el navegador.
  * @param {type} divId Id del <div> que va a quedar a la vista del usuario.
  */
 function cambiaVista(divId) {
-    if (divId == DIV_LOCAL_MENU_JUEGO) {
+    if (divId == constantsDIVS.DIV_LOCAL_MENU_JUEGO) {
         online = false;
     } else {
         online = true;
-        if (divId == DIV_SCORES) {
-            getScores(BY_VICTORIES);
+        if (divId == constantsDIVS.DIV_SCORES) {
+            getScores(otherConstants.BY_VICTORIES);
         } else {
-            if (divId == LOGIN_SCREEN) {
+            if (divId == constantsDIVS.LOGIN_SCREEN) {
                 getKeysFromServlet();
             }
         }
     }
-    document.getElementById(DIV_MENU_PPAL).style.display = constants.NONE;
+    document.getElementById(constantsDIVS.DIV_MENU_PPAL).style.display = constantsJSCSS.NONE;
     //document.getElementById('playLocal').style.display = NONE;
-    document.getElementById(DIV_PLAY_ONLINE).style.display = constants.NONE;
-    document.getElementById(DIV_RULES).style.display = constants.NONE;
-    document.getElementById(DIV_RULES_GRAPHIC).style.display = constants.NONE;
-    document.getElementById(DIV_INFO_DEVELOPERS).style.display = constants.NONE;
-    document.getElementById(DIV_LOCAL_MENU_JUEGO).style.display = constants.NONE;
-    document.getElementById(DIV_ONLINE_MENU).style.display = constants.NONE;
-    document.getElementById(DIV_ONLINE_MENU_JUEGO).style.display = constants.NONE;
-    document.getElementById(HEADER_GAME).style.display = constants.NONE;
-    document.getElementById(GAME3_RED).style.display = constants.NONE;
-    document.getElementById(GAME3_BLUE).style.display = constants.NONE;
-    document.getElementById(GAME5_RED).style.display = constants.NONE;
-    document.getElementById(GAME5_BLUE).style.display = constants.NONE;
-    document.getElementById(GAME9_RED).style.display = constants.NONE;
-    document.getElementById(GAME9_BLUE).style.display = constants.NONE;
-    document.getElementById(VISTA_RESULT).style.display = constants.NONE;
-    document.getElementById(DIV_SCORES).style.display = constants.NONE;
-    document.getElementById(LOGIN_SCREEN).style.display = constants.NONE;
-    document.getElementById(divId).style.display = constants.BLOCK;
-    $("#" + NAME_PLAYER1).attr(PLACEHOLDER, language[userLang].player1);
-    $("#" + NAME_PLAYER2).attr(PLACEHOLDER, language[userLang].player2);
-    $("#" + CUSTOMED_ROUNDS).attr(PLACEHOLDER, language[userLang].numberOfRounds);
-    $("#" + NAME_PLAYER_ONLINE).attr(PLACEHOLDER, language[userLang].yourNameHere);
+    document.getElementById(constantsDIVS.DIV_PLAY_ONLINE).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.DIV_RULES).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.DIV_RULES_GRAPHIC).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.DIV_INFO_DEVELOPERS).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.DIV_LOCAL_MENU_JUEGO).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.DIV_ONLINE_MENU).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.DIV_ONLINE_MENU_JUEGO).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.HEADER_GAME).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.GAME3_RED).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.GAME3_BLUE).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.GAME5_RED).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.GAME5_BLUE).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.GAME9_RED).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.GAME9_BLUE).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.VISTA_RESULT).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.DIV_SCORES).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.LOGIN_SCREEN).style.display = constantsJSCSS.NONE;
+    document.getElementById(divId).style.display = constantsJSCSS.BLOCK;
+    $("#" + constantsInputs.NAME_PLAYER1).attr(constantsJSCSS.PLACEHOLDER, language[userLang].player1);
+    $("#" + constantsInputs.NAME_PLAYER2).attr(constantsJSCSS.PLACEHOLDER, language[userLang].player2);
+    $("#" + CUSTOMED_ROUNDS).attr(constantsJSCSS.PLACEHOLDER, language[userLang].numberOfRounds);
+    $("#" + constantsInputs.NAME_PLAYER_ONLINE).attr(constantsJSCSS.PLACEHOLDER, language[userLang].yourNameHere);
 }
 /**
  * Método que hace aparecer un elemento, concretamente un <input> de tipo 'text', sobre una pantalla ya cargada y visible.
  * @param {type} element Elemento de entrada de texto que aparecerá en la pantalla.
  */
 function visibleElement(element) {
-    document.getElementById(element).style.display = constants.INLINE;
+    document.getElementById(element).style.display = constantsJSCSS.INLINE;
 }
 /**
  * Método que hace desaparecer un elemento, concretamente un <input> de tipo 'text', sobre una pantalla ya cargada y visible.
  * @param {type} element Elemento de entrada de texto que deaparecerá de la pantalla.
  */
 function invisibleElement(element) {
-    document.getElementById(element).style.display = constants.NONE;
+    document.getElementById(element).style.display = constantsJSCSS.NONE;
 }
 /**
  * Método que gestiona el cambio de pantalla del formulario de configuración de la partida en modo local a la pantalla del juego.
@@ -81,43 +86,43 @@ function invisibleElement(element) {
  * en función de la configuración elegida.
  */
 function cambiaVistaJuego() {
-    if (($("#" + NAME_PLAYER1).val() == "" || $("#" + NAME_PLAYER1).val() == constants.UNDEFINED) || (dosJugadores == true && (($("#" + NAME_PLAYER1).val() == "" || $("#" + NAME_PLAYER1).val() == constants.UNDEFINED) || ($("#" + NAME_PLAYER2).val() == "" || $("#" + NAME_PLAYER2).val() == constants.UNDEFINED)))) {
+    if (($("#" + constantsInputs.NAME_PLAYER1).val() == "" || $("#" + constantsInputs.NAME_PLAYER1).val() == constantsJSCSS.UNDEFINED) || (dosJugadores == true && (($("#" + constantsInputs.NAME_PLAYER1).val() == "" || $("#" + constantsInputs.NAME_PLAYER1).val() == constantsJSCSS.UNDEFINED) || ($("#" + constantsInputs.NAME_PLAYER2).val() == "" || $("#" + constantsInputs.NAME_PLAYER2).val() == constantsJSCSS.UNDEFINED)))) {
         alert(language[userLang].fillTheFields);
     } else {
         var dosJugadores = false;
-        if (document.getElementById(ONE_PLAYER).checked) {
+        if (document.getElementById(constantsInputs.ONE_PLAYER).checked) {
             datos.setModalidadJuego(new ModalidadJuego().getModalidad().UNO);
-            localStorage.setItem(RB_PLAYERS, ONE_PLAYER);
-            localStorage.setItem(NAME_PLAYER1, $("#" + NAME_PLAYER1).val());
+            localStorage.setItem(constantsInputs.RB_PLAYERS, constantsInputs.ONE_PLAYER);
+            localStorage.setItem(constantsInputs.NAME_PLAYER1, $("#" + constantsInputs.NAME_PLAYER1).val());
         } else {
-            localStorage.setItem(RB_PLAYERS, TWO_PLAYERS);
+            localStorage.setItem(constantsInputs.RB_PLAYERS, TWO_PLAYERS);
             datos.setModalidadJuego(new ModalidadJuego().getModalidad().DOS);
             dosJugadores = true;
-            localStorage.setItem(NAME_PLAYER2, $("#" + NAME_PLAYER2).val());
+            localStorage.setItem(constantsInputs.NAME_PLAYER2, $("#" + constantsInputs.NAME_PLAYER2).val());
         }
-        cambiaVista(HEADER_GAME);
-        datos.setNombreJ1($("#" + NAME_PLAYER1).val());
-        if (document.getElementById(GAME3).checked == true) {
-            localStorage.setItem(RB_JUEGO, GAME3);
-            document.getElementById(GAME3_RED).style.display = constants.BLOCK;
+        cambiaVista(constantsDIVS.HEADER_GAME);
+        datos.setNombreJ1($("#" + constantsInputs.NAME_PLAYER1).val());
+        if (document.getElementById(constantsInputs.GAME3).checked == true) {
+            localStorage.setItem(constantsInputs.RB_JUEGO, constantsInputs.GAME3);
+            document.getElementById(constantsDIVS.GAME3_RED).style.display = constantsJSCSS.BLOCK;
             datos.setFactorAlgoritmo(1);
             modo = 3;
         } else {
-            if (document.getElementById(GAME5).checked == true) {
-                localStorage.setItem(RB_JUEGO, GAME5);
-                document.getElementById(GAME5_RED).style.display = constants.BLOCK;
+            if (document.getElementById(constantsInputs.GAME5).checked == true) {
+                localStorage.setItem(constantsInputs.RB_JUEGO, constantsInputs.GAME5);
+                document.getElementById(constantsDIVS.GAME5_RED).style.display = constantsJSCSS.BLOCK;
                 datos.setFactorAlgoritmo(2);
                 modo = 5;
             } else {
-                localStorage.setItem(RB_JUEGO, GAME9);
-                document.getElementById(GAME9_RED).style.display = constants.BLOCK;
+                localStorage.setItem(constantsInputs.RB_JUEGO, constantsInputs.GAME9);
+                document.getElementById(constantsDIVS.GAME9_RED).style.display = constantsJSCSS.BLOCK;
                 datos.setFactorAlgoritmo(4);
                 modo = 9;
             }
         }
         setLimiteRondas();
         datos.setTurno(true);
-        $("#" + IMAGE_PLAYER1).attr(constants.SRC, IMAGE_HELP_ROJO);
+        $("#" + constantsDIVS.IMAGE_PLAYER1).attr(constantsJSCSS.SRC, otherConstants.IMAGE_HELP_ROJO);
         showToastRed();
     }
 }
@@ -125,9 +130,9 @@ function cambiaVistaJuego() {
  * Método encargado de cambiar al DataContainer datos el número de rondas elegido en el formulario del modo local.
  */
 function setLimiteRondas() {
-    if (document.getElementById(ONE_ROUND).checked) {
+    if (document.getElementById(constantsInputs.ONE_ROUND).checked) {
         datos.setRoundsLimit(1);
-        localStorage.setItem(RB_RONDAS, ONE_ROUND);
+        localStorage.setItem(RB_RONDAS, constantsInputs.ONE_ROUND);
     } else {
         if (document.getElementById(THREE_ROUNDS).checked) {
             datos.setRoundsLimit(3);
@@ -157,7 +162,7 @@ function gestionaJuego(window, opClicked, imgId) {
     //alert(datos.getModalidadJuego().ordinal);
     var mmsg = null;
     modalidad = new ModalidadJuego().getModalidad();
-    if (document.getElementById(window).style.display == constants.BLOCK) {
+    if (document.getElementById(window).style.display == constantsJSCSS.BLOCK) {
         opc = mapFichas[opClicked];
         //alert(datos.isTurno()+" - - - "+opc);
         if (datos.isTurno() == true && opc != null) {
@@ -167,7 +172,7 @@ function gestionaJuego(window, opClicked, imgId) {
             if (datos.getModalidadJuego().ordinal == modalidad.DOS.ordinal) {
                 //DOS JUGADORES
                 //alert("DOS JUGADORES");
-                datos.setNombreJ2($("#" + NAME_PLAYER2).val());
+                datos.setNombreJ2($("#" + constantsInputs.NAME_PLAYER2).val());
                 turnoAzul();
                 datos.setTurno(false);
                 showToastBlue();
@@ -177,7 +182,7 @@ function gestionaJuego(window, opClicked, imgId) {
                     //alert("UN JUGADOR");
                     datos.setEnumChosen2(getEnumFromOrdinal(Math.floor((Math.random() * ((datos.getFactorAlgoritmo() * 2) + 1)))));
                     //console.log(datos.getEnumChosen2());
-                    datos.setNombreJ2(CPU);
+                    datos.setNombreJ2(otherConstants.CPU);
                     datos.setIdImgPulsada2(gestionaPulsadoMaquina());
                     comunEvaluacionGanador();
                 } else {
@@ -190,8 +195,8 @@ function gestionaJuego(window, opClicked, imgId) {
                     opcionJuego.opcion = (datos.getEnumChosen1().ordinal);
                     //alert(datos.getEnumChosen2());
                     if (datos.getEnumChosen2() != null) {
-                        //$("#imgResultP2").attr(constants.SRC, document.getElementById(datos.getIdImgPulsada2()).src);
-                        $("#" + IMG_RESULT_P2).attr(constants.SRC, $("#" + datos.getIdImgPulsada2()).attr(constants.SRC));
+                        //$("#imgResultP2").attr(constantsJSCSS.SRC, document.getElementById(datos.getIdImgPulsada2()).src);
+                        $("#" + constantsDIVS.IMG_RESULT_P2).attr(constantsJSCSS.SRC, $("#" + datos.getIdImgPulsada2()).attr(constantsJSCSS.SRC));
                         comunEvaluacionGanador();
                     }
                     mmsg.content = (opcionJuego);
@@ -216,32 +221,32 @@ function gestionaJuego(window, opClicked, imgId) {
  */
 function comunEvaluacionGanador() {
     //alert("EVALUACION GANADOR");
-//    $("#imgResultP1").attr(constants.SRC, document.getElementById(datos.getIdImgPulsada1()).src);
-//    $("#imgResultP2").attr(constants.SRC, document.getElementById(datos.getIdImgPulsada2()).src);
+//    $("#imgResultP1").attr(constantsJSCSS.SRC, document.getElementById(datos.getIdImgPulsada1()).src);
+//    $("#imgResultP2").attr(constantsJSCSS.SRC, document.getElementById(datos.getIdImgPulsada2()).src);
     //alert("id 1: " + datos.getIdImgPulsada1() + " --- id 2: " + datos.getIdImgPulsada2());
-    //alert("ruta 1: "+$("#"+datos.getIdImgPulsada1()).attr(constants.SRC)+" --- ruta 2: "+$("#"+datos.getIdImgPulsada2()).attr(constants.SRC));
-    $("#" + IMG_RESULT_P1).attr(constants.SRC, $("#" + datos.getIdImgPulsada1()).attr(constants.SRC));
+    //alert("ruta 1: "+$("#"+datos.getIdImgPulsada1()).attr(constantsJSCSS.SRC)+" --- ruta 2: "+$("#"+datos.getIdImgPulsada2()).attr(constantsJSCSS.SRC));
+    $("#" + constantsDIVS.IMG_RESULT_P1).attr(constantsJSCSS.SRC, $("#" + datos.getIdImgPulsada1()).attr(constantsJSCSS.SRC));
     if (datos.getModalidadJuego().ordinal == modalidad.DOS.ordinal) {
-        $("#" + IMG_RESULT_P2).attr(constants.SRC, $("#" + datos.getIdImgPulsada2()).attr(constants.SRC));
+        $("#" + constantsDIVS.IMG_RESULT_P2).attr(constantsJSCSS.SRC, $("#" + datos.getIdImgPulsada2()).attr(constantsJSCSS.SRC));
     } else {
-        $("#" + IMG_RESULT_P2).attr(constants.SRC, $("#" + datos.getIdImgPulsada2() + modo).attr(constants.SRC));
+        $("#" + constantsDIVS.IMG_RESULT_P2).attr(constantsJSCSS.SRC, $("#" + datos.getIdImgPulsada2() + modo).attr(constantsJSCSS.SRC));
     }
     switch (logicaJuego()) {
         case 0:
             //empata
             console.log("case empate");
-            $("#" + DIV_RESULT_GAME).text(language[userLang].draw);
+            $("#" + constantsDIVS.DIV_RESULT_GAME).text(language[userLang].draw);
             break;
         case 1:
             //gana jugador 1
             console.log("case gana");
-            $("#" + DIV_RESULT_GAME).text(datos.getNombreJ1() + language[userLang].wins);
+            $("#" + constantsDIVS.DIV_RESULT_GAME).text(datos.getNombreJ1() + language[userLang].wins);
             datos.sumaVictoriesP1();
             break;
         case 2:
             //gana jugador 2
             console.log("case pierde");
-            $("#" + DIV_RESULT_GAME).text(datos.getNombreJ2() + language[userLang].wins);
+            $("#" + constantsDIVS.DIV_RESULT_GAME).text(datos.getNombreJ2() + language[userLang].wins);
             datos.sumaVictoriesP2();
             break;
     }
@@ -260,7 +265,7 @@ function logicaJuego() {
         datos.avanzaRonda();
         //alert(datos.getRoundsCounter());
         if (datos.rondasFinalizadas() == true) {
-            $("#" + NEXT_BTN).prop(constants.DISABLED, true);
+            $("#" + constantsInputs.NEXT_BTN).prop(constantsJSCSS.DISABLED, true);
         }
         for (var j = ((datos.getEnumChosen2().ordinal + 1) % ((datos.getFactorAlgoritmo() * 2) + 1)), i = 0; i < (datos.getFactorAlgoritmo()) && !ganaChosen; i++, j = ((j + 1) % ((datos.getFactorAlgoritmo() * 2) + 1))) {
             if (datos.getEnumChosen1().ordinal == j) {
@@ -316,7 +321,7 @@ function getEnumFromOrdinal(ordinal) {
  * En esta pantalla se mostrarán ambas elecciones, la cuenta de victorias de cada jugador y el resultado de la partida.
  */
 function cambiarVistaAResult() {
-    cambiaVista(VISTA_RESULT);
+    cambiaVista(constantsDIVS.VISTA_RESULT);
     $("#" + WON_COUNT_P1).html(datos.getNombreJ1() + language[userLang].wonCount + datos.getVictoriesP1());
     $("#" + WON_COUNT_P2).html(datos.getNombreJ2() + language[userLang].wonCount + datos.getVictoriesP2());
     datos.setEnumChosen1(null);
@@ -339,15 +344,15 @@ function gestionaPulsadoMaquina() {
  * en color azul cuando el turno sea del jugador 2.
  */
 function turnoAzul() {
-    $("#" + IMAGE_PLAYER1).attr(constants.SRC, IMAGE_BLANK);
-    $("#" + IMAGE_PLAYER2).attr(constants.SRC, IMAGE_HELP_AZUL);
-    if (document.getElementById(GAME3).checked == true) {
-        document.getElementById(GAME3_BLUE).style.display = constants.BLOCK;
+    $("#" + constantsDIVS.IMAGE_PLAYER1).attr(constantsJSCSS.SRC, IMAGE_BLANK);
+    $("#" + IMAGE_PLAYER2).attr(constantsJSCSS.SRC, IMAGE_HELP_AZUL);
+    if (document.getElementById(constantsInputs.GAME3).checked == true) {
+        document.getElementById(constantsDIVS.GAME3_BLUE).style.display = constantsJSCSS.BLOCK;
     } else {
-        if (document.getElementById(GAME5).checked == true) {
-            document.getElementById(GAME5_BLUE).style.display = constants.BLOCK;
+        if (document.getElementById(constantsInputs.GAME5).checked == true) {
+            document.getElementById(constantsDIVS.GAME5_BLUE).style.display = constantsJSCSS.BLOCK;
         } else {
-            document.getElementById(GAME9_BLUE).style.display = constants.BLOCK;
+            document.getElementById(constantsDIVS.GAME9_BLUE).style.display = constantsJSCSS.BLOCK;
         }
     }
 }
@@ -358,12 +363,12 @@ function backFromPlayScreen() {
     //alert();
     datos.setVictoriesP1(0);
     datos.setVictoriesP2(0);
-    $("#" + NEXT_BTN).prop(constants.DISABLED, false);
+    $("#" + constantsInputs.NEXT_BTN).prop(constantsJSCSS.DISABLED, false);
     datos.setRoundsCounter(0);
     if (datos.getModalidadJuego().ordinal == new ModalidadJuego().getModalidad().ONLINE.ordinal && websocket != null) {
         websocket.close();
     }
-    cambiaVista(DIV_MENU_PPAL);
+    cambiaVista(constantsDIVS.DIV_MENU_PPAL);
     //document.getElementById('title').style.display = BLOCK;
 }
 /**
@@ -371,9 +376,9 @@ function backFromPlayScreen() {
  */
 function showToastRed() {
     if (userLang != SPANISH) {
-        $(constants.CLASE_TOAST).text(datos.getNombreJ1() + language[userLang].turnOf).css(constants.BACKGROUND_COLOR, constants.RED).fadeIn(500).delay(1200).fadeOut(550);
+        $(constantsJSCSS.CLASE_TOAST).text(datos.getNombreJ1() + language[userLang].turnOf).css(constantsJSCSS.BACKGROUND_COLOR, constantsJSCSS.RED).fadeIn(500).delay(1200).fadeOut(550);
     } else {
-        $(constants.CLASE_TOAST).text(language[userLang].turnOf + datos.getNombreJ1()).css(constants.BACKGROUND_COLOR, constants.RED).fadeIn(500).delay(1200).fadeOut(550);
+        $(constantsJSCSS.CLASE_TOAST).text(language[userLang].turnOf + datos.getNombreJ1()).css(constantsJSCSS.BACKGROUND_COLOR, constantsJSCSS.RED).fadeIn(500).delay(1200).fadeOut(550);
     }
 }
 /**º
@@ -381,9 +386,9 @@ function showToastRed() {
  */
 function showToastBlue() {
     if (userLang != SPANISH) {
-        $(constants.CLASE_TOAST).text(datos.getNombreJ1() + language[userLang].turnOf).css(constants.BACKGROUND_COLOR, constants.BLUE).fadeIn(500).delay(1200).fadeOut(550);
+        $(constantsJSCSS.CLASE_TOAST).text(datos.getNombreJ1() + language[userLang].turnOf).css(constantsJSCSS.BACKGROUND_COLOR, constantsJSCSS.BLUE).fadeIn(500).delay(1200).fadeOut(550);
     } else {
-        $(constants.CLASE_TOAST).text(language[userLang].turnOf + datos.getNombreJ1()).css(constants.BACKGROUND_COLOR, constants.BLUE).fadeIn(500).delay(1200).fadeOut(550);
+        $(constantsJSCSS.CLASE_TOAST).text(language[userLang].turnOf + datos.getNombreJ1()).css(constantsJSCSS.BACKGROUND_COLOR, constantsJSCSS.BLUE).fadeIn(500).delay(1200).fadeOut(550);
     }
 }
 /**
@@ -396,10 +401,10 @@ function cambiaVistaJuegoOnline() {
     //if (id == "gameOnlineScreen") {
     datos.setTurno(true);
     online = true;
-    localStorage.setItem(ONLINE, online);
+    localStorage.setItem(otherConstants.ONLINE, online);
     datos.setModalidadJuego(new ModalidadJuego().getModalidad().ONLINE);
-    cambiaVista(HEADER_GAME);
-    localStorage.setItem(NAME_PLAYER_ONLINE, $("#" + LOGIN_INPUT_TEXT).val());
+    cambiaVista(constantsDIVS.HEADER_GAME);
+    localStorage.setItem(constantsInputs.NAME_PLAYER_ONLINE, $("#" + constantsInputs.LOGIN_INPUT_TEXT).val());
     connect();
     var metamsg = new MetaMessage().getMetaMessage();
     metamsg.type = (new TypeMessage().getTypeMessage().CONEXION.name);
@@ -409,28 +414,28 @@ function cambiaVistaJuegoOnline() {
     player.playing = (false);
     //alert("PLAYER JSON "+playerJson);
     datos.setJugando(true);
-    if (document.getElementById(GAME3_ONL).checked == true) {
-        localStorage.setItem(RB_JUEGO_ONL, GAME3_ONL);
-        document.getElementById(GAME3_RED).style.display = constants.BLOCK;
+    if (document.getElementById(constantsInputs.GAME3_ONL).checked == true) {
+        localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME3_ONL);
+        document.getElementById(constantsDIVS.GAME3_RED).style.display = constantsJSCSS.BLOCK;
         datos.setFactorAlgoritmo(1);
         player.tipoJuego = (new GameType().getGameType().JUEGO3.name);
         modo = 3;
     } else {
-        if (document.getElementById(GAME5_ONL).checked == true) {
-            localStorage.setItem(RB_JUEGO_ONL, GAME5_ONL);
-            document.getElementById(GAME5_RED).style.display = constants.BLOCK;
+        if (document.getElementById(constantsInputs.GAME5_ONL).checked == true) {
+            localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME5_ONL);
+            document.getElementById(constantsDIVS.GAME5_RED).style.display = constantsJSCSS.BLOCK;
             datos.setFactorAlgoritmo(2);
             player.tipoJuego = (new GameType().getGameType().JUEGO5.name);
             modo = 5;
         } else {
-            localStorage.setItem(RB_JUEGO_ONL, GAME9_ONL);
-            document.getElementById(GAME9_ONL).style.display = constants.BLOCK;
+            localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME9_ONL);
+            document.getElementById(constantsInputs.GAME9_ONL).style.display = constantsJSCSS.BLOCK;
             datos.setFactorAlgoritmo(4);
             player.tipoJuego = (new GameType().getGameType().JUEGO9.name);
             modo = 9;
         }
     }
-    localStorage.setItem(MODO, modo);
+    localStorage.setItem(otherConstants.MODO, modo);
     setLimiteRondasOnline();
     metamsg.content = (player);
     console.log(metamsg);
@@ -445,19 +450,19 @@ function cambiaVistaJuegoOnline() {
  * Método encargado de cambiar al DataContainer datos el número de rondas elegido en el formulario del modo online.
  */
 function setLimiteRondasOnline() {
-    if (document.getElementById(ONE_ROUND_ONL).checked) {
+    if (document.getElementById(constantsInputs.ONE_ROUND_ONL).checked) {
         datos.setRoundsLimit(1);
         player.numberOfRounds = (new RoundsNumber().getRoundsNumber().UNA.name);
-        localStorage.setItem(RB_RONDAS_ONL, ONE_ROUND_ONL);
+        localStorage.setItem(constantsInputs.RB_RONDAS_ONL, constantsInputs.ONE_ROUND_ONL);
     } else {
-        if (document.getElementById(THREE_ROUNDS_ONL).checked) {
+        if (document.getElementById(constantsInputs.THREE_ROUNDS_ONL).checked) {
             datos.setRoundsLimit(3);
             player.numberOfRounds = (new RoundsNumber().getRoundsNumber().TRES.name);
-            localStorage.setItem(RB_RONDAS_ONL, THREE_ROUNDS_ONL);
+            localStorage.setItem(constantsInputs.RB_RONDAS_ONL, constantsInputs.THREE_ROUNDS_ONL);
         } else {
             datos.setRoundsLimit(5);
             player.numberOfRounds = (new RoundsNumber().getRoundsNumber().CINCO.name);
-            localStorage.setItem(RB_RONDAS_ONL, FIVE_ROUNDS_ONL);
+            localStorage.setItem(constantsInputs.RB_RONDAS_ONL, constantsInputs.FIVE_ROUNDS_ONL);
         }
     }
     //alert(player.numberOfRounds.name);
@@ -479,37 +484,37 @@ function randomGame() {
 
 function getScores(selectedOption) {
     var players = null;
-    if (selectedOption == BY_ROUNDS) {
-        $.post(URL_GET_BY_ROUNDS,
+    if (selectedOption == otherConstants.BY_ROUNDS) {
+        $.post(constantsURLs.URL_GET_BY_ROUNDS,
                 function (data) {
                     players = JSON.parse(data);
                     console.debug("players: ", players);
-                    $("#" + LIST_SCORES).text("");
+                    $("#" + constantsInputs.LIST_SCORES).text("");
                     for (var i = 0; i < players.length; i++) {
-                        $("#" + LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + LIST_ITEM_CLOSE);
+                        $("#" + constantsInputs.LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + otherConstants.LIST_ITEM_CLOSE);
                     }
                 });
     } else {
-        if (selectedOption == BY_VICTORIES) {
-            $.post(URL_GET_BY_VICTORIES,
+        if (selectedOption == otherConstants.BY_VICTORIES) {
+            $.post(constantsURLs.URL_GET_BY_VICTORIES,
                     function (data) {
                         players = JSON.parse(data);
                         console.debug("players: ", players);
                         console.debug("players: ", JSON.parse(JSON.stringify(players)));
-                        $("#" + LIST_SCORES).text("");
+                        $("#" + constantsInputs.LIST_SCORES).text("");
                         for (var i = 0; i < players.length; i++) {
-                            $("#" + LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + LIST_ITEM_CLOSE);
+                            $("#" + constantsInputs.LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + otherConstants.LIST_ITEM_CLOSE);
                         }
 
                     });
         } else {
-            $.post(URL_GET_BY_AVERAGE,
+            $.post(constantsURLs.URL_GET_BY_AVERAGE,
                     function (data) {
                         players = JSON.parse(data);
                         console.debug("players: ", players);
-                        $("#" + LIST_SCORES).text("");
+                        $("#" + constantsInputs.LIST_SCORES).text("");
                         for (var i = 0; i < players.length; i++) {
-                            $("#" + LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + LIST_ITEM_CLOSE);
+                            $("#" + constantsInputs.LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + otherConstants.LIST_ITEM_CLOSE);
                         }
                     });
         }
@@ -519,8 +524,8 @@ function getScores(selectedOption) {
 function getKeysFromServlet() {
     if (clave == "") {
         $.ajax({
-            type: constants.POST,
-            url: "http://localhost:8080/ServerPPTGame/seguridad"
+            type: constantsJSCSS.POST,
+            url: constantsURLs.URL_GET_KEYS
         }).done(function (data) {
             //alert(data);
             console.debug("DATA", data);
@@ -536,31 +541,31 @@ function getKeysFromServlet() {
 
 function doLogin() {
     var logueadoCorrectamente;
-    if ($("#" + LOGIN_INPUT_TEXT).val() != "" && $("#" + PASS_INPUT_TEXT).val() != "" && (click == false || (click == true && $("#" + PASS_INPUT_TEXT).val() == $("#" + CONFIRM_PASS_INPUT_TEXT).val()))) {
+    if ($("#" + constantsInputs.LOGIN_INPUT_TEXT).val() != "" && $("#" + constantsInputs.PASS_INPUT_TEXT).val() != "" && (click == false || (click == true && $("#" + constantsInputs.PASS_INPUT_TEXT).val() == $("#" + constantsInputs.CONFIRM_PASS_INPUT_TEXT).val()))) {
         var user = new User().getUser();
-        user.login = $("#" + LOGIN_INPUT_TEXT).val();
-        user.pass = $("#" + PASS_INPUT_TEXT).val();
+        user.login = $("#" + constantsInputs.LOGIN_INPUT_TEXT).val();
+        user.pass = $("#" + constantsInputs.PASS_INPUT_TEXT).val();
         datos.setNombreJ1(user.login);
         var key = clave + "" + complemento;
         var keyHash, complHash;
-        $.post(URL_SERVLET_HASHING_JS,
-                {op: OP_CLAVES, clave: clave, complemento: complemento},
+        $.post(constantsURLs.URL_SERVLET_HASHING_JS,
+                {op: otherConstants.OP_CLAVES, clave: clave, complemento: complemento},
                 function (data) {
                     keyHash = JSON.parse(data)[0];
                     complHash = JSON.parse(data)[1];
-                    $.post(URL_SERVLET_HASHING_JS,
-                            {op: OP_USER, user: JSON.stringify(user), fraseHash: key},
+                    $.post(constantsURLs.URL_SERVLET_HASHING_JS,
+                            {op: otherConstants.OP_USER, user: JSON.stringify(user), fraseHash: key},
                             function (data) {
                                 user = JSON.parse(data);
                                 if (click == true) {
-                                    $.post(URL_SERVLET_SIGN_UP,
+                                    $.post(constantsURLs.URL_SERVLET_SIGN_UP,
                                             {user: user, claveHasheada: keyHash, complementoHasheado: complHash, claveComplemento: JSON.stringify(keyCompl)},
                                             function (data) {
                                                 logueadoCorrectamente = data;
                                                 compruebaSiLogueadoBien(logueadoCorrectamente, false);
                                             });
                                 } else {
-                                    $.post(URL_SERVLET_SIGN_IN,
+                                    $.post(constantsURLs.URL_SERVLET_SIGN_IN,
                                             {user: user, claveHasheada: keyHash, complementoHasheado: complHash, claveComplemento: JSON.stringify(keyCompl)},
                                             function (data) {
                                                 logueadoCorrectamente = data;
@@ -575,11 +580,11 @@ function doLogin() {
 }
 
 function compruebaSiLogueadoBien(logueadoCorrectamente, click) {
-    if (logueadoCorrectamente == SI) {
-        localStorage.setItem(LOGUEADO, JSON.stringify({nombre: datos.getNombreJ1(), yaLogueado: true}));
+    if (logueadoCorrectamente == otherConstants.SI) {
+        localStorage.setItem(otherConstants.LOGUEADO, JSON.stringify({nombre: datos.getNombreJ1(), yaLogueado: true}));
         clave = "";
         complemento = "";
-        cambiaVista(DIV_PLAY_ONLINE);
+        cambiaVista(constantsDIVS.DIV_PLAY_ONLINE);
         removeMaterializeImports();
     } else {
         if (click == true) {
@@ -591,31 +596,31 @@ function compruebaSiLogueadoBien(logueadoCorrectamente, click) {
 }
 
 function muestraPantallaLoginSiNoLogueado() {
-    var logueado = JSON.parse(localStorage.getItem(LOGUEADO));
+    var logueado = JSON.parse(localStorage.getItem(otherConstants.LOGUEADO));
     console.debug("logueado", logueado);
     if (logueado != null) {
         if (logueado.yaLogueado == true) {
             datos.setNombreJ1(logueado.nombre);
-            cambiaVista(DIV_PLAY_ONLINE);
-            $("#" + NAME_LOGGED_PLAYER).text(logueado.nombre);
-            $("#" + LOGGED_PLAYER).text(logueado.nombre);
+            cambiaVista(constantsDIVS.DIV_PLAY_ONLINE);
+            $("#" + constantsDIVS.NAME_LOGGED_PLAYER).text(logueado.nombre);
+            $("#" + constantsDIVS.LOGGED_PLAYER).text(logueado.nombre);
         }
     } else {
-        $('#' + LOGIN_SCREEN).load(HTML_LOGIN_SCREEN);
-        cambiaVista(LOGIN_SCREEN);
+        $('#' + constantsDIVS.LOGIN_SCREEN).load(otherConstants.HTML_LOGIN_SCREEN);
+        cambiaVista(constantsDIVS.LOGIN_SCREEN);
     }
 }
 
 function logOut() {
-    localStorage.removeItem(LOGUEADO);
-    cambiaVista(DIV_MENU_PPAL);
+    localStorage.removeItem(otherConstants.LOGUEADO);
+    cambiaVista(constantsDIVS.DIV_MENU_PPAL);
 }
 
 function addVictories(victories) {
-    $.post(URL_SERVLET_SIGN_IN,
-        {user: user, claveHasheada: keyHash, complementoHasheado: complHash, claveComplemento: JSON.stringify(keyCompl)},
-        function (data) {
-            logueadoCorrectamente = data;
-            compruebaSiLogueadoBien(logueadoCorrectamente, true);
-        });
+    $.post(constantsURLs.URL_SERVLET_SIGN_IN,
+            {user: user, claveHasheada: keyHash, complementoHasheado: complHash, claveComplemento: JSON.stringify(keyCompl)},
+            function (data) {
+                logueadoCorrectamente = data;
+                compruebaSiLogueadoBien(logueadoCorrectamente, true);
+            });
 }
