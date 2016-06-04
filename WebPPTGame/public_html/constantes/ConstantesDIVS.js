@@ -16,7 +16,7 @@ ConstantesDIVS=function(){
         IMAGE_PLAYER1:"p1",
         IMAGE_PLAYER2:"p2",
         IMG_RESULT_P1:"imgResultP1",
-        IMG_RESULT_P2:"imgResultP2",
+        IMG_RESULT_P2:"imgResultP2"
     }
 };
 //DIVS
