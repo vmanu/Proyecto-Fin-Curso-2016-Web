@@ -35,13 +35,6 @@ ConstantesJuego=function(){
         return constantsInputs;
     };
 };
-//GAMES
-var GAME3_RED="gameOf3red";
-var GAME3_BLUE="gameOf3blue";
-var GAME5_RED="gameOf5red";
-var GAME5_BLUE="gameOf5blue";
-var GAME9_RED="gameOf9red";
-var GAME9_BLUE="gameOf9blue";
 
 //OPTIONS
 var PIEDRA3="PIEDRA3";
