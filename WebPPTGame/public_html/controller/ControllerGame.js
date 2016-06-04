@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var datos, mapFichas, mapFichasMaquina, opc, modo, online, player, clave, complemento, keyCompl;
+var datos, mapFichas, mapFichasMaquina, opc, modo, online, player, clave, complemento, keyCompl, constants;
 
 $(document).ready(function () {
     clave = "";
@@ -16,7 +16,8 @@ $(document).ready(function () {
     mapFichas = datos.inicializaMapFichas();
     mapFichasMaquina = datos.inicializaMapFichasMaquina();
     localStorage.setItem(DATOS, datos);
-    $("#" + IMAGE_PLAYER2).attr(SRC, IMAGE_BLANK);
+    $("#" + IMAGE_PLAYER2).attr(constants.SRC, IMAGE_BLANK);
+    constants = new ConstantesJSyCSS().getConstants();
 });
 /**
  * Método que quita la visibilidad de ciertos elementos del juego, poniendo visible el pasado por parámetro para su visualización en el navegador.
@@ -29,28 +30,32 @@ function cambiaVista(divId) {
         online = true;
         if (divId == DIV_SCORES) {
             getScores(BY_VICTORIES);
+        } else {
+            if (divId == LOGIN_SCREEN) {
+                getKeysFromServlet();
+            }
         }
     }
-    document.getElementById(DIV_MENU_PPAL).style.display = NONE;
+    document.getElementById(DIV_MENU_PPAL).style.display = constants.NONE;
     //document.getElementById('playLocal').style.display = NONE;
-    document.getElementById(DIV_PLAY_ONLINE).style.display = NONE;
-    document.getElementById(DIV_RULES).style.display = NONE;
-    document.getElementById(DIV_RULES_GRAPHIC).style.display = NONE;
-    document.getElementById(DIV_INFO_DEVELOPERS).style.display = NONE;
-    document.getElementById(DIV_LOCAL_MENU_JUEGO).style.display = NONE;
-    document.getElementById(DIV_ONLINE_MENU).style.display = NONE;
-    document.getElementById(DIV_ONLINE_MENU_JUEGO).style.display = NONE;
-    document.getElementById(HEADER_GAME).style.display = NONE;
-    document.getElementById(GAME3_RED).style.display = NONE;
-    document.getElementById(GAME3_BLUE).style.display = NONE;
-    document.getElementById(GAME5_RED).style.display = NONE;
-    document.getElementById(GAME5_BLUE).style.display = NONE;
-    document.getElementById(GAME9_RED).style.display = NONE;
-    document.getElementById(GAME9_BLUE).style.display = NONE;
-    document.getElementById(VISTA_RESULT).style.display = NONE;
-    document.getElementById(DIV_SCORES).style.display = NONE;
-    document.getElementById(LOGIN_SCREEN).style.display = NONE;
-    document.getElementById(divId).style.display = BLOCK;
+    document.getElementById(DIV_PLAY_ONLINE).style.display = constants.NONE;
+    document.getElementById(DIV_RULES).style.display = constants.NONE;
+    document.getElementById(DIV_RULES_GRAPHIC).style.display = constants.NONE;
+    document.getElementById(DIV_INFO_DEVELOPERS).style.display = constants.NONE;
+    document.getElementById(DIV_LOCAL_MENU_JUEGO).style.display = constants.NONE;
+    document.getElementById(DIV_ONLINE_MENU).style.display = constants.NONE;
+    document.getElementById(DIV_ONLINE_MENU_JUEGO).style.display = constants.NONE;
+    document.getElementById(HEADER_GAME).style.display = constants.NONE;
+    document.getElementById(GAME3_RED).style.display = constants.NONE;
+    document.getElementById(GAME3_BLUE).style.display = constants.NONE;
+    document.getElementById(GAME5_RED).style.display = constants.NONE;
+    document.getElementById(GAME5_BLUE).style.display = constants.NONE;
+    document.getElementById(GAME9_RED).style.display = constants.NONE;
+    document.getElementById(GAME9_BLUE).style.display = constants.NONE;
+    document.getElementById(VISTA_RESULT).style.display = constants.NONE;
+    document.getElementById(DIV_SCORES).style.display = constants.NONE;
+    document.getElementById(LOGIN_SCREEN).style.display = constants.NONE;
+    document.getElementById(divId).style.display = constants.BLOCK;
     $("#" + NAME_PLAYER1).attr(PLACEHOLDER, language[userLang].player1);
     $("#" + NAME_PLAYER2).attr(PLACEHOLDER, language[userLang].player2);
     $("#" + CUSTOMED_ROUNDS).attr(PLACEHOLDER, language[userLang].numberOfRounds);
@@ -61,14 +66,14 @@ function cambiaVista(divId) {
  * @param {type} element Elemento de entrada de texto que aparecerá en la pantalla.
  */
 function visibleElement(element) {
-    document.getElementById(element).style.display = INLINE;
+    document.getElementById(element).style.display = constants.INLINE;
 }
 /**
  * Método que hace desaparecer un elemento, concretamente un <input> de tipo 'text', sobre una pantalla ya cargada y visible.
  * @param {type} element Elemento de entrada de texto que deaparecerá de la pantalla.
  */
 function invisibleElement(element) {
-    document.getElementById(element).style.display = NONE;
+    document.getElementById(element).style.display = constants.NONE;
 }
 /**
  * Método que gestiona el cambio de pantalla del formulario de configuración de la partida en modo local a la pantalla del juego.
@@ -76,7 +81,7 @@ function invisibleElement(element) {
  * en función de la configuración elegida.
  */
 function cambiaVistaJuego() {
-    if (($("#" + NAME_PLAYER1).val() == "" || $("#" + NAME_PLAYER1).val() == UNDEFINED) || (dosJugadores == true && (($("#" + NAME_PLAYER1).val() == "" || $("#" + NAME_PLAYER1).val() == UNDEFINED) || ($("#" + NAME_PLAYER2).val() == "" || $("#" + NAME_PLAYER2).val() == UNDEFINED)))) {
+    if (($("#" + NAME_PLAYER1).val() == "" || $("#" + NAME_PLAYER1).val() == constants.UNDEFINED) || (dosJugadores == true && (($("#" + NAME_PLAYER1).val() == "" || $("#" + NAME_PLAYER1).val() == constants.UNDEFINED) || ($("#" + NAME_PLAYER2).val() == "" || $("#" + NAME_PLAYER2).val() == constants.UNDEFINED)))) {
         alert(language[userLang].fillTheFields);
     } else {
         var dosJugadores = false;
@@ -94,25 +99,25 @@ function cambiaVistaJuego() {
         datos.setNombreJ1($("#" + NAME_PLAYER1).val());
         if (document.getElementById(GAME3).checked == true) {
             localStorage.setItem(RB_JUEGO, GAME3);
-            document.getElementById(GAME3_RED).style.display = BLOCK;
+            document.getElementById(GAME3_RED).style.display = constants.BLOCK;
             datos.setFactorAlgoritmo(1);
             modo = 3;
         } else {
             if (document.getElementById(GAME5).checked == true) {
                 localStorage.setItem(RB_JUEGO, GAME5);
-                document.getElementById(GAME5_RED).style.display = BLOCK;
+                document.getElementById(GAME5_RED).style.display = constants.BLOCK;
                 datos.setFactorAlgoritmo(2);
                 modo = 5;
             } else {
                 localStorage.setItem(RB_JUEGO, GAME9);
-                document.getElementById(GAME9_RED).style.display = BLOCK;
+                document.getElementById(GAME9_RED).style.display = constants.BLOCK;
                 datos.setFactorAlgoritmo(4);
                 modo = 9;
             }
         }
         setLimiteRondas();
         datos.setTurno(true);
-        $("#" + IMAGE_PLAYER1).attr(SRC, IMAGE_HELP_ROJO);
+        $("#" + IMAGE_PLAYER1).attr(constants.SRC, IMAGE_HELP_ROJO);
         showToastRed();
     }
 }
@@ -152,7 +157,7 @@ function gestionaJuego(window, opClicked, imgId) {
     //alert(datos.getModalidadJuego().ordinal);
     var mmsg = null;
     modalidad = new ModalidadJuego().getModalidad();
-    if (document.getElementById(window).style.display == BLOCK) {
+    if (document.getElementById(window).style.display == constants.BLOCK) {
         opc = mapFichas[opClicked];
         //alert(datos.isTurno()+" - - - "+opc);
         if (datos.isTurno() == true && opc != null) {
@@ -185,8 +190,8 @@ function gestionaJuego(window, opClicked, imgId) {
                     opcionJuego.opcion = (datos.getEnumChosen1().ordinal);
                     //alert(datos.getEnumChosen2());
                     if (datos.getEnumChosen2() != null) {
-                        //$("#imgResultP2").attr(SRC, document.getElementById(datos.getIdImgPulsada2()).src);
-                        $("#" + IMG_RESULT_P2).attr(SRC, $("#" + datos.getIdImgPulsada2()).attr(SRC));
+                        //$("#imgResultP2").attr(constants.SRC, document.getElementById(datos.getIdImgPulsada2()).src);
+                        $("#" + IMG_RESULT_P2).attr(constants.SRC, $("#" + datos.getIdImgPulsada2()).attr(constants.SRC));
                         comunEvaluacionGanador();
                     }
                     mmsg.content = (opcionJuego);
@@ -211,15 +216,15 @@ function gestionaJuego(window, opClicked, imgId) {
  */
 function comunEvaluacionGanador() {
     //alert("EVALUACION GANADOR");
-//    $("#imgResultP1").attr(SRC, document.getElementById(datos.getIdImgPulsada1()).src);
-//    $("#imgResultP2").attr(SRC, document.getElementById(datos.getIdImgPulsada2()).src);
+//    $("#imgResultP1").attr(constants.SRC, document.getElementById(datos.getIdImgPulsada1()).src);
+//    $("#imgResultP2").attr(constants.SRC, document.getElementById(datos.getIdImgPulsada2()).src);
     //alert("id 1: " + datos.getIdImgPulsada1() + " --- id 2: " + datos.getIdImgPulsada2());
-    //alert("ruta 1: "+$("#"+datos.getIdImgPulsada1()).attr(SRC)+" --- ruta 2: "+$("#"+datos.getIdImgPulsada2()).attr(SRC));
-    $("#" + IMG_RESULT_P1).attr(SRC, $("#" + datos.getIdImgPulsada1()).attr(SRC));
+    //alert("ruta 1: "+$("#"+datos.getIdImgPulsada1()).attr(constants.SRC)+" --- ruta 2: "+$("#"+datos.getIdImgPulsada2()).attr(constants.SRC));
+    $("#" + IMG_RESULT_P1).attr(constants.SRC, $("#" + datos.getIdImgPulsada1()).attr(constants.SRC));
     if (datos.getModalidadJuego().ordinal == modalidad.DOS.ordinal) {
-        $("#" + IMG_RESULT_P2).attr(SRC, $("#" + datos.getIdImgPulsada2()).attr(SRC));
+        $("#" + IMG_RESULT_P2).attr(constants.SRC, $("#" + datos.getIdImgPulsada2()).attr(constants.SRC));
     } else {
-        $("#" + IMG_RESULT_P2).attr(SRC, $("#" + datos.getIdImgPulsada2() + modo).attr(SRC));
+        $("#" + IMG_RESULT_P2).attr(constants.SRC, $("#" + datos.getIdImgPulsada2() + modo).attr(constants.SRC));
     }
     switch (logicaJuego()) {
         case 0:
@@ -255,7 +260,7 @@ function logicaJuego() {
         datos.avanzaRonda();
         //alert(datos.getRoundsCounter());
         if (datos.rondasFinalizadas() == true) {
-            $("#" + NEXT_BTN).prop(DISABLED, true);
+            $("#" + NEXT_BTN).prop(constants.DISABLED, true);
         }
         for (var j = ((datos.getEnumChosen2().ordinal + 1) % ((datos.getFactorAlgoritmo() * 2) + 1)), i = 0; i < (datos.getFactorAlgoritmo()) && !ganaChosen; i++, j = ((j + 1) % ((datos.getFactorAlgoritmo() * 2) + 1))) {
             if (datos.getEnumChosen1().ordinal == j) {
@@ -334,15 +339,15 @@ function gestionaPulsadoMaquina() {
  * en color azul cuando el turno sea del jugador 2.
  */
 function turnoAzul() {
-    $("#" + IMAGE_PLAYER1).attr(SRC, IMAGE_BLANK);
-    $("#" + IMAGE_PLAYER2).attr(SRC, IMAGE_HELP_AZUL);
+    $("#" + IMAGE_PLAYER1).attr(constants.SRC, IMAGE_BLANK);
+    $("#" + IMAGE_PLAYER2).attr(constants.SRC, IMAGE_HELP_AZUL);
     if (document.getElementById(GAME3).checked == true) {
-        document.getElementById(GAME3_BLUE).style.display = BLOCK;
+        document.getElementById(GAME3_BLUE).style.display = constants.BLOCK;
     } else {
         if (document.getElementById(GAME5).checked == true) {
-            document.getElementById(GAME5_BLUE).style.display = BLOCK;
+            document.getElementById(GAME5_BLUE).style.display = constants.BLOCK;
         } else {
-            document.getElementById(GAME9_BLUE).style.display = BLOCK;
+            document.getElementById(GAME9_BLUE).style.display = constants.BLOCK;
         }
     }
 }
@@ -353,7 +358,7 @@ function backFromPlayScreen() {
     //alert();
     datos.setVictoriesP1(0);
     datos.setVictoriesP2(0);
-    $("#" + NEXT_BTN).prop(DISABLED, false);
+    $("#" + NEXT_BTN).prop(constants.DISABLED, false);
     datos.setRoundsCounter(0);
     if (datos.getModalidadJuego().ordinal == new ModalidadJuego().getModalidad().ONLINE.ordinal && websocket != null) {
         websocket.close();
@@ -366,19 +371,19 @@ function backFromPlayScreen() {
  */
 function showToastRed() {
     if (userLang != SPANISH) {
-        $(CLASE_TOAST).text(datos.getNombreJ1() + language[userLang].turnOf).css(BACKGROUND_COLOR, RED).fadeIn(500).delay(1200).fadeOut(550);
+        $(constants.CLASE_TOAST).text(datos.getNombreJ1() + language[userLang].turnOf).css(constants.BACKGROUND_COLOR, constants.RED).fadeIn(500).delay(1200).fadeOut(550);
     } else {
-        $(CLASE_TOAST).text(language[userLang].turnOf + datos.getNombreJ1()).css(BACKGROUND_COLOR, RED).fadeIn(500).delay(1200).fadeOut(550);
+        $(constants.CLASE_TOAST).text(language[userLang].turnOf + datos.getNombreJ1()).css(constants.BACKGROUND_COLOR, constants.RED).fadeIn(500).delay(1200).fadeOut(550);
     }
 }
-/**
+/**º
  * Método encargado de sacar una notificación emergente informando del turno del jugador 2 (color azul).
  */
 function showToastBlue() {
     if (userLang != SPANISH) {
-        $(CLASE_TOAST).text(datos.getNombreJ1() + language[userLang].turnOf).css(BACKGROUND_COLOR, BLUE).fadeIn(500).delay(1200).fadeOut(550);
+        $(constants.CLASE_TOAST).text(datos.getNombreJ1() + language[userLang].turnOf).css(constants.BACKGROUND_COLOR, constants.BLUE).fadeIn(500).delay(1200).fadeOut(550);
     } else {
-        $(CLASE_TOAST).text(language[userLang].turnOf + datos.getNombreJ1()).css(BACKGROUND_COLOR, BLUE).fadeIn(500).delay(1200).fadeOut(550);
+        $(constants.CLASE_TOAST).text(language[userLang].turnOf + datos.getNombreJ1()).css(constants.BACKGROUND_COLOR, constants.BLUE).fadeIn(500).delay(1200).fadeOut(550);
     }
 }
 /**
@@ -406,20 +411,20 @@ function cambiaVistaJuegoOnline() {
     datos.setJugando(true);
     if (document.getElementById(GAME3_ONL).checked == true) {
         localStorage.setItem(RB_JUEGO_ONL, GAME3_ONL);
-        document.getElementById(GAME3_RED).style.display = BLOCK;
+        document.getElementById(GAME3_RED).style.display = constants.BLOCK;
         datos.setFactorAlgoritmo(1);
         player.tipoJuego = (new GameType().getGameType().JUEGO3.name);
         modo = 3;
     } else {
         if (document.getElementById(GAME5_ONL).checked == true) {
             localStorage.setItem(RB_JUEGO_ONL, GAME5_ONL);
-            document.getElementById(GAME5_RED).style.display = BLOCK;
+            document.getElementById(GAME5_RED).style.display = constants.BLOCK;
             datos.setFactorAlgoritmo(2);
             player.tipoJuego = (new GameType().getGameType().JUEGO5.name);
             modo = 5;
         } else {
             localStorage.setItem(RB_JUEGO_ONL, GAME9_ONL);
-            document.getElementById(GAME9_ONL).style.display = BLOCK;
+            document.getElementById(GAME9_ONL).style.display = constants.BLOCK;
             datos.setFactorAlgoritmo(4);
             player.tipoJuego = (new GameType().getGameType().JUEGO9.name);
             modo = 9;
@@ -514,8 +519,8 @@ function getScores(selectedOption) {
 function getKeysFromServlet() {
     if (clave == "") {
         $.ajax({
-            type: POST,
-            url: URL_GET_KEYS
+            type: constants.POST,
+            url: "http://localhost:8080/ServerPPTGame/seguridad"
         }).done(function (data) {
             //alert(data);
             console.debug("DATA", data);
@@ -608,9 +613,9 @@ function logOut() {
 
 function addVictories(victories) {
     $.post(URL_SERVLET_SIGN_IN,
-            {user: user, claveHasheada: keyHash, complementoHasheado: complHash, claveComplemento: JSON.stringify(keyCompl)},
-            function (data) {
-                logueadoCorrectamente = data;
-                compruebaSiLogueadoBien(logueadoCorrectamente, true);
-            });
+        {user: user, claveHasheada: keyHash, complementoHasheado: complHash, claveComplemento: JSON.stringify(keyCompl)},
+        function (data) {
+            logueadoCorrectamente = data;
+            compruebaSiLogueadoBien(logueadoCorrectamente, true);
+        });
 }

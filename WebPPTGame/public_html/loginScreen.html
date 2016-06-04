@@ -7,31 +7,26 @@ and open the template in the editor.
 <html>
     <head>
         <title>Login</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-        <script src="model/EnumFichas3.js" type="text/javascript"></script>
-        <script src="model/EnumFichas5.js" type="text/javascript"></script>
-        <script src="model/EnumFichas9.js" type="text/javascript"></script>
-        <script src="model/DataContainer.js" type="text/javascript"></script>
-        <script src="controller/ControllerGame.js" type="text/javascript"></script>
-        <script src="model/ModalidadJuego.js" type="text/javascript"></script>
-        <script src="model/User.js" type="text/javascript"></script>
+        
         <script>
             var click;
             $(document).ready(function () {
                 //console.debug("keySession",sessionStorage.getItem("keySession"));
                 //console.debug("keysComplements LOGINSCREEN",sessionStorage.getItem("keysComplements"));
-                $("#"+DIV_CONFIRMAR_PASS).attr(HIDDEN, true);
+                $("#"+DIV_CONFIRMAR_PASS).attr(constants.HIDDEN, true);
+                //alert(DIV_CONFIRMAR_PASS);
                 click=false;
-                getKeysFromServlet();
+                //getKeysFromServlet();
             });
+            
             function removejscssfile(filename, filetype) {
-                var targetelement = (filetype == JS) ? SCRIPT : (filetype == CSS) ? LINK : NONE; //determine element type to create nodelist from
-                var targetattr = (filetype == JS) ? SRC : (filetype == CSS) ? HREF : NONE; //determine corresponding attribute to test for
+                var targetelement = (filetype == constants.JS) ? SCRIPT : (filetype == constants.CSS) ? constants.LINK : constants.NONE; //determine element type to create nodelist from
+                var targetattr = (filetype == constants.JS) ? SRC : (filetype == constants.CSS) ? constants.HREF : constants.NONE; //determine corresponding attribute to test for
                 var allsuspects = document.getElementsByTagName(targetelement);
                 for (var i = allsuspects.length; i >= 0; i--) { //search backwards within nodelist for matching elements to remove
                     if (allsuspects[i] && allsuspects[i].getAttribute(targetattr) != null && allsuspects[i].getAttribute(targetattr).indexOf(filename) != -1)
@@ -40,8 +35,8 @@ and open the template in the editor.
             }
 
             function removeMaterializeImports() {
-                removejscssfile(SCRIPT_MATERIALIZE_JS, JS);
-                removejscssfile(SCRIPT_MATERIALIZE_CSS, CSS);
+                removejscssfile(constants.SCRIPT_MATERIALIZE_JS, constants.JS);
+                removejscssfile(constants.SCRIPT_MATERIALIZE_CSS, constants.CSS);
             }
 
             function signUp() {
@@ -50,17 +45,16 @@ and open the template in the editor.
                     //SIGN UP
                     $("#"+SIGN_IN_BTN).text(language[userLang].signUp);
                     $("#"+SIGN_UP_BTN).text(language[userLang].signIn);
-                    $("#"+DIV_CONFIRMAR_PASS).removeAttr(HIDDEN);
+                    $("#"+DIV_CONFIRMAR_PASS).removeAttr(constants.HIDDEN);
                     click=true;
                 }else{
                     //SIGN IN
                     $("#"+SIGN_IN_BTN).text(language[userLang].signIn);
                     $("#"+SIGN_UP_BTN).text(language[userLang].signUp);
-                    $("#"+DIV_CONFIRMAR_PASS).attr(HIDDEN,true);
+                    $("#"+DIV_CONFIRMAR_PASS).attr(constants.HIDDEN,true);
                     click=false;
                 }
                 //console.debug("click en signup",click);
-
             }
         </script>
     </head>
@@ -70,13 +64,13 @@ and open the template in the editor.
             <div class="col s4" style="text-align: center; border: 20px solid deepskyblue; border-radius: 20px">
                 <form>
                     <h2 class="center-align">
-                        <script>document.write(language[userLang].login);</script>
+                        <script>document.write(language[userLang].login);alert(1);</script>
                     </h2>
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="login" type="text" class="validate" style="font-size: 24px; text-align: center">
                             <label for="login">
-                                <script>document.write(language[userLang].userId);</script>
+                                <script>document.write(language[userLang].userId);alert(2);</script>
                             </label>
                         </div>
                     </div>
@@ -84,7 +78,7 @@ and open the template in the editor.
                         <div class="input-field col s12">
                             <input id="password" type="password" class="validate" style="font-size: 24px; text-align: center">
                             <label for="password">
-                                <script>document.write(language[userLang].pass);</script>
+                                <script>document.write(language[userLang].pass);alert(3);</script>
                             </label>
                         </div>
                     </div>
@@ -92,23 +86,23 @@ and open the template in the editor.
                         <div class="input-field col s12">
                             <input id="confirmPass" type="password" class="validate" style="font-size: 24px; text-align: center">
                             <label for="confirmPass">
-                                <script>document.write(language[userLang].confirmPass);</script>
+                                <script>document.write(language[userLang].confirmPass);alert(4);</script>
                             </label>
                         </div>
                     </div>
-                    <div id="signUp" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="signUp()" onmouseover="$('#'+SIGN_UP_BTN).css(CURSOR, POINTER)">
-                        <script>document.write(language[userLang].signUp);</script>
+                    <div id="signUp" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="signUp()" onmouseover="$('#'+SIGN_UP_BTN).css(constants.CURSOR, constants.POINTER)">
+                        <script>document.write(language[userLang].signUp);alert(5);</script>
                     </div>
                     <div class="row">
                         <div class="col m12">
                             <p class="right-align">
                                 <button class="btn btn-large waves-effect waves-light" type="button" name="signIn" style="background-color: dodgerblue" 
                                         onclick="cambiaVista(DIV_MENU_PPAL); removeMaterializeImports();">
-                                    <script>document.write(language[userLang].back);</script>
+                                    <script>document.write(language[userLang].back);alert(6);</script>
                                 </button>
                                 <button id="signIn" class="btn btn-large waves-effect waves-light" type="button" name="signIn" style="background-color: dodgerblue"
                                         onclick="doLogin();">
-                                    <script>document.write(language[userLang].signIn);</script>
+                                    <script>document.write(language[userLang].signIn);alert(7);</script>
                                 </button>
                             </p>
                         </div>

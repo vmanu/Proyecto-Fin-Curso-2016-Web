@@ -1,53 +1,40 @@
-//LANGUAGES
-var SPANISH="es";
-var ENGLISH="en";
-//CONTROLS HTML
-var RB_PLAYERS="rbPlayers";
-var RB_JUEGO="rbJuego";
-var RB_RONDAS="rbRondas";
-var RB_JUEGO_ONL="rbJuegoOnl";
-var RB_RONDAS_ONL="rbRondasOnl";
-var NAME_PLAYER1="nameOfPlayer1";
-var NAME_PLAYER2="nameOfPlayer2";
-var NAME_PLAYER_ONLINE="nameOfPlayerOnline";
-var ONE_PLAYER="onePlayer";
-var TWO_PLAYERS="twoPlayers";
-var ONE_ROUND="oneRound";
-var THREE_ROUNDS="threeRounds";
-var FIVE_ROUNDS="fiveRounds";
-var MORE_ROUNDS="moreRounds";
-var ONE_ROUND_ONL="oneRoundOnl";
-var THREE_ROUNDS_ONL="threeRoundsOnl";
-var FIVE_ROUNDS_ONL="fiveRoundsOnl";
-var CUSTOMED_ROUNDS="customedRounds";
-var LOGIN_INPUT_TEXT="login";
-var PASS_INPUT_TEXT="password";
-var CONFIRM_PASS_INPUT_TEXT="confirmPass";
-var COMBO_SELECT_SCORES="selectScores";
-var LIST_SCORES="listPlayers";
-//DIVS
-var DIV_MENU_PPAL="initialButtons";
-var DIV_LOCAL_MENU_JUEGO="localGameMenu";
-var DIV_PLAY_ONLINE="playOnline";
-var DIV_RULES="rules";
-var DIV_RULES_GRAPHIC="graphicRules";
-var DIV_INFO_DEVELOPERS="infoDev";
-var DIV_SCORES="scores";
-var DIV_ONLINE_MENU="onlineGameMenu";
-var DIV_ONLINE_MENU_JUEGO="customedOnline";
-var HEADER_GAME="headerGame";
-var VISTA_RESULT="vistaResult";
-var LOGIN_SCREEN="loginScreen";
-var DIV_CONFIRMAR_PASS="divConfirmPassword";
-var IMAGE_PLAYER1="p1";
-var IMAGE_PLAYER2="p2";
-var IMG_RESULT_P1="imgResultP1";
-var IMG_RESULT_P2="imgResultP2";
-var DIV_RESULT_GAME="imgResultP2";
-var WON_COUNT_P1="wonCountP1";
-var WON_COUNT_P2="wonCountP2";
-var NAME_LOGGED_PLAYER="nameLoggedPlayer";
-var LOGGED_PLAYER="loggedPlayer";
+ConstantesJuego=function(){
+    var constantsInputs={
+        RB_PLAYERS:"rbPlayers",
+        RB_JUEGO:"rbJuego",
+        RB_RONDAS:"rbRondas",
+        RB_JUEGO_ONL:"rbJuegoOnl",
+        RB_RONDAS_ONL:"rbRondasOnl",
+        NAME_PLAYER1:"nameOfPlayer1",
+        NAME_PLAYER2:"nameOfPlayer2",
+        NAME_PLAYER_ONLINE:"nameOfPlayerOnline",
+        ONE_PLAYER:"onePlayer",
+        TWO_PLAYERS:"twoPlayers",
+        ONE_ROUND:"oneRound",
+        THREE_ROUNDS:"threeRounds",
+        FIVE_ROUNDS:"fiveRounds",
+        MORE_ROUNDS:"moreRounds",
+        ONE_ROUND_ONL:"oneRoundOnl",
+        THREE_ROUNDS_ONL:"threeRoundsOnl",
+        FIVE_ROUNDS_ONL:"fiveRounds",
+        CUSTOMED_ROUNDS:"customedRounds",
+        LOGIN_INPUT_TEXT:"login",
+        PASS_INPUT_TEXT:"password",
+        CONFIRM_PASS_INPUT_TEXT:"confirmPass",
+        COMBO_SELECT_SCORES:"selectScores",
+        LIST_SCORES:"listPlayers",
+        GAME3:"game3",
+        GAME5:"game5",
+        GAME9:"game9",
+        GAME3_ONL:"game3Onl",
+        GAME5_ONL:"game5Onl",
+        GAME9_ONL:"game9Onl"
+    };
+    
+    this.getConstantsInputs=function(){
+        return constantsInputs;
+    };
+};
 //GAMES
 var GAME3_RED="gameOf3red";
 var GAME3_BLUE="gameOf3blue";
@@ -55,12 +42,7 @@ var GAME5_RED="gameOf5red";
 var GAME5_BLUE="gameOf5blue";
 var GAME9_RED="gameOf9red";
 var GAME9_BLUE="gameOf9blue";
-var GAME3="game3";
-var GAME5="game5";
-var GAME9="game9";
-var GAME3_ONL="game3Onl";
-var GAME5_ONL="game5Onl";
-var GAME9_ONL="game9Onl";
+
 //OPTIONS
 var PIEDRA3="PIEDRA3";
 var PAPEL3="PAPEL3";
@@ -102,11 +84,9 @@ var IMAGE_BLANK="imagesPPTGame/blank.png";
 var IMAGE_HELP_ROJO="imagesPPTGame/helpsymbolrojo.png";
 var IMAGE_HELP_AZUL="imagesPPTGame/helpsymbolazul.png";
 //STYLES
-var CLASE_TOAST=".toast";
-var COLOR_ROJO="red";
-var COLOR_AZUL="blue";
+
 //URL SERVLETS
-var URL_GET_KEYS="http://192.168.1.104:8080/ServerPPTGame/seguridad";
+var URL_GET_KEYS="http://localhost:8080/ServerPPTGame/seguridad";
 var URL_GET_BY_ROUNDS="http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByRounds";
 var URL_GET_BY_VICTORIES="http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByVictories";
 var URL_GET_BY_AVERAGE="http://192.168.1.104:8080/ServerPPTGame/ServletDB?op=getByAverage";
@@ -124,4 +104,4 @@ var OP_CLAVES="claves";
 var OP_USER="user";
 var SI="SI";
 //VIEWS
-var HTML_LOGIN_SCREEN="loginScreen.html";
+var HTML_LOGIN_SCREEN='loginScreen.html';
