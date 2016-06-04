@@ -16,8 +16,8 @@ $(document).ready(function () {
     datos.setVictoriesP2(0);
     mapFichas = datos.inicializaMapFichas();
     mapFichasMaquina = datos.inicializaMapFichasMaquina();
-    localStorage.setItem(DATOS, datos);
-    $("#" + IMAGE_PLAYER2).attr(constantsJSCSS.SRC, IMAGE_BLANK);
+    localStorage.setItem(otherConstants.DATOS, datos);
+    $("#" + constantsDIVS.IMAGE_PLAYER2).attr(constantsJSCSS.SRC, otherConstants.IMAGE_BLANK);
 //    constantsJSCSS = new ConstantesJSyCSS().getConstantsJSCSS();
 //    constantsInputs = new ConstantesInputs().getConstantsInputs();
 //    constantsDIVS = new ConstantesDIVS().getConstantsDivs();
@@ -63,7 +63,7 @@ function cambiaVista(divId) {
     document.getElementById(divId).style.display = constantsJSCSS.BLOCK;
     $("#" + constantsInputs.NAME_PLAYER1).attr(constantsJSCSS.PLACEHOLDER, language[userLang].player1);
     $("#" + constantsInputs.NAME_PLAYER2).attr(constantsJSCSS.PLACEHOLDER, language[userLang].player2);
-    $("#" + CUSTOMED_ROUNDS).attr(constantsJSCSS.PLACEHOLDER, language[userLang].numberOfRounds);
+    $("#" + constantsInputs.CUSTOMED_ROUNDS).attr(constantsJSCSS.PLACEHOLDER, language[userLang].numberOfRounds);
     $("#" + constantsInputs.NAME_PLAYER_ONLINE).attr(constantsJSCSS.PLACEHOLDER, language[userLang].yourNameHere);
 }
 /**
@@ -606,7 +606,9 @@ function muestraPantallaLoginSiNoLogueado() {
             $("#" + constantsDIVS.LOGGED_PLAYER).text(logueado.nombre);
         }
     } else {
+        console.debug("html",otherConstants.HTML_LOGIN_SCREEN);
         $('#' + constantsDIVS.LOGIN_SCREEN).load(otherConstants.HTML_LOGIN_SCREEN);
+        console.debug("DIV LOGIN",constantsDIVS.LOGIN_SCREEN);
         cambiaVista(constantsDIVS.LOGIN_SCREEN);
     }
 }

@@ -1,4 +1,4 @@
-ConstantesJuego=function(){
+ConstantesInputs=function(){
     var constantsInputs={
         RB_PLAYERS:"rbPlayers",
         RB_JUEGO:"rbJuego",

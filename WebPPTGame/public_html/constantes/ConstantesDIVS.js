@@ -12,7 +12,7 @@ ConstantesDIVS=function(){
         HEADER_GAME:"headerGame",
         VISTA_RESULT:"vistaResult",
         LOGIN_SCREEN:"loginScreen",
-        DIV_CONFIRMAR_PASS:"divConfirmarPassword",
+        DIV_CONFIRMAR_PASS:"divConfirmPassword",
         IMAGE_PLAYER1:"p1",
         IMAGE_PLAYER2:"p2",
         IMG_RESULT_P1:"imgResultP1",

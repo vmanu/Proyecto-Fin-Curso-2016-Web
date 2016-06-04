@@ -20,9 +20,7 @@ ConstantesJSyCSS=function(){
         BACKGROUND_COLOR:"background-color",
         POST:"POST",
         RED:"red",
-        BLUE:"blue",
-        SPANISH:"es",
-        ENGLISH:"en"
+        BLUE:"blue"
     };
     
     this.getConstantsJSCSS=function(){

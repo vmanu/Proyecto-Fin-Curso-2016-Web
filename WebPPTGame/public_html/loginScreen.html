@@ -1,32 +1,44 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
         <title>Login</title>
         <meta charset="UTF-8">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="styles.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        -->
         <script>
             var click;
             $(document).ready(function () {
                 //console.debug("keySession",sessionStorage.getItem("keySession"));
                 //console.debug("keysComplements LOGINSCREEN",sessionStorage.getItem("keysComplements"));
-                $("#"+DIV_CONFIRMAR_PASS).attr(constants.HIDDEN, true);
+                console.debug("div confirm pass", constantsDIVS.DIV_CONFIRMAR_PASS);
+                $("#" + constantsDIVS.DIV_CONFIRMAR_PASS).attr(constantsJSCSS.HIDDEN, true);
+
                 //alert(DIV_CONFIRMAR_PASS);
-                click=false;
+                click = false;
+
                 //getKeysFromServlet();
             });
-            
+
+            var userLang = navigator.language || navigator.userLanguage;
+            console.debug("userLang", userLang);
+            if (userLang != "es") {
+                userLang = "en";
+            }
+            console.debug("userLang", userLang);
+            var language = new Language().getLang();
+
             function removejscssfile(filename, filetype) {
-                var targetelement = (filetype == constants.JS) ? SCRIPT : (filetype == constants.CSS) ? constants.LINK : constants.NONE; //determine element type to create nodelist from
-                var targetattr = (filetype == constants.JS) ? SRC : (filetype == constants.CSS) ? constants.HREF : constants.NONE; //determine corresponding attribute to test for
+                var targetelement = (filetype == constantsJSCSS.JS) ? constantsJSCSS.SCRIPT : (filetype == constantsJSCSS.CSS) ? constantsJSCSS.LINK : constantsJSCSS.NONE; //determine element type to create nodelist from
+                var targetattr = (filetype == constantsJSCSS.JS) ? constantsJSCSS.SRC : (filetype == constantsJSCSS.CSS) ? constantsJSCSS.HREF : constantsJSCSS.NONE; //determine corresponding attribute to test for
                 var allsuspects = document.getElementsByTagName(targetelement);
                 for (var i = allsuspects.length; i >= 0; i--) { //search backwards within nodelist for matching elements to remove
                     if (allsuspects[i] && allsuspects[i].getAttribute(targetattr) != null && allsuspects[i].getAttribute(targetattr).indexOf(filename) != -1)
@@ -35,24 +47,24 @@ and open the template in the editor.
             }
 
             function removeMaterializeImports() {
-                removejscssfile(constants.SCRIPT_MATERIALIZE_JS, constants.JS);
-                removejscssfile(constants.SCRIPT_MATERIALIZE_CSS, constants.CSS);
+                removejscssfile(constantsJSCSS.SCRIPT_MATERIALIZE_JS, constantsJSCSS.JS);
+                removejscssfile(constantsJSCSS.SCRIPT_MATERIALIZE_CSS, constantsJSCSS.CSS);
             }
 
             function signUp() {
-                
+
                 if (click == false) {
                     //SIGN UP
-                    $("#"+SIGN_IN_BTN).text(language[userLang].signUp);
-                    $("#"+SIGN_UP_BTN).text(language[userLang].signIn);
-                    $("#"+DIV_CONFIRMAR_PASS).removeAttr(constants.HIDDEN);
-                    click=true;
-                }else{
+                    $("#" + constantsInputs.SIGN_IN_BTN).text(language[userLang].signUp);
+                    $("#" + constantsInputs.SIGN_UP_BTN).text(language[userLang].signIn);
+                    $("#" + constantsDIVS.DIV_CONFIRMAR_PASS).removeAttr(constantsJSCSS.HIDDEN);
+                    click = true;
+                } else {
                     //SIGN IN
-                    $("#"+SIGN_IN_BTN).text(language[userLang].signIn);
-                    $("#"+SIGN_UP_BTN).text(language[userLang].signUp);
-                    $("#"+DIV_CONFIRMAR_PASS).attr(constants.HIDDEN,true);
-                    click=false;
+                    $("#" + constantsInputs.SIGN_IN_BTN).text(language[userLang].signIn);
+                    $("#" + constantsInputs.SIGN_UP_BTN).text(language[userLang].signUp);
+                    $("#" + constantsDIVS.DIV_CONFIRMAR_PASS).attr(constantsJSCSS.HIDDEN, true);
+                    click = false;
                 }
                 //console.debug("click en signup",click);
             }
@@ -63,46 +75,46 @@ and open the template in the editor.
             <div class="col s4">&nbsp</div>
             <div class="col s4" style="text-align: center; border: 20px solid deepskyblue; border-radius: 20px">
                 <form>
-                    <h2 class="center-align">
-                        <script>document.write(language[userLang].login);alert(1);</script>
+                    <h2 class="center-align" id="loginTitle">
                     </h2>
+
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="login" type="text" class="validate" style="font-size: 24px; text-align: center">
-                            <label for="login">
-                                <script>document.write(language[userLang].userId);alert(2);</script>
+                            <label for="login" id="loginText">
+
                             </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="password" type="password" class="validate" style="font-size: 24px; text-align: center">
-                            <label for="password">
-                                <script>document.write(language[userLang].pass);alert(3);</script>
+                            <label for="password" id="passwordText">
+
                             </label>
                         </div>
                     </div>
                     <div class="row" id="divConfirmPassword" hidden>
                         <div class="input-field col s12">
                             <input id="confirmPass" type="password" class="validate" style="font-size: 24px; text-align: center">
-                            <label for="confirmPass">
-                                <script>document.write(language[userLang].confirmPass);alert(4);</script>
+                            <label for="confirmPass" id="confirmPassText">
+
                             </label>
                         </div>
                     </div>
-                    <div id="signUp" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="signUp()" onmouseover="$('#'+SIGN_UP_BTN).css(constants.CURSOR, constants.POINTER)">
-                        <script>document.write(language[userLang].signUp);alert(5);</script>
+                    <div id="signUp" style="float:left; color: blue; text-decoration: underline; margin-left: 15px" onclick="signUp()" onmouseover="$('#' + constantsInputs.SIGN_UP_BTN).css(constantsJSCSS.CURSOR, constantsJSCSS.POINTER)">
+
                     </div>
                     <div class="row">
                         <div class="col m12">
                             <p class="right-align">
-                                <button class="btn btn-large waves-effect waves-light" type="button" name="signIn" style="background-color: dodgerblue" 
-                                        onclick="cambiaVista(DIV_MENU_PPAL); removeMaterializeImports();">
-                                    <script>document.write(language[userLang].back);alert(6);</script>
+                                <button id="backBtn" class="btn btn-large waves-effect waves-light" type="button" style="background-color: dodgerblue" 
+                                        onclick="cambiaVista(constantsDIVS.DIV_MENU_PPAL); removeMaterializeImports();">
+
                                 </button>
                                 <button id="signIn" class="btn btn-large waves-effect waves-light" type="button" name="signIn" style="background-color: dodgerblue"
                                         onclick="doLogin();">
-                                    <script>document.write(language[userLang].signIn);alert(7);</script>
+
                                 </button>
                             </p>
                         </div>
@@ -110,6 +122,17 @@ and open the template in the editor.
                 </form>
             </div>
             <div class="col s4" style="text-align: right">&nbsp</div>
+            <script>
+                console.debug("language en login", language[userLang].login);
+                $("#loginTitle").text(language[userLang].login);
+                $("#signIn").text(language[userLang].signIn);
+                $("#backBtn").text(language[userLang].back);
+                $("#signUp").text(language[userLang].signUp);
+                $("#confirmPassText").text(language[userLang].confirmPass);
+                $("#passwordText").text(language[userLang].pass);
+                $("#loginText").text(language[userLang].userId);
+            </script>
+
         </div>
     </body>
 </html>
