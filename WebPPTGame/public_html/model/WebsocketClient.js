@@ -63,12 +63,19 @@ function onMessage(evt) {
         opcJuego = JSON.parse(JSON.stringify(metamsg.content));
         console.debug("opc jueego: ", opcJuego);
         if (opcJuego != null) {
+            var chosen2null=datos.getEnumChosen2()==null;
             datos.setEnumChosen2(getEnumFromOrdinal(opcJuego.opcion));
             datos.setIdImgPulsada2(gestionaPulsadoMaquina() + localStorage.getItem("modo"));
             console.log("chosen1; " + datos.getEnumChosen1());
             if (datos.getEnumChosen1() != null) {
                 $("#imgResultP2").attr("src", $("#" + datos.getIdImgPulsada2()).attr("src"));
                 comunEvaluacionGanador();
+            }else{
+                if(chosen2null){
+                    ///////////////////////
+                    cambiaSegundoMensaje();
+                    ///////////////////////
+                }
             }
         }
     } else {
@@ -78,7 +85,17 @@ function onMessage(evt) {
             //websocket.onclose(evt);
             //websocket.close();
         } else {
-            datos.setNombreJ2(JSON.parse(JSON.stringify(metamsg.content)));
+            if((metamsg != null && metamsg.type == new TypeMessage().getTypeMessage().NOMBRE.name)){
+                datos.setNombreJ2(JSON.parse(JSON.stringify(metamsg.content)));
+            }else{
+                if(metamsg!=null){
+                    var player=JSON.parse(JSON.stringify(metamsg.content));
+                    datos.setFactorAlgoritmo(player.tipoJuego==new GameType().getGameType().JUEGO3.name?1:(player.tipoJuego==new GameType().getGameType().JUEGO5.name?2:4));
+                    datos.setRoundsLimit(player.numberOfRounds==new RoundsNumber().getRoundsNumber().UNA.name?1:(player.numberOfRounds==new RoundsNumber().getRoundsNumber().TRES.name?3:5));
+                    datos.setModalidadJuego(new ModalidadJuego().getModalidad().ONLINE.ordinal);
+                    datos.setTurno(true);
+                }
+            }
         }
 
     }

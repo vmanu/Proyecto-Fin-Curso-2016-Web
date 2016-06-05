@@ -472,13 +472,14 @@ function setLimiteRondasOnline() {
  */
 function randomGame() {
     var metamsg = new MetaMessage();
-    var p = new Player();
-    p.setPlaying(false);
-    p.setRoundsNumber(new RoundsNumber().getRoundsNumber().ANY);
-    p.setGameType(new GameType().getGameType().ANY);
-    p.setNumPartidas(datos.getNombreJ1());
+    var p = new Player().getPlayer();
+    p.namePlayer=datos.getNombreJ1();
+    p.numberOfRounds=new RoundsNumber().getRoundsNumber().ANY.name;
+    p.tipoJuego=new GameType().getGameType().ANY.name;
+    p.numPartidas=0;
+    p.playing=false;
     metamsg.setContent(p);
-    metamsg.setTypeMessage(new TypeMessage().getTypeMessage().CONEXION);
+    metamsg.setTypeMessage(new TypeMessage().getTypeMessage().CONEXION.name);
     websocket.send(metamsg);
 }
 
