@@ -27,7 +27,8 @@ ConstantesDIVS=function(){
         GAME5_RED:"gameOf5red",
         GAME5_BLUE:"gameOf5blue",
         GAME9_RED:"gameOf9red",
-        GAME9_BLUE:"gameOf9blue"
+        GAME9_BLUE:"gameOf9blue",
+        DIV_SEARCHING_PLAYER:"searchingPlayer"
     };
     
     this.getConstantsDivs=function(){

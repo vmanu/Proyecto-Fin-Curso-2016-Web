@@ -81,6 +81,9 @@ function onMessage(evt) {
         } else {
             if((metamsg != null && metamsg.type == new TypeMessage().getTypeMessage().NOMBRE.name)){
                 datos.setNombreJ2(JSON.parse(JSON.stringify(metamsg.content)));
+                cambiaVistaJuegoPorFactor();
+                //cambiaVistaJuegoOnline(false);
+                //localStorage.setItem("recibidoNombre",true);
             }else{
                 if(metamsg!=null){
                     var player=JSON.parse(JSON.stringify(metamsg.content));
@@ -90,11 +93,10 @@ function onMessage(evt) {
                     datos.setModalidadJuego(new ModalidadJuego().getModalidad().ONLINE);
                     console.debug("modalidad WS",datos.getModalidadJuego());
                     datos.setTurno(true);
-                    cambiaVistaJuegoRandom();
+                    cambiaVistaJuegoPorFactor();
                 }
             }
         }
-
     }
 //    }
 }

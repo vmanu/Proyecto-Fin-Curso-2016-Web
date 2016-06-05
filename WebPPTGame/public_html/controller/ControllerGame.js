@@ -60,6 +60,7 @@ function cambiaVista(divId) {
     document.getElementById(constantsDIVS.VISTA_RESULT).style.display = constantsJSCSS.NONE;
     document.getElementById(constantsDIVS.DIV_SCORES).style.display = constantsJSCSS.NONE;
     document.getElementById(constantsDIVS.LOGIN_SCREEN).style.display = constantsJSCSS.NONE;
+    document.getElementById(constantsDIVS.DIV_SEARCHING_PLAYER).style.display = constantsJSCSS.NONE;
     document.getElementById(divId).style.display = constantsJSCSS.BLOCK;
     $("#" + constantsInputs.NAME_PLAYER1).attr(constantsJSCSS.PLACEHOLDER, language[userLang].player1);
     $("#" + constantsInputs.NAME_PLAYER2).attr(constantsJSCSS.PLACEHOLDER, language[userLang].player2);
@@ -402,14 +403,13 @@ function showToastBlue() {
  * Se encarga de recoger los datos introducidos por el usuario en dicho formulario y mostrar la pantalla correspondiente
  * en función de la configuración elegida.
  */
-function cambiaVistaJuegoOnline(okey) {
+function asignaValoresJuegoOnline() {
     //if (id == "gameOnlineScreen") {
-    if (okey) {
         datos.setTurno(true);
         online = true;cambiaVista(constantsDIVS.HEADER_GAME);
         localStorage.setItem(otherConstants.ONLINE, online);
         datos.setModalidadJuego(new ModalidadJuego().getModalidad().ONLINE);
-        cambiaVista(constantsDIVS.HEADER_GAME);
+        //cambiaVista(constantsDIVS.HEADER_GAME);
         localStorage.setItem(constantsInputs.NAME_PLAYER_ONLINE, $("#" + constantsInputs.LOGIN_INPUT_TEXT).val());
         connect();
         var metamsg = new MetaMessage().getMetaMessage();
@@ -422,20 +422,20 @@ function cambiaVistaJuegoOnline(okey) {
         datos.setJugando(true);
         if (document.getElementById(constantsInputs.GAME3_ONL).checked == true) {
             localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME3_ONL);
-            document.getElementById(constantsDIVS.GAME3_RED).style.display = constantsJSCSS.BLOCK;
+            //document.getElementById(constantsDIVS.GAME3_RED).style.display = constantsJSCSS.BLOCK;
             datos.setFactorAlgoritmo(1);
             player.tipoJuego = (new GameType().getGameType().JUEGO3.name);
             modo = 3;
         } else {
             if (document.getElementById(constantsInputs.GAME5_ONL).checked == true) {
                 localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME5_ONL);
-                document.getElementById(constantsDIVS.GAME5_RED).style.display = constantsJSCSS.BLOCK;
+                //document.getElementById(constantsDIVS.GAME5_RED).style.display = constantsJSCSS.BLOCK;
                 datos.setFactorAlgoritmo(2);
                 player.tipoJuego = (new GameType().getGameType().JUEGO5.name);
                 modo = 5;
             } else {
                 localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME9_ONL);
-                document.getElementById(constantsInputs.GAME9_ONL).style.display = constantsJSCSS.BLOCK;
+                //document.getElementById(constantsInputs.GAME9_ONL).style.display = constantsJSCSS.BLOCK;
                 datos.setFactorAlgoritmo(4);
                 player.tipoJuego = (new GameType().getGameType().JUEGO9.name);
                 modo = 9;
@@ -450,9 +450,7 @@ function cambiaVistaJuegoOnline(okey) {
         waitForSocketConnection(websocket, function () {
             websocket.send(msgToSend);
         });
-    } else {
-        cambiaVistaJuegoRandom();
-    }
+        cambiaVista(constantsDIVS.DIV_SEARCHING_PLAYER);
 }
 
 /**
@@ -494,7 +492,7 @@ function randomGame() {
     waitForSocketConnection(websocket, function () {
         websocket.send(msgToSend);
     });
-
+    cambiaVista(constantsDIVS.DIV_SEARCHING_PLAYER);
 }
 
 function getScores(selectedOption) {
@@ -633,7 +631,7 @@ function logOut() {
     cambiaVista(constantsDIVS.DIV_MENU_PPAL);
 }
 
-function cambiaVistaJuegoRandom() {
+function cambiaVistaJuegoPorFactor() {
     datos.setModalidadJuego(new ModalidadJuego().getModalidad().ONLINE);
     cambiaVista(constantsDIVS.HEADER_GAME);
     if (datos.getFactorAlgoritmo() == 1) {
