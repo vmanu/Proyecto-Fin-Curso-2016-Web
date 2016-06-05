@@ -263,6 +263,8 @@ DataContainer = function(){
 //        if(roundsCounter==roundsLimit){
 //            fin=true;
 //        }
+console.debug("roundCounter en finalizadas",roundsCounter);
+console.debug("roundLimit en finalizadas",roundsLimit);
         return roundsCounter==roundsLimit;//fin;
     };
     /*

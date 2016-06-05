@@ -16,7 +16,7 @@ $(document).ready(function () {
     datos.setVictoriesP2(0);
     mapFichas = datos.inicializaMapFichas();
     mapFichasMaquina = datos.inicializaMapFichasMaquina();
-    localStorage.setItem(otherConstants.DATOS, datos);
+    //localStorage.setItem(otherConstants.DATOS, datos);
     $("#" + constantsDIVS.IMAGE_PLAYER2).attr(constantsJSCSS.SRC, otherConstants.IMAGE_BLANK);
 //    constantsJSCSS = new ConstantesJSyCSS().getConstantsJSCSS();
 //    constantsInputs = new ConstantesInputs().getConstantsInputs();
@@ -132,19 +132,19 @@ function cambiaVistaJuego() {
 function setLimiteRondas() {
     if (document.getElementById(constantsInputs.ONE_ROUND).checked) {
         datos.setRoundsLimit(1);
-        localStorage.setItem(RB_RONDAS, constantsInputs.ONE_ROUND);
+        localStorage.setItem(constantsInputs.RB_RONDAS, constantsInputs.ONE_ROUND);
     } else {
-        if (document.getElementById(THREE_ROUNDS).checked) {
+        if (document.getElementById(constantsInputs.THREE_ROUNDS).checked) {
             datos.setRoundsLimit(3);
-            localStorage.setItem(RB_RONDAS, THREE_ROUNDS);
+            localStorage.setItem(constantsInputs.RB_RONDAS, constantsInputs.THREE_ROUNDS);
         } else {
-            if (document.getElementById(FIVE_ROUNDS).checked) {
+            if (document.getElementById(constantsInputs.FIVE_ROUNDS).checked) {
                 datos.setRoundsLimit(5);
-                localStorage.setItem(RB_RONDAS, FIVE_ROUNDS);
+                localStorage.setItem(constantsInputs.RB_RONDAS, constantsInputs.FIVE_ROUNDS);
             } else {
-                datos.setRoundsLimit($("#" + CUSTOMED_ROUNDS).val());
-                localStorage.setItem(RB_RONDAS, MORE_ROUNDS);
-                localStorage.setItem(VALUE_RONDAS, $("#" + CUSTOMED_ROUNDS).val());
+                datos.setRoundsLimit($("#" + constantsInputs.CUSTOMED_ROUNDS).val());
+                localStorage.setItem(constantsInputs.RB_RONDAS, constantsInputs.MORE_ROUNDS);
+                localStorage.setItem(otherConstants.VALUE_RONDAS, $("#" + constantsInputs.CUSTOMED_ROUNDS).val());
             }
         }
     }
@@ -168,6 +168,7 @@ function gestionaJuego(window, opClicked, imgId) {
         if (datos.isTurno() == true && opc != null) {
             //alert("IS TURNO"+datos.isTurno());
             datos.setEnumChosen1(opc);
+            console.debug("opc1", datos.getEnumChosen1());
             datos.setIdImgPulsada1(imgId);
             if (datos.getModalidadJuego().ordinal == modalidad.DOS.ordinal) {
                 //DOS JUGADORES
@@ -262,7 +263,9 @@ function logicaJuego() {
         resultado = 0;
     } else {
         var ganaChosen = false;
+        console.debug("rondas antes", datos.getRoundsCounter());
         datos.avanzaRonda();
+        console.debug("rondas después", datos.getRoundsCounter());
         //alert(datos.getRoundsCounter());
         if (datos.rondasFinalizadas() == true) {
             $("#" + constantsInputs.NEXT_BTN).prop(constantsJSCSS.DISABLED, true);
@@ -322,8 +325,8 @@ function getEnumFromOrdinal(ordinal) {
  */
 function cambiarVistaAResult() {
     cambiaVista(constantsDIVS.VISTA_RESULT);
-    $("#" + WON_COUNT_P1).html(datos.getNombreJ1() + language[userLang].wonCount + datos.getVictoriesP1());
-    $("#" + WON_COUNT_P2).html(datos.getNombreJ2() + language[userLang].wonCount + datos.getVictoriesP2());
+    $("#" + constantsDIVS.WON_COUNT_P1).html(datos.getNombreJ1() + language[userLang].wonCount + datos.getVictoriesP1());
+    $("#" + constantsDIVS.WON_COUNT_P2).html(datos.getNombreJ2() + language[userLang].wonCount + datos.getVictoriesP2());
     datos.setEnumChosen1(null);
     datos.setEnumChosen2(null);
     datos.setJugando(false);
@@ -365,6 +368,9 @@ function backFromPlayScreen() {
     datos.setVictoriesP2(0);
     $("#" + constantsInputs.NEXT_BTN).prop(constantsJSCSS.DISABLED, false);
     datos.setRoundsCounter(0);
+    console.debug("modalidad object: ",datos.getModalidadJuego());
+    console.debug("modalidad: ",datos.getModalidadJuego().ordinal);
+    console.debug("modalidad online: ",new ModalidadJuego().getModalidad().ONLINE.ordinal);
     if (datos.getModalidadJuego().ordinal == new ModalidadJuego().getModalidad().ONLINE.ordinal && websocket != null) {
         websocket.close();
     }
@@ -396,54 +402,57 @@ function showToastBlue() {
  * Se encarga de recoger los datos introducidos por el usuario en dicho formulario y mostrar la pantalla correspondiente
  * en función de la configuración elegida.
  */
-function cambiaVistaJuegoOnline() {
-
+function cambiaVistaJuegoOnline(okey) {
     //if (id == "gameOnlineScreen") {
-    datos.setTurno(true);
-    online = true;
-    localStorage.setItem(otherConstants.ONLINE, online);
-    datos.setModalidadJuego(new ModalidadJuego().getModalidad().ONLINE);
-    cambiaVista(constantsDIVS.HEADER_GAME);
-    localStorage.setItem(constantsInputs.NAME_PLAYER_ONLINE, $("#" + constantsInputs.LOGIN_INPUT_TEXT).val());
-    connect();
-    var metamsg = new MetaMessage().getMetaMessage();
-    metamsg.type = (new TypeMessage().getTypeMessage().CONEXION.name);
-    player = new Player().getPlayer();
-    player.namePlayer = (datos.getNombreJ1());
-    console.debug("nombre j1", datos.getNombreJ1());
-    player.playing = (false);
-    //alert("PLAYER JSON "+playerJson);
-    datos.setJugando(true);
-    if (document.getElementById(constantsInputs.GAME3_ONL).checked == true) {
-        localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME3_ONL);
-        document.getElementById(constantsDIVS.GAME3_RED).style.display = constantsJSCSS.BLOCK;
-        datos.setFactorAlgoritmo(1);
-        player.tipoJuego = (new GameType().getGameType().JUEGO3.name);
-        modo = 3;
-    } else {
-        if (document.getElementById(constantsInputs.GAME5_ONL).checked == true) {
-            localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME5_ONL);
-            document.getElementById(constantsDIVS.GAME5_RED).style.display = constantsJSCSS.BLOCK;
-            datos.setFactorAlgoritmo(2);
-            player.tipoJuego = (new GameType().getGameType().JUEGO5.name);
-            modo = 5;
+    if (okey) {
+        datos.setTurno(true);
+        online = true;cambiaVista(constantsDIVS.HEADER_GAME);
+        localStorage.setItem(otherConstants.ONLINE, online);
+        datos.setModalidadJuego(new ModalidadJuego().getModalidad().ONLINE);
+        cambiaVista(constantsDIVS.HEADER_GAME);
+        localStorage.setItem(constantsInputs.NAME_PLAYER_ONLINE, $("#" + constantsInputs.LOGIN_INPUT_TEXT).val());
+        connect();
+        var metamsg = new MetaMessage().getMetaMessage();
+        metamsg.type = (new TypeMessage().getTypeMessage().CONEXION.name);
+        player = new Player().getPlayer();
+        player.namePlayer = (datos.getNombreJ1());
+        console.debug("nombre j1", datos.getNombreJ1());
+        player.playing = (false);
+        //alert("PLAYER JSON "+playerJson);
+        datos.setJugando(true);
+        if (document.getElementById(constantsInputs.GAME3_ONL).checked == true) {
+            localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME3_ONL);
+            document.getElementById(constantsDIVS.GAME3_RED).style.display = constantsJSCSS.BLOCK;
+            datos.setFactorAlgoritmo(1);
+            player.tipoJuego = (new GameType().getGameType().JUEGO3.name);
+            modo = 3;
         } else {
-            localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME9_ONL);
-            document.getElementById(constantsInputs.GAME9_ONL).style.display = constantsJSCSS.BLOCK;
-            datos.setFactorAlgoritmo(4);
-            player.tipoJuego = (new GameType().getGameType().JUEGO9.name);
-            modo = 9;
+            if (document.getElementById(constantsInputs.GAME5_ONL).checked == true) {
+                localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME5_ONL);
+                document.getElementById(constantsDIVS.GAME5_RED).style.display = constantsJSCSS.BLOCK;
+                datos.setFactorAlgoritmo(2);
+                player.tipoJuego = (new GameType().getGameType().JUEGO5.name);
+                modo = 5;
+            } else {
+                localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME9_ONL);
+                document.getElementById(constantsInputs.GAME9_ONL).style.display = constantsJSCSS.BLOCK;
+                datos.setFactorAlgoritmo(4);
+                player.tipoJuego = (new GameType().getGameType().JUEGO9.name);
+                modo = 9;
+            }
         }
+        localStorage.setItem(otherConstants.MODO, modo);
+        setLimiteRondasOnline();
+        metamsg.content = (player);
+        console.log(metamsg);
+        var msgToSend = JSON.stringify(metamsg);
+        //alert(msgToSend);
+        waitForSocketConnection(websocket, function () {
+            websocket.send(msgToSend);
+        });
+    } else {
+        cambiaVistaJuegoRandom();
     }
-    localStorage.setItem(otherConstants.MODO, modo);
-    setLimiteRondasOnline();
-    metamsg.content = (player);
-    console.log(metamsg);
-    var msgToSend = JSON.stringify(metamsg);
-    //alert(msgToSend);
-    waitForSocketConnection(websocket, function () {
-        websocket.send(msgToSend);
-    });
 }
 
 /**
@@ -471,16 +480,21 @@ function setLimiteRondasOnline() {
  * Método encargado de la configuración de una partida aleatoria, con patrones de juego cualesquiera, sin que el usuario los elija.
  */
 function randomGame() {
+    connect();
     var metamsg = new MetaMessage();
-    var p = new Player().getPlayer();
-    p.namePlayer=datos.getNombreJ1();
-    p.numberOfRounds=new RoundsNumber().getRoundsNumber().ANY.name;
-    p.tipoJuego=new GameType().getGameType().ANY.name;
-    p.numPartidas=0;
-    p.playing=false;
-    metamsg.setContent(p);
-    metamsg.setTypeMessage(new TypeMessage().getTypeMessage().CONEXION.name);
-    websocket.send(metamsg);
+    metamsg.type = (new TypeMessage().getTypeMessage().CONEXION.name);
+    var p = new Player();
+    p.namePlayer = datos.getNombreJ1();
+    p.numberOfRounds = new RoundsNumber().getRoundsNumber().ANY.name;
+    p.tipoJuego = new GameType().getGameType().ANY.name;
+    p.numPartidas = 0;
+    p.playing = false;
+    metamsg.content = p;
+    var msgToSend = JSON.stringify(metamsg);
+    waitForSocketConnection(websocket, function () {
+        websocket.send(msgToSend);
+    });
+
 }
 
 function getScores(selectedOption) {
@@ -492,7 +506,7 @@ function getScores(selectedOption) {
                     console.debug("players: ", players);
                     $("#" + constantsInputs.LIST_SCORES).text("");
                     for (var i = 0; i < players.length; i++) {
-                        $("#" + constantsInputs.LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + otherConstants.LIST_ITEM_CLOSE);
+                        $("#" + constantsInputs.LIST_SCORES).append(otherConstants.LIST_ITEM_OPEN + language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + otherConstants.LIST_ITEM_CLOSE);
                     }
                 });
     } else {
@@ -504,7 +518,7 @@ function getScores(selectedOption) {
                         console.debug("players: ", JSON.parse(JSON.stringify(players)));
                         $("#" + constantsInputs.LIST_SCORES).text("");
                         for (var i = 0; i < players.length; i++) {
-                            $("#" + constantsInputs.LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + otherConstants.LIST_ITEM_CLOSE);
+                            $("#" + constantsInputs.LIST_SCORES).append(otherConstants.LIST_ITEM_OPEN + language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + otherConstants.LIST_ITEM_CLOSE);
                         }
 
                     });
@@ -515,7 +529,7 @@ function getScores(selectedOption) {
                         console.debug("players: ", players);
                         $("#" + constantsInputs.LIST_SCORES).text("");
                         for (var i = 0; i < players.length; i++) {
-                            $("#" + constantsInputs.LIST_SCORES).append(language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + otherConstants.LIST_ITEM_CLOSE);
+                            $("#" + constantsInputs.LIST_SCORES).append(otherConstants.LIST_ITEM_OPEN + language[userLang].nameScores + players[i].namePlayer + language [userLang].victoriesScores + players[i].numVictorias + language[userLang].roundsScores + players[i].numPartidas + otherConstants.LIST_ITEM_CLOSE);
                         }
                     });
         }
@@ -607,9 +621,9 @@ function muestraPantallaLoginSiNoLogueado() {
             $("#" + constantsDIVS.LOGGED_PLAYER).text(logueado.nombre);
         }
     } else {
-        console.debug("html",otherConstants.HTML_LOGIN_SCREEN);
+        console.debug("html", otherConstants.HTML_LOGIN_SCREEN);
         $('#' + constantsDIVS.LOGIN_SCREEN).load(otherConstants.HTML_LOGIN_SCREEN);
-        console.debug("DIV LOGIN",constantsDIVS.LOGIN_SCREEN);
+        console.debug("DIV LOGIN", constantsDIVS.LOGIN_SCREEN);
         cambiaVista(constantsDIVS.LOGIN_SCREEN);
     }
 }
@@ -619,11 +633,23 @@ function logOut() {
     cambiaVista(constantsDIVS.DIV_MENU_PPAL);
 }
 
-function addVictories(victories) {
-    $.post(constantsURLs.URL_SERVLET_SIGN_IN,
-            {user: user, claveHasheada: keyHash, complementoHasheado: complHash, claveComplemento: JSON.stringify(keyCompl)},
-            function (data) {
-                logueadoCorrectamente = data;
-                compruebaSiLogueadoBien(logueadoCorrectamente, true);
-            });
+function cambiaVistaJuegoRandom() {
+    datos.setModalidadJuego(new ModalidadJuego().getModalidad().ONLINE);
+    cambiaVista(constantsDIVS.HEADER_GAME);
+    if (datos.getFactorAlgoritmo() == 1) {
+        document.getElementById(constantsDIVS.GAME3_RED).style.display = constantsJSCSS.BLOCK;
+        //player.tipoJuego = (new GameType().getGameType().JUEGO3.name);
+        modo = 3;
+    } else {
+        if (datos.getFactorAlgoritmo() == 2) {
+            document.getElementById(constantsDIVS.GAME5_RED).style.display = constantsJSCSS.BLOCK;
+            // player.tipoJuego = (new GameType().getGameType().JUEGO5.name);
+            modo = 5;
+        } else {
+            document.getElementById(constantsInputs.GAME9_ONL).style.display = constantsJSCSS.BLOCK;
+            //player.tipoJuego = (new GameType().getGameType().JUEGO9.name);
+            modo = 9;
+        }
+    }
+    localStorage.setItem(otherConstants.MODO, modo);
 }

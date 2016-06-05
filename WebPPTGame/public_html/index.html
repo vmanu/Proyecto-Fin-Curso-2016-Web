@@ -38,6 +38,7 @@ and open the template in the editor.
         <script src="model/ClaveComplemento.js" type="text/javascript"></script>
         <script src="controller/ControllerGame.js" type="text/javascript"></script>
         <script src="resources/rulesOfTheGame.js" type="text/javascript"></script>
+        <script src="model/User.js" type="text/javascript"></script>
         <script src="resources/infoOfDevelopers.js" type="text/javascript"></script>
         <script>
             var constantsJSCSS = "", constantsInputs = "", constantsDIVS = "", constantsOpsJuego = "", otherConstants = "", constantsURLs = "";
@@ -169,7 +170,7 @@ and open the template in the editor.
             <input type="radio" id="moreRounds" name="rounds" onclick="visibleElement(constantsInputs.CUSTOMED_ROUNDS)"/><script>document.write(language[userLang].customedRounds);</script><br>
             <input type="text" class="containsPlaceholder" id="customedRounds" name="customedRounds" placeholder="Number of Rounds" hidden/><br><br>
             <div>
-                <button type="button" class="btn btn-primary btn-lg " onclick="cambiaVista(DIV_MENU_PPAL)">
+                <button type="button" class="btn btn-primary btn-lg " onclick="cambiaVista(constantsDIVS.DIV_MENU_PPAL)">
                     <script>document.write(language[userLang].back);</script>
                 </button>
                 <button type="button" class="btn btn-primary btn-lg " onclick="cambiaVistaJuego()">
@@ -210,7 +211,7 @@ and open the template in the editor.
                 <button type="button" class="btn btn-primary btn-lg " onclick="cambiaVista(constantsDIVS.DIV_ONLINE_MENU)">
                     <script>document.write(language[userLang].back);</script>
                 </button>
-                <button id="gameOnlineScreen" type="button" class="btn btn-primary btn-lg " onclick="cambiaVistaJuegoOnline()">
+                <button id="gameOnlineScreen" type="button" class="btn btn-primary btn-lg " onclick="cambiaVistaJuegoOnline(true)">
                     <script>document.write(language[userLang].play);</script>
                 </button>
             </div>
@@ -290,7 +291,7 @@ and open the template in the editor.
                 <input type="button" class="btn btn-primary btn-lg" id="next" value="Continue" onclick="if (!online) {
                             cambiaVistaJuego();
                         } else {
-                            cambiaVistaJuegoOnline();
+                            cambiaVistaJuegoOnline(false);
                         }"/>
             </div>
         </div>
@@ -309,7 +310,7 @@ and open the template in the editor.
                     </div>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(DIV_PLAY_ONLINE)">
+                    <button type="button" class="btn btn-primary btn-sm btn-block" onclick="cambiaVista(constantsDIVS.DIV_PLAY_ONLINE)">
                         <script>document.write(language[userLang].back);</script>
                     </button>
                 </div>
