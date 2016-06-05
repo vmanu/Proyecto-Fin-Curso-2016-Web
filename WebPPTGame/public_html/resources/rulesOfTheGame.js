@@ -59,7 +59,7 @@ var textRules=
        +"  • Pistola mata al humano\n"
        +"  • Pistola destroza las tijeras\n"
        +"  • Pistola destruye la piedra\n"
-       +"  • Pistola apaga el fuego";
+       +"  • Pistola se alimenta de fuego";
        
 /**
  * 
