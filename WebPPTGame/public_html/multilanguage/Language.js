@@ -58,7 +58,8 @@ Language = function () {
             victoriesScores: "<br>Victorias:",
             roundsScores: " | Rondas:",
             wrongLoginOrPass: "¡Usuario y/o contraseña incorrectos!",
-            passNotEquals: "¡No coinciden las contraseñas!" 
+            passNotEquals: "¡No coinciden las contraseñas!",
+            searchingPlayer:"Buscando jugador..."
         },
         en: {
             titleGame: "Rock, scissors, paper",
@@ -109,7 +110,8 @@ Language = function () {
             victoriesScores: "<br>Victories:",
             roundsScores: " | Rounds:",
             wrongLoginOrPass: "Login and/or password are wrong!",
-            passNotEquals: "Both passwords doesn't match!"            
+            passNotEquals: "Both passwords doesn't match!",
+            searchingPlayer:"Looking for a player..."
         }
     };
 
