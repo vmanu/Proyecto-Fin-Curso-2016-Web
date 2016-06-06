@@ -3,8 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var datos, mapFichas, mapFichasMaquina, opc, modo, online, player, clave, complemento, keyCompl;
-//        constantsJSCSS, constantsInputs,constantsDIVS, constantsOpsJuego, otherConstants, constantsURLs;
+var datos;
+var mapFichas;
+var mapFichasMaquina;
+var opc;
+var modo;
+var online;
+var player;
+var clave;
+var complemento;
+var keyCompl;
 
 $(document).ready(function () {
     clave = "";

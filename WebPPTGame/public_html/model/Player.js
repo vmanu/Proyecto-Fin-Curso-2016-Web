@@ -12,10 +12,9 @@ Player = function () {
         namePlayer: "",
         tipoJuego: new GameType(),
         numberOfRounds: new RoundsNumber(),
-        playing: "",
+        playing: false,
         numPartidas: 0,
-        numVictorias: 0,
-        promedio: 0
+        numVictorias: 0
     };
     
     //GETTER
