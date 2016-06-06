@@ -18,6 +18,8 @@ and open the template in the editor.
         <script src="constantes/ConstantesJSyCSS.js" type="text/javascript"></script>
         <script src="constantes/ConstantesOpcionesJuego.js" type="text/javascript"></script>
         <script src="constantes/ConstantesOtras.js" type="text/javascript"></script>
+        <script src="constantes/ConstantesOpcionesAzul.js" type="text/javascript"></script>
+        <script src="constantes/ConstantesOpcionesRojo.js" type="text/javascript"></script>
         <script src="constantes/ConstantesServletURLs.js" type="text/javascript"></script>
         <script src="multilanguage/Language.js" type="text/javascript"></script>
         <script src="model/ModalidadJuego.js" type="text/javascript"></script>
@@ -41,13 +43,15 @@ and open the template in the editor.
         <script src="model/User.js" type="text/javascript"></script>
         <script src="resources/infoOfDevelopers.js" type="text/javascript"></script>
         <script>
-            var constantsJSCSS = "", constantsInputs = "", constantsDIVS = "", constantsOpsJuego = "", otherConstants = "", constantsURLs = "";
+            var constantsJSCSS = "", constantsInputs = "", constantsDIVS = "", constantsOpsJuego = "", otherConstants = "", constantsURLs = "", constantsOpsRojo="", constantsOpsAzul="";
             constantsJSCSS = new ConstantesJSyCSS().getConstantsJSCSS();
             constantsInputs = new ConstantesInputs().getConstantsInputs();
             constantsDIVS = new ConstantesDIVS().getConstantsDivs();
             constantsOpsJuego = new ConstantesOpcionesJuego().getConstantesOpcionesJuego();
             constantsURLs = new ConstantesServletURLs().getConstantsURLs();
             otherConstants = new ConstantesOtras().getOtherConstants();
+            constantsOpsRojo = new ConstantesOpcionesRojo().getConstantsOpsRojo();
+            constantsOpsAzul = new ConstantesOpcionesAzul().getConstantsOpsAzul();
             $(document).ready(function () {
                 console.debug("other const", otherConstants);
                 if (localStorage.getItem(constantsInputs.RB_PLAYERS) != null && localStorage.getItem(constantsInputs.RB_JUEGO) != null && localStorage.getItem(constantsInputs.RB_RONDAS) != null) {
@@ -109,6 +113,8 @@ and open the template in the editor.
                         console.debug("LOGUEADO2", otherConstants.LOGUEADO);
                         if (localStorage.getItem(otherConstants.LOGUEADO) != null) {
                             document.write(JSON.parse(localStorage.getItem(otherConstants.LOGUEADO)).nombre);
+                        }else{
+                            
                         }
                     </script>
                 </div>

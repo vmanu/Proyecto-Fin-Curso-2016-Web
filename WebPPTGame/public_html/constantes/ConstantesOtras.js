@@ -30,6 +30,6 @@ ConstantesOtras = function () {
     
     this.getOtherConstants=function(){
         return otherConstants;
-    }
+    };
 };
 

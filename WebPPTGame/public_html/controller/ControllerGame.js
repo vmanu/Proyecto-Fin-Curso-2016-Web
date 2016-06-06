@@ -606,6 +606,7 @@ function compruebaSiLogueadoBien(logueadoCorrectamente, click) {
         clave = "";
         complemento = "";
         cambiaVista(constantsDIVS.DIV_PLAY_ONLINE);
+        $("#"+constantsDIVS.NAME_LOGGED_PLAYER).text(datos.getNombreJ1());
         removeMaterializeImports();
     } else {
         if (click == true) {

@@ -1,21 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/*
-var imported = document.createElement('script');
-imported.src = '/model/EnumFichas3';
-document.head.appendChild(imported);
-
-var imported2 = document.createElement('script');
-imported2.src = '/model/EnumFichas5';
-document.head.appendChild(imported2);
-
-var imported3 = document.createElement('script');
-imported3.src = '/model/EnumFichas9';
-document.head.appendChild(imported3);
-*/
 /**
  * Objeto contenedor de todos los elementos manejados en la lógica del juego.
  * @returns {DataContainer}
@@ -182,17 +164,17 @@ DataContainer = function(){
      */
     this.inicializaMapFichasMaquina=function(){
         mapFichasMaquina={
-            PAPEL:"papelazul",
-            PIEDRA:"piedraazul",
-            TIJERA:"tijerasazul",
-            SPOCK:"spockazul",
-            LAGARTO:"lizardazul",
-            AIRE:"windazul",
-            AGUA:"waterazul",
-            PISTOLA:"gunazul",
-            FUEGO:"fireazul",
-            HUMANO:"humanazul",
-            ESPONJA:"spongeazul"
+            PAPEL: constantsOpsAzul.PAPEL3,
+            PIEDRA: constantsOpsAzul.PIEDRA3,
+            TIJERA: constantsOpsAzul.TIJERA3,
+            SPOCK: constantsOpsAzul.SPOCK5,
+            LAGARTO: constantsOpsAzul.LAGARTO5,
+            AIRE: constantsOpsAzul.AIRE9,
+            AGUA: constantsOpsAzul.AGUA9,
+            PISTOLA: constantsOpsAzul.PISTOLA9,
+            FUEGO: constantsOpsAzul.FUEGO9,
+            HUMANO: constantsOpsAzul.HUMANO9,
+            ESPONJA: constantsOpsAzul.ESPONJA9
         };
         return mapFichasMaquina;
     };
@@ -202,23 +184,23 @@ DataContainer = function(){
      */
     this.inicializaMapImagesAzul=function(){
         var mapImagesAzul={
-            PAPEL5:"papelazul",
-            SPOCK5:"spockazul",
-            PIEDRA5:"piedraazul",
-            TIJERA5:"tijerasazul",
-            LAGARTO5:"lizardazul",
-            PAPEL9:"windazul",
-            AIRE9:"windazul",
-            AGUA9:"waterazul",
-            PISTOLA9:"gunazul",
-            PIEDRA9:"piedraazul",
-            FUEGO9:"fireazul",
-            TIJERA9:"tijerasazul",
-            HUMANO9:"humanazul",
-            ESPONJA9:"spongeazul",
-            PAPEL3:"papelazul",
-            PIEDRA3:"piedraazul",
-            TIJERA3:"tijerasazul"
+            PAPEL5: constantsOpsAzul.PAPEL5,
+            SPOCK5: constantsOpsAzul.SPOCK5,
+            PIEDRA5: constantsOpsAzul.PIEDRA5,
+            TIJERA5: constantsOpsAzul.TIJERA5,
+            LAGARTO5: constantsOpsAzul.LAGARTO5,
+            PAPEL9: constantsOpsAzul.PAPEL9,
+            AIRE9: constantsOpsAzul.AIRE9,
+            AGUA9: constantsOpsAzul.AGUA9,
+            PISTOLA9: constantsOpsAzul.PISTOLA9,
+            PIEDRA9: constantsOpsAzul.PIEDRA9,
+            FUEGO9: constantsOpsAzul.FUEGO9,
+            TIJERA9: constantsOpsAzul.TIJERA9,
+            HUMANO9: constantsOpsAzul.HUMANO9,
+            ESPONJA9: constantsOpsAzul.ESPONJA9,
+            PAPEL3: constantsOpsAzul.PAPEL3,
+            PIEDRA3: constantsOpsAzul.PIEDRA3,
+            TIJERA3: constantsOpsAzul.TIJERA3
         };
         return mapImagesAzul;
     };
@@ -228,23 +210,23 @@ DataContainer = function(){
      */
     this.inicializaMapImagesRojo=function(){
         var mapImagesRojo={
-            PAPEL5:"papelrojo",
-            SPOCK5:"spockrojo",
-            PIEDRA5:"piedraroja",
-            TIJERA5:"tijerasrojo",
-            LAGARTO5:"lizardrojo",
-            PAPEL9:"windrojo",
-            AIRE9:"windrojo",
-            AGUA9:"waterrojo",
-            PISTOLA9:"gunrojo",
-            PIEDRA9:"piedraroja",
-            FUEGO9:"firerojo",
-            TIJERA9:"tijerasrojo",
-            HUMANO9:"humanrojo",
-            ESPONJA9:"spongerojo",
-            PAPEL3:"papelrojo",
-            PIEDRA3:"piedraroja",
-            TIJERA3:"tijerasrojo"
+            PAPEL5: constantsOpsRojo.PAPEL5,
+            SPOCK5: constantsOpsRojo.SPOCK5,
+            PIEDRA5: constantsOpsRojo.PIEDRA5,
+            TIJERA5: constantsOpsRojo.TIJERA5,
+            LAGARTO5: constantsOpsRojo.LAGARTO5,
+            PAPEL9: constantsOpsRojo.PAPEL9,
+            AIRE9: constantsOpsRojo.AIRE9,
+            AGUA9: constantsOpsRojo.AGUA9,
+            PISTOLA9: constantsOpsRojo.PISTOLA9,
+            PIEDRA9: constantsOpsRojo.PIEDRA9,
+            FUEGO9: constantsOpsRojo.FUEGO9,
+            TIJERA9: constantsOpsRojo.TIJERA9,
+            HUMANO9: constantsOpsRojo.HUMANO9,
+            ESPONJA9: constantsOpsRojo.ESPONJA9,
+            PAPEL3: constantsOpsRojo.PAPEL3,
+            PIEDRA3: constantsOpsRojo.PIEDRA3,
+            TIJERA3: constantsOpsRojo.TIJERA3
         };
         return mapImagesRojo;
     };
