@@ -390,7 +390,7 @@ function backFromPlayScreen() {
  * Método encargado de sacar una notificación emergente informando del turno del jugador 1 (color rojo).
  */
 function showToastRed() {
-    if (userLang != SPANISH) {
+    if (userLang != "es") {
         $(constantsJSCSS.CLASE_TOAST).text(datos.getNombreJ1() + language[userLang].turnOf).css(constantsJSCSS.BACKGROUND_COLOR, constantsJSCSS.RED).fadeIn(500).delay(1200).fadeOut(550);
     } else {
         $(constantsJSCSS.CLASE_TOAST).text(language[userLang].turnOf + datos.getNombreJ1()).css(constantsJSCSS.BACKGROUND_COLOR, constantsJSCSS.RED).fadeIn(500).delay(1200).fadeOut(550);
@@ -400,7 +400,7 @@ function showToastRed() {
  * Método encargado de sacar una notificación emergente informando del turno del jugador 2 (color azul).
  */
 function showToastBlue() {
-    if (userLang != SPANISH) {
+    if (userLang != "es") {
         $(constantsJSCSS.CLASE_TOAST).text(datos.getNombreJ1() + language[userLang].turnOf).css(constantsJSCSS.BACKGROUND_COLOR, constantsJSCSS.BLUE).fadeIn(500).delay(1200).fadeOut(550);
     } else {
         $(constantsJSCSS.CLASE_TOAST).text(language[userLang].turnOf + datos.getNombreJ1()).css(constantsJSCSS.BACKGROUND_COLOR, constantsJSCSS.BLUE).fadeIn(500).delay(1200).fadeOut(550);
@@ -653,7 +653,7 @@ function cambiaVistaJuegoPorFactor() {
             // player.tipoJuego = (new GameType().getGameType().JUEGO5.name);
             modo = 5;
         } else {
-            document.getElementById(constantsInputs.GAME9_ONL).style.display = constantsJSCSS.BLOCK;
+            document.getElementById(constantsDIVS.GAME9_RED).style.display = constantsJSCSS.BLOCK;
             //player.tipoJuego = (new GameType().getGameType().JUEGO9.name);
             modo = 9;
         }
