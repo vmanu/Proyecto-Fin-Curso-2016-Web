@@ -298,12 +298,13 @@ and open the template in the editor.
             </div>
             <div>
                 <input type="button" class="btn btn-primary btn-lg" id="back" value="Back" onclick="backFromPlayScreen()"/>
-                <input type="button" class="btn btn-primary btn-lg" id="next" value="Continue" onclick="if (!online) {
+                <input type="button" class="btn btn-primary btn-lg" id="next" value="Continue" onclick="/*if (!online) {
                             cambiaVistaJuego();
                         } else {
                             
-                            cambiaVistaJuegoOnline(false);
-                        }"/>
+                            asignaValoresJuegoOnline();
+                        }*/
+                       cambiaVistaJuegoPorFactor()"/>
             </div>
         </div>
         <div class="atCenterTopOfScreen" id="scores" hidden>

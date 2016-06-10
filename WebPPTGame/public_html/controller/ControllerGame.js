@@ -40,12 +40,15 @@ function cambiaVista(divId) {
     if (divId == constantsDIVS.DIV_LOCAL_MENU_JUEGO) {
         online = false;
     } else {
-        online = true;
         if (divId == constantsDIVS.DIV_SCORES) {
             getScores(otherConstants.BY_VICTORIES);
         } else {
             if (divId == constantsDIVS.LOGIN_SCREEN) {
                 getKeysFromServlet();
+            }else{
+                if(divId == constantsDIVS.DIV_ONLINE_MENU){
+                    online=true;
+                }
             }
         }
     }
@@ -641,7 +644,7 @@ function logOut() {
 }
 
 function cambiaVistaJuegoPorFactor() {
-    datos.setModalidadJuego(new ModalidadJuego().getModalidad().ONLINE);
+    
     cambiaVista(constantsDIVS.HEADER_GAME);
     if (datos.getFactorAlgoritmo() == 1) {
         document.getElementById(constantsDIVS.GAME3_RED).style.display = constantsJSCSS.BLOCK;
