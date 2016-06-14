@@ -17,15 +17,9 @@
         <script>
             var click;
             $(document).ready(function () {
-                //console.debug("keySession",sessionStorage.getItem("keySession"));
-                //console.debug("keysComplements LOGINSCREEN",sessionStorage.getItem("keysComplements"));
                 console.debug("div confirm pass", constantsDIVS.DIV_CONFIRMAR_PASS);
                 $("#" + constantsDIVS.DIV_CONFIRMAR_PASS).attr(constantsJSCSS.HIDDEN, true);
-
-                //alert(DIV_CONFIRMAR_PASS);
                 click = false;
-
-                //getKeysFromServlet();
             });
 
             var userLang = navigator.language || navigator.userLanguage;

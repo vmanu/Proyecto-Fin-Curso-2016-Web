@@ -24,13 +24,7 @@ $(document).ready(function () {
     datos.setVictoriesP2(0);
     mapFichas = datos.inicializaMapFichas();
     mapFichasMaquina = datos.inicializaMapFichasMaquina();
-    //localStorage.setItem(otherConstants.DATOS, datos);
     $("#" + constantsDIVS.IMAGE_PLAYER2).attr(constantsJSCSS.SRC, otherConstants.IMAGE_BLANK);
-//    constantsJSCSS = new ConstantesJSyCSS().getConstantsJSCSS();
-//    constantsInputs = new ConstantesInputs().getConstantsInputs();
-//    constantsDIVS = new ConstantesDIVS().getConstantsDivs();
-//    constantsOpsJuego = new ConstantesOpcionesJuego().getConstantesOpcionesJuego();
-//    constantsURLs = new ConstantesServletURLs().getConstantsURLs();
 });
 /**
  * Método que quita la visibilidad de ciertos elementos del juego, poniendo visible el pasado por parámetro para su visualización en el navegador.
@@ -53,7 +47,6 @@ function cambiaVista(divId) {
         }
     }
     document.getElementById(constantsDIVS.DIV_MENU_PPAL).style.display = constantsJSCSS.NONE;
-    //document.getElementById('playLocal').style.display = NONE;
     document.getElementById(constantsDIVS.DIV_PLAY_ONLINE).style.display = constantsJSCSS.NONE;
     document.getElementById(constantsDIVS.DIV_RULES).style.display = constantsJSCSS.NONE;
     document.getElementById(constantsDIVS.DIV_RULES_GRAPHIC).style.display = constantsJSCSS.NONE;
@@ -170,21 +163,16 @@ function setLimiteRondas() {
  * @returns {gestionaJuego.mmsg|MetaMessage} MetaMessage empleado para la comunicación online con el ServerEndpoint.
  */
 function gestionaJuego(window, opClicked, imgId) {
-    //alert(datos.getModalidadJuego().name);
-    //alert(datos.getModalidadJuego().ordinal);
     var mmsg = null;
     modalidad = new ModalidadJuego().getModalidad();
     if (document.getElementById(window).style.display == constantsJSCSS.BLOCK) {
         opc = mapFichas[opClicked];
-        //alert(datos.isTurno()+" - - - "+opc);
         if (datos.isTurno() == true && opc != null) {
-            //alert("IS TURNO"+datos.isTurno());
             datos.setEnumChosen1(opc);
             console.debug("opc1", datos.getEnumChosen1());
             datos.setIdImgPulsada1(imgId);
             if (datos.getModalidadJuego().ordinal == modalidad.DOS.ordinal) {
                 //DOS JUGADORES
-                //alert("DOS JUGADORES");
                 datos.setNombreJ2($("#" + constantsInputs.NAME_PLAYER2).val());
                 turnoAzul();
                 datos.setTurno(false);
@@ -192,7 +180,6 @@ function gestionaJuego(window, opClicked, imgId) {
             } else {
                 if (datos.getModalidadJuego().ordinal == modalidad.UNO.ordinal) {
                     //UN JUGADOR
-                    //alert("UN JUGADOR");
                     datos.setEnumChosen2(getEnumFromOrdinal(Math.floor((Math.random() * ((datos.getFactorAlgoritmo() * 2) + 1)))));
                     //console.log(datos.getEnumChosen2());
                     datos.setNombreJ2(otherConstants.CPU);
@@ -200,15 +187,11 @@ function gestionaJuego(window, opClicked, imgId) {
                     comunEvaluacionGanador();
                 } else {
                     //ONLINE
-                    //datos.setNombreJ1($("#nameOfPlayerOnline").val());
-                    //alert("ONLINE");
                     mmsg = new MetaMessage();
                     mmsg.type = (new TypeMessage().getTypeMessage().PARTIDA.name);
                     var opcionJuego = new OpcionJuego();
                     opcionJuego.opcion = (datos.getEnumChosen1().ordinal);
-                    //alert(datos.getEnumChosen2());
                     if (datos.getEnumChosen2() != null) {
-                        //$("#imgResultP2").attr(constantsJSCSS.SRC, document.getElementById(datos.getIdImgPulsada2()).src);
                         $("#" + constantsDIVS.IMG_RESULT_P2).attr(constantsJSCSS.SRC, $("#" + datos.getIdImgPulsada2()).attr(constantsJSCSS.SRC));
                         comunEvaluacionGanador();
                     }
@@ -233,11 +216,6 @@ function gestionaJuego(window, opClicked, imgId) {
  * Método en el que se evalúa el ganador de la partida.
  */
 function comunEvaluacionGanador() {
-    //alert("EVALUACION GANADOR");
-//    $("#imgResultP1").attr(constantsJSCSS.SRC, document.getElementById(datos.getIdImgPulsada1()).src);
-//    $("#imgResultP2").attr(constantsJSCSS.SRC, document.getElementById(datos.getIdImgPulsada2()).src);
-    //alert("id 1: " + datos.getIdImgPulsada1() + " --- id 2: " + datos.getIdImgPulsada2());
-    //alert("ruta 1: "+$("#"+datos.getIdImgPulsada1()).attr(constantsJSCSS.SRC)+" --- ruta 2: "+$("#"+datos.getIdImgPulsada2()).attr(constantsJSCSS.SRC));
     $("#" + constantsDIVS.IMG_RESULT_P1).attr(constantsJSCSS.SRC, $("#" + datos.getIdImgPulsada1()).attr(constantsJSCSS.SRC));
     if (datos.getModalidadJuego().ordinal == modalidad.DOS.ordinal) {
         $("#" + constantsDIVS.IMG_RESULT_P2).attr(constantsJSCSS.SRC, $("#" + datos.getIdImgPulsada2()).attr(constantsJSCSS.SRC));
@@ -278,7 +256,6 @@ function logicaJuego() {
         console.debug("rondas antes", datos.getRoundsCounter());
         datos.avanzaRonda();
         console.debug("rondas después", datos.getRoundsCounter());
-        //alert(datos.getRoundsCounter());
         if (datos.rondasFinalizadas() == true) {
             $("#" + constantsInputs.NEXT_BTN).prop(constantsJSCSS.DISABLED, true);
         }
@@ -342,10 +319,6 @@ function cambiarVistaAResult() {
     datos.setEnumChosen1(null);
     datos.setEnumChosen2(null);
     datos.setJugando(false);
-    //document.getElementById('back').onclick = function () {
-
-    //};
-
 }
 /**
  * Método que escoge la imagen correspondiente a la opción elegida por la máquina en modo 1 jugador.
@@ -375,7 +348,6 @@ function turnoAzul() {
  * Gestiona la vuelta al menú inicial desde la pantalla de resultado de la partida.
  */
 function backFromPlayScreen() {
-    //alert();
     datos.setVictoriesP1(0);
     datos.setVictoriesP2(0);
     $("#" + constantsInputs.NEXT_BTN).prop(constantsJSCSS.DISABLED, false);
@@ -387,7 +359,6 @@ function backFromPlayScreen() {
         websocket.close();
     }
     cambiaVista(constantsDIVS.DIV_MENU_PPAL);
-    //document.getElementById('title').style.display = BLOCK;
 }
 /**
  * Método encargado de sacar una notificación emergente informando del turno del jugador 1 (color rojo).
@@ -415,12 +386,10 @@ function showToastBlue() {
  * en función de la configuración elegida.
  */
 function asignaValoresJuegoOnline() {
-    //if (id == "gameOnlineScreen") {
         datos.setTurno(true);
         online = true;cambiaVista(constantsDIVS.HEADER_GAME);
         localStorage.setItem(otherConstants.ONLINE, online);
         datos.setModalidadJuego(new ModalidadJuego().getModalidad().ONLINE);
-        //cambiaVista(constantsDIVS.HEADER_GAME);
         localStorage.setItem(constantsInputs.NAME_PLAYER_ONLINE, $("#" + constantsInputs.LOGIN_INPUT_TEXT).val());
         connect();
         var metamsg = new MetaMessage().getMetaMessage();
@@ -429,24 +398,20 @@ function asignaValoresJuegoOnline() {
         player.namePlayer = (datos.getNombreJ1());
         console.debug("nombre j1", datos.getNombreJ1());
         player.playing = (false);
-        //alert("PLAYER JSON "+playerJson);
         datos.setJugando(true);
         if (document.getElementById(constantsInputs.GAME3_ONL).checked == true) {
             localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME3_ONL);
-            //document.getElementById(constantsDIVS.GAME3_RED).style.display = constantsJSCSS.BLOCK;
             datos.setFactorAlgoritmo(1);
             player.tipoJuego = (new GameType().getGameType().JUEGO3.name);
             modo = 3;
         } else {
             if (document.getElementById(constantsInputs.GAME5_ONL).checked == true) {
                 localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME5_ONL);
-                //document.getElementById(constantsDIVS.GAME5_RED).style.display = constantsJSCSS.BLOCK;
                 datos.setFactorAlgoritmo(2);
                 player.tipoJuego = (new GameType().getGameType().JUEGO5.name);
                 modo = 5;
             } else {
                 localStorage.setItem(constantsInputs.RB_JUEGO_ONL, constantsInputs.GAME9_ONL);
-                //document.getElementById(constantsInputs.GAME9_ONL).style.display = constantsJSCSS.BLOCK;
                 datos.setFactorAlgoritmo(4);
                 player.tipoJuego = (new GameType().getGameType().JUEGO9.name);
                 modo = 9;
@@ -457,7 +422,6 @@ function asignaValoresJuegoOnline() {
         metamsg.content = (player);
         console.log(metamsg);
         var msgToSend = JSON.stringify(metamsg);
-        //alert(msgToSend);
         waitForSocketConnection(websocket, function () {
             websocket.send(msgToSend);
         });
@@ -483,7 +447,6 @@ function setLimiteRondasOnline() {
             localStorage.setItem(constantsInputs.RB_RONDAS_ONL, constantsInputs.FIVE_ROUNDS_ONL);
         }
     }
-    //alert(player.numberOfRounds.name);
 }
 /**
  * Método encargado de la configuración de una partida aleatoria, con patrones de juego cualesquiera, sin que el usuario los elija.
@@ -551,7 +514,6 @@ function getKeysFromServlet() {
             type: constantsJSCSS.POST,
             url: constantsURLs.URL_GET_KEYS
         }).done(function (data) {
-            //alert(data);
             console.debug("DATA", data);
             keyCompl = JSON.parse(data);
             console.debug("keyCompl", keyCompl);
